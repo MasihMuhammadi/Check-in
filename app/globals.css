@@ -1,0 +1,42 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.shaped-div {
+  /* margin: 40px; */
+  /* clip-path: polygon(-20% -20%, 100% 100%, 100% 100%, 0% 100%); */
+  clip-path: polygon(0% 0%, 100% 0%, 100% 75%, 50% 100%, 0% 75%);
+}
+
+.rotate-90 {
+  transform: rotate(-90deg);
+}
+.animated-text {
+  position: relative;
+  display: inline-block;
+}
+@keyframes slideDown {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(10px);
+  }
+}
+
+@keyframes slideUp {
+  0% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+.animate-slide-down {
+  animation: slideDown 3s infinite alternate;
+}
+
+.animate-slide-up {
+  animation: slideUp 3s infinite alternate;
+}
