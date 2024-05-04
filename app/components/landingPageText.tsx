@@ -2,6 +2,11 @@
 import { useEffect, useState } from "react";
 import Buttons from "./buttons";
 // import "./LandingPageText.css"; // Import CSS file for styling
+import { validate } from 'email-validator';
+import { EmailVerifier } from 'email-verifier'
+
+
+
 
 const LandingPageText = () => {
   const [dynamicText, setDynamicText] = useState("Fastest");
@@ -13,7 +18,9 @@ const LandingPageText = () => {
       setIsVisible(!isVisible);
     }, 5000);
 
+
   }, []);
+
 
   return (
     <div className="leading mt-28 ">

@@ -1,3 +1,4 @@
+"use client";
 import React, { ReactElement } from "react"
 interface CustomButtonInterface {
   children: string | ReactElement | null
@@ -17,13 +18,19 @@ const Buttons = ({
   disabled,
   type,
 }: CustomButtonInterface) => {
+
   return (
     <>
       <button
+        onClick={(params) => {
+          if (!disabled && clickHandler) {
+            clickHandler(params)
+          }
+        }}
         type={type ? type : "button"}
         disabled={disabled}
 
-        className={`flex justify-center items-center rounded-xl transition-colors duration-500 px-3 py-2 ${style} ${primary
+        className={`flex justify-center items-center rounded-xl transition-colors duration-500  py-2 ${style} ${primary
           ? "text-white hover:text-primary active:text-white hover:bg-white bg-primary active:bg-primary border border-primary active:border-primary "
           : secondary
             ? "bg-white border border-primary hover:bg-primary hover:text-white active:bg-primary hover:border-primary active:border-primary active:text-white"
