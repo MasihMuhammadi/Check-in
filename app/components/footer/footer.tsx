@@ -4,8 +4,8 @@ const Footer = () => {
   return (
     <>
       <div className="flex  bg-gray-50 mt-5">
-        <div className="shaped-div w-full h-[500px] p  z-[1000]">
-          <div className="w-full h-full pt-10 bg-gradientPrimary  flex flex-row justify-between  px-10 ">
+        <div className=" w-full h-[500px] p  z-[1000]">
+          <div className="w-full h-full pt-10 bg-gradientPrimary  flex flex-col sm:flex-row justify-between  px-10 ">
             <div className="mx-5 ">
               <h1 className="text-white text-3xl underline ">Pages</h1>
               <ul className="text-white">
