@@ -21,7 +21,7 @@ const About = () => {
           <div className="flex flex-col justify-center items-center ">
             <SonAndFather className={"w-[347px] h-[291px]"} />
             <Buttons secondary={true} style="w-64" >Check you child status</Buttons>
-            <p className={`px-4 py-3 transition-all duration-400 ${expandCard1 ? "opacity-1" : "opacity-0 "}`}>Monitor your child's attendance effortlessly with [Your Website Name]. As a parent, stay informed about your child's school attendance status. Log in, enter the verification code provided by the school, and access real-time updates on their attendance record. Stay actively involved in your child's education with ease and confidence. Join us now and stay connected effortlessly.</p>
+            <p className={`px-4 py-3 transition-all duration-400 ${expandCard1 ? "opacity-1" : "opacity-0 "}`}>Monitor your childs attendance effortlessly with [Your Website Name]. As a parent, stay informed about your childs school attendance status. Log in, enter the verification code provided by the school, and access real-time updates on their attendance record. Stay actively involved in your childs education with ease and confidence. Join us now and stay connected effortlessly.</p>
             <div className="h-10 w-10 rounded-full bg-primary text-center text-white absolute bottom-0 left-3 flex items-center justify-center cursor-pointer" onClick={() => setExpandCard1(!expandCard1)}>
               <ArrowIcon />
 

@@ -1,4 +1,3 @@
-import { capitalize } from "lodash";
 
 // Interface for validation function props.
 interface validationProps {
@@ -44,7 +43,7 @@ export const validator = (options: validationProps) => {
       : true;
 
   // Capitalize the name of the field
-  const name = capitalize(required.name);
+  const name = "masih"
 
   return {
     required: {
@@ -55,23 +54,23 @@ export const validator = (options: validationProps) => {
     // if message is provided, use it, otherwise generate it.
     maxLength: maxLength
       ? {
-          message: maxLength?.message
-            ? maxLength.message
-            : `${name} can not be more than ${maxLength.value} characters`,
+        message: maxLength?.message
+          ? maxLength.message
+          : `${name} can not be more than ${maxLength.value} characters`,
 
-          value: maxLength.value,
-        }
+        value: maxLength.value,
+      }
       : undefined,
 
     // if message is provided, use it, otherwise generate it.
     minLength: minLength
       ? {
-          message: minLength?.message
-            ? minLength.message
-            : `${name} can not be less than ${minLength.value} characters`,
+        message: minLength?.message
+          ? minLength.message
+          : `${name} can not be less than ${minLength.value} characters`,
 
-          value: minLength.value,
-        }
+        value: minLength.value,
+      }
       : undefined,
 
     // if min is provided, return the object otherwise don't
@@ -83,9 +82,9 @@ export const validator = (options: validationProps) => {
 
     pattern: pattern
       ? {
-          value: pattern,
-          message: `${name} is not valid`,
-        }
+        value: pattern,
+        message: `${name} is not valid`,
+      }
       : undefined,
   };
 };

@@ -135,7 +135,7 @@ const SignUpFormInputes = () => {
                   name="password"
                   type={isPassword ? "text" : "password"}
                   value={values.password}
-                  onChange={(e) => {
+                  onChange={(e: any) => {
                     handleChange(e); // Call handleChange function
                     setPassword(e.target.value); // Set password state
                   }}
@@ -153,7 +153,7 @@ const SignUpFormInputes = () => {
                 Register
               </Buttons>
               <p className="mt-4">
-                You don't have an account?{" "}
+                You dont have an account?{" "}
                 <Link href="/login" className="underline">
                   Login
                 </Link>
