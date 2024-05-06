@@ -31,9 +31,9 @@ const Buttons = ({
         disabled={disabled}
 
         className={`flex justify-center items-center rounded-xl transition-colors duration-500  py-2 ${style} ${primary
-          ? "text-white hover:text-primary active:text-white hover:bg-white bg-primary active:bg-primary border border-primary active:border-primary "
+          ? "text-white hover:text-primary active:text-white hover:bg-white bg-primary active:bg-secondary border border-primary active:border-primary "
           : secondary
-            ? "bg-white border border-primary hover:bg-primary hover:text-white active:bg-primary hover:border-primary active:border-primary active:text-white"
+            ? "bg-white border border-primary hover:bg-primary hover:text-white active:bg-secondary hover:border-primary active:border-primary active:text-white"
             : disabled &&
             "bg-gray-700 text-white border border-gray-700 cursor-not-allowed"
           } ${style}`}

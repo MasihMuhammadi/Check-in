@@ -7,7 +7,7 @@ import masihImage from "../../../public/images/Masih.jpg"
 import LocationIcon from '../../../public/smallIcons/location'
 import SubjectIcon from '../../../public/smallIcons/subject'
 import StudentsIcon from '../../../public/smallIcons/students'
-
+import Buttons from '../../components/buttons'
 
 export default function Page({ params }: { params: any }) {
 
@@ -19,7 +19,7 @@ export default function Page({ params }: { params: any }) {
             <div>
                 <Header />
                 <div>
-                    <div className="flex flex-col md:flex-row gap-y-5 p-10 items-start gap-x-5 justify-between">
+                    <div className="flex flex-col md:flex-row gap-y-5 p-10 items-start gap-x-5 justify-between ">
                         <Image src={masihImage} width={500} height={500} className="text-center content-center " alt="" />
                         <div>
                             <p className='text-[32px] text-medium'>Description:</p>
@@ -46,12 +46,17 @@ export default function Page({ params }: { params: any }) {
                             </div>
                         </div>
                     </div>
-                    <div className='flex justify-between '>
-                        <div>jlk</div>
+                    <div className='flex justify-between items-center justify-center w-full margin-auto'>
+                        <div className=" -mt-40 mx-20 px-10 ">
+                            <p>are you interested to be student in this instutations? </p>
+                            <div className='mt-5'>
+                                <Buttons primary={true} style={"px-5 my-2 py-3"}>Register To This Course</Buttons>
+                                <Buttons secondary={true} style={"px-5 py-3"}>See Other Courses</Buttons>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ad ut tempora non quam aut adipisci natus modi quo voluptatem debitis odio consequatur error earum, nihil fugiat perspiciatis accusamus hic quos illum consequuntur. Ab aliquam quibusdam nulla quod eius. Numquam, magni? Iure delectus dolores nesciunt quod sit, expedita voluptates saepe consequuntur.
-
             </div>
         </> :
             <><NotFound /></>}
