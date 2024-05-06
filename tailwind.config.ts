@@ -18,6 +18,7 @@ const config: Config = {
       },
       colors: {
         primary: "#1e1e1e",
+        secondary: "#1e1e1ede"
       },
       padding: {
         laptopScreen: "0px 50px",
