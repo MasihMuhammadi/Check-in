@@ -13,7 +13,7 @@ const LandingPageText = () => {
     }, 5000);
 
 
-  }, []);
+  }, [isVisible]);
 
 
   return (

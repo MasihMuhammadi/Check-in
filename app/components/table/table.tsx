@@ -18,20 +18,21 @@ const Table = ({ headers, bodyRows }: { headers: string[], bodyRows: any[] }) =>
                 <table className="table-auto  w-full px-10">
                     <thead>
                         <tr className='relative mt-4'>
-                            {headers.map((header, idx) => (
+                            {headers.map((header: any, idx: number) => (
                                 <th className='mt-2' key={idx}>{header}</th>
                             ))}
                         </tr>
                     </thead>
                     <tbody className='text-center justify-center items-center rounded-md'>
-                        {bodyRows?.map((row, idx) => (
-                            <tr key={idx} className='odd:bg-gray-100 even:bg-gray-50 rounded-xl px-4'>
-                                {row.map((cell, idx) => (
-                                    <td className="m-auto" key={idx}>{cell}</td>
+                        {bodyRows?.map((row, rowIndex) => (
+                            <tr key={rowIndex} className='odd:bg-gray-100 even:bg-gray-50 rounded-xl px-4'>
+                                {row.map((cell: any, cellIndex: number) => (
+                                    <td key={cellIndex} className="m-auto">{cell}</td>
                                 ))}
                             </tr>
                         ))}
                     </tbody>
+
 
                 </table>
             </div>
@@ -41,69 +42,3 @@ const Table = ({ headers, bodyRows }: { headers: string[], bodyRows: any[] }) =>
 
 export default Table;
 
-{/* <tbody className='text-center'>
-                    <tr className='odd:bg-gray-100'>
-                        <input type="checkbox" />
-                        <td>stu_1231212313</td>
-                        <td>Masihullah</td>
-                        <td>Abdullah</td>
-                        <td>+123131233</td>
-                        <td>Math</td>
-                        <td>10</td>
-                        <td>2</td>
-                        <td>
-                            <div className='flex gap-x-4 items-center justify-center'>
-                                <PresentIcon />
-                                <AbsentIcon />
-                            </div>
-                        </td>
-                    </tr>
-                    <tr className=''>
-                        <input type="checkbox" />
-                        <td>stu_1231212313</td>
-                        <td>Safiullah</td>
-                        <td>Abdullah</td>
-                        <td>+742734732</td>
-                        <td>Chemistery</td>
-                        <td>2</td>
-                        <td>4</td>
-                        <td>
-                            <div className='flex gap-x-4 items-center justify-center'>
-                                <PresentIcon />
-                                <AbsentIcon />
-                            </div>
-                        </td>
-                    </tr>
-                    <tr className='odd:bg-gray-100'>
-                        <input type="checkbox" />
-                        <td>stu_1231212313</td>
-                        <td>Safiullah</td>
-                        <td>Abdullah</td>
-                        <td>+742734732</td>
-                        <td>Chemistery</td>
-                        <td>2</td>
-                        <td>4</td>
-                        <td>
-                            <div className='flex gap-x-4 items-center justify-center'>
-                                <PresentIcon />
-                                <AbsentIcon />
-                            </div>
-                        </td>
-                    </tr>
-                    <tr className={` ${background}`}>
-                        <input type="checkbox" name="table" onChange={(e) => changeBG(e.target.checked)} />
-                        <td>stu_1231212313</td>
-                        <td>Safiullah</td>
-                        <td>Abdullah</td>
-                        <td>+742734732</td>
-                        <td>Chemistery</td>
-                        <td>2</td>
-                        <td>4</td>
-                        <td>
-                            <div className='flex gap-x-4 items-center justify-center'>
-                                <PresentIcon />
-                                <AbsentIcon />
-                            </div>
-                        </td>
-                    </tr>
-                </tbody> */}
