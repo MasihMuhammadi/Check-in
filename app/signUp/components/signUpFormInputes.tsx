@@ -40,17 +40,22 @@ const SignUpFormInputes = () => {
     password: '',
   };
 
+  let baseUrl = "http://localhost:5000"
+
 
   const onSubmit = async (values: any, { setSubmitting }: { setSubmitting: any }) => {
+    try {
 
-    const response = await axios.get('https://jsonplaceholder.typicode.com/users')
-    console.log(response.data)
+      const baseUrl = 'http://localhost:5000'; // Example base URL
+
+      const response = await axios.post(`${baseUrl}/createUser/user`, values);
+
+      console.log('User created:', response.data);
+    } catch (error) {
+      console.error('Error creating user:', error);
+    }
     setSubmitting(false);
   };
-
-
-
-
 
 
   return (
@@ -62,7 +67,7 @@ const SignUpFormInputes = () => {
         validateOnChange={false} // To prevent instant validation on password change
       >
         {({ values, handleChange, handleSubmit, isSubmitting }) => (
-          <Form>
+          <Form >
             <div className="flex flex-col gap-6 place-items-center px-10">
               <div className="relative">
 
