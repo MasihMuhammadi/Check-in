@@ -5,7 +5,7 @@ import MainPage from "./mainPage";
 const LandingPage = () => {
   return (
     <>
-      <div className=" overflow-hidden mb-10 no-scrollbar overflow-scroll">
+      <div className=" overflow-hidden mb-10 no-scrollbar ">
         <Header />
         <MainPage />
       </div>

@@ -13,7 +13,7 @@ const Header = () => {
   const [toggleSignButton, setToggleSignButton] = useState<string>("login");
   return (
     <>
-      <div className="flex flex-row justify-between items-center  ">
+      <div className="flex flex-row justify-between items-center   z-[1000]">
         <div className="py-10 ">
           <EduEchoLogo />
         </div>

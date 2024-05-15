@@ -56,7 +56,7 @@ const Information = () => {
       </div>
 
       <h1 className="text-2xl mt-10 font-bold mx-4">Why Should We Use Edu Echo?</h1>
-      <div className="flex flex-col md:flex-row justify-center items-center">
+      <div className="flex flex-col sm:flex-row justify-center items-center">
         <div>
           <SonAndFather className={"w-[400px] md:w-[400px] lg:w-[500px]"} />
         </div>
