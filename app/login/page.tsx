@@ -1,6 +1,11 @@
 "use client";
+
 import React, { useEffect } from "react";
+
+import LoginForm from "../components/loginForm";
 import Header from "../components/header";
+
+
 
 const Login = () => {
   useEffect(() => {
@@ -15,6 +20,7 @@ const Login = () => {
     <>
       <div className="">
         <Header />
+        <LoginForm />
       </div>
     </>
   );

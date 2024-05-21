@@ -5,7 +5,7 @@ import Footer from "./components/footer/footer";
 
 export default function Home() {
   return (
-    <div className="lg:px-laptopScreen  md:px-IpadScreen sm:px-mobileScreen overflowno-scrollbar-hidden">
+    <div className="lg:px-laptopScreen md:px-IpadScreen sm:px-mobileScreen no-scrollbar overflow-hidden">
       <LandingPage />
       <Information />
       <Footer />

@@ -8,6 +8,7 @@ import LocationIcon from '../../../public/smallIcons/location'
 import SubjectIcon from '../../../public/smallIcons/subject'
 import StudentsIcon from '../../../public/smallIcons/students'
 import Buttons from '../../components/buttons'
+import Footer from '@/app/components/footer/footer'
 
 export default function Page({ params }: { params: any }) {
 
@@ -19,7 +20,7 @@ export default function Page({ params }: { params: any }) {
             <div>
                 <Header />
                 <div>
-                    <div className="flex flex-col md:flex-row gap-y-5 p-10 items-start gap-x-5 justify-between ">
+                    <div className="flex flex-col lg:flex-row gap-y-5 p-10 items-start gap-x-5 justify-between ">
                         <Image src={masihImage} width={500} height={500} className="text-center content-center " alt="" />
                         <div>
                             <p className='text-[32px] text-medium'>Description:</p>
@@ -59,7 +60,9 @@ export default function Page({ params }: { params: any }) {
                 </div>
             </div>
         </> :
-            <><NotFound /></>}
+            <><NotFound /></>
+        }
+        <Footer />
     </>
 
 }

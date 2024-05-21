@@ -17,7 +17,7 @@ const LandingPageText = () => {
 
 
   return (
-    <div className="leading mt-28 ">
+    <div className="leading mt-28 lg:px-laptopScreen md:px-IpadScreen sm:px-mobileScreen">
       <p className="text-5xl leading-[60px] inline ">
         Unlock New  Experiences,
 

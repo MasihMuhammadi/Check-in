@@ -23,7 +23,7 @@ const config: Config = {
       padding: {
         laptopScreen: "0px 50px",
         IpadScreen: "25px",
-        mobileScreen: "15px",
+        mobileScreen: "20px",
       },
       borderColor: {
         primary: "#1e1e1e",
