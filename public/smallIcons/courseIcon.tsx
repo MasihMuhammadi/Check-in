@@ -1,10 +1,10 @@
 
 import React from 'react';
 
-const CourseIcon = ({ width, height }: { width: any, height: any }) => {
+const CourseIcon = ({ width, height }: { width?: any, height?: any }) => {
     return (
         <>
-            <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <svg width={width || "32"} height={height || "32"} viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M30.2222 32H5.33333C2.38782 32 0 29.851 0 27.2V4.8C0 2.14904 2.38782 0 5.33333 0H30.2222C31.2041 0 32 0.716352 32 1.6V30.4C32 31.2837 31.2041 32 30.2222 32ZM28.4444 28.8V25.6H5.33333C4.3515 25.6 3.55556 26.3163 3.55556 27.2C3.55556 28.0837 4.3515 28.8 5.33333 28.8H28.4444ZM16 12.8C17.9637 12.8 19.5556 11.3673 19.5556 9.6C19.5556 7.83269 17.9637 6.4 16 6.4C14.0363 6.4 12.4444 7.83269 12.4444 9.6C12.4444 11.3673 14.0363 12.8 16 12.8ZM10.6667 19.2H21.3333C21.3333 16.549 18.9456 14.4 16 14.4C13.0544 14.4 10.6667 16.549 10.6667 19.2Z" fill="black" />
             </svg>
 

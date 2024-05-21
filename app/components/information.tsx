@@ -24,13 +24,13 @@ const Information = () => {
 
   return (
     <div>
-      <div className="grid grid-cols-1 items-center justify-center sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className=" grid grid-cols-1 sm:gap-x-1 sm:grid-cols-2 md:grid-cols-3  md:gap-x-2 lg:grid-cols-4 items-center content-center justify-center gap-4  ">
         {/* Display three cards in a row */}
         {Array.from({ length: 4 }, (_, index) => (
-          <div key={index}>
-            <div key={index} className="border border-black w-80 h-80 rounded-xl text-blue-500">
+          <div key={index} className=" flex justify-center items-center">
+            <div key={index} className="border border-black w-64 h-80 rounded-xl text-blue-500">
               <div className="px-2">
-                <Skeleton borderRadius={10} width={300} baseColor="#0B3353" height={50} duration={2.5} />
+                <Skeleton borderRadius={10} width={240} baseColor="#0B3353" height={50} duration={2.5} />
               </div>
               <div className="flex items-center justify-center">
                 <Image src={masihImage} width={150} height={60} className="text-center content-center " alt="" />
@@ -38,9 +38,8 @@ const Information = () => {
               <div className="px-4">
                 <Skeleton count={2} borderRadius={4} />
                 {/* <Skeleton width={100} height={30} borderRadius={4} style={{ textAlign: "center", content: "center" }} /> */}
-                <Buttons primary={true} style="px-5 margin ">
+                <Buttons secondary={true} style="px-5  text-black">
                   <Link href={`/courses/${courseId}`} >
-
                     {/* <button>View Course</button> */}
                     view course
                   </Link>

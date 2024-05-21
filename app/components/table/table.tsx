@@ -26,7 +26,7 @@ const Table = ({ headers, bodyRows }: { headers: string[], bodyRows: any[] }) =>
                     <tbody className='text-center justify-center items-center rounded-md'>
                         {bodyRows?.map((row, rowIndex) => (
                             <tr key={rowIndex} className='odd:bg-gray-100 even:bg-gray-50 rounded-xl px-4'>
-                                {row.map((cell: any, cellIndex: number) => (
+                                {row?.map((cell: any, cellIndex: number) => (
                                     <td key={cellIndex} className="m-auto">{cell}</td>
                                 ))}
                             </tr>
@@ -36,6 +36,7 @@ const Table = ({ headers, bodyRows }: { headers: string[], bodyRows: any[] }) =>
 
                 </table>
             </div>
+
         </>
     );
 };

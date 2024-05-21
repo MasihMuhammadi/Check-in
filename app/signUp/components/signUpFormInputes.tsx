@@ -23,6 +23,7 @@ const SignUpFormInputes = () => {
 
   const phoneValidation = new RegExp(/^(?:\+|00)?(?:[0-9] ?){6,14}[0-9]$/i)
   const validationSchema = Yup.object({
+    fullName: Yup.string().required('Invalid fullName address').required('fullName is required'),
     email: Yup.string().email('Invalid email address').required('Email is required'),
     course: Yup.string().required('Course or School Name is required'),
     phone: Yup.string().required('Phone is required'),
@@ -34,6 +35,7 @@ const SignUpFormInputes = () => {
     setIsPassword(!isPassword)
   }
   const initialValues = {
+    fullName: '',
     email: '',
     course: '',
     phone: '',
@@ -45,14 +47,12 @@ const SignUpFormInputes = () => {
 
   const onSubmit = async (values: any, { setSubmitting }: { setSubmitting: any }) => {
     try {
-
-      const baseUrl = 'http://localhost:5000'; // Example base URL
-
-      const response = await axios.post(`${baseUrl}/createUser/user`, values);
-
+      const response = await axios.post(`${baseUrl}/api/users/user`, values);
       console.log('User created:', response.data);
     } catch (error) {
-      console.error('Error creating user:', error);
+
+      console.log('Error creating user: maybe user is alreaady exist');
+
     }
     setSubmitting(false);
   };
@@ -75,7 +75,26 @@ const SignUpFormInputes = () => {
                   <AccountIcon width={24} height={24} />
 
                 </i>
-                <label className={`absolute -top-3.5 left-6 transition-position duration-[5000ms] bg-gradientPrimary p-1 px-2 text-xs text-white rounded-lg`}>
+                <label className={`absolute -top-3.5 right-6 transition-position duration-[5000ms] bg-gradientPrimary p-1 px-2 text-xs text-white rounded-lg`}>
+                  name
+                </label>
+                <Field
+                  name="fullName"
+                  type="fullName"
+                  placeholder="fullName"
+                  onChange={handleChange}
+                  value={values.fullName}
+                  className="border bordre-2 border-gray-700 w-[530px] p-2 px-14 h-14 rounded-md focus:outline-none focus:border-[#1e1e1e] focus:ring-1 focus:ring-[#1e1e1e]"
+                />
+                <ErrorMessage name="fullName" id="fullName" component="div" className=" text-xs text-red-500" />
+              </div>
+              <div className="relative">
+
+                <i className="absolute top-5 left-4">
+                  <AccountIcon width={24} height={24} />
+
+                </i>
+                <label className={`absolute -top-3.5 right-6 transition-position duration-[5000ms] bg-gradientPrimary p-1 px-2 text-xs text-white rounded-lg`}>
                   Email
                 </label>
                 <Field
@@ -93,7 +112,7 @@ const SignUpFormInputes = () => {
                 <i className="absolute top-5 left-4">
                   <CourseIcon width={24} height={24} />
                 </i>
-                <label className="absolute -top-3.5 left-6 bg-gradientPrimary p-1 px-2 text-xs text-white rounded-lg">
+                <label className="absolute -top-3.5 right-6 bg-gradientPrimary p-1 px-2 text-xs text-white rounded-lg">
                   Course or School Name
                 </label>
                 <Field

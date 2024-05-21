@@ -19,7 +19,7 @@ const Courses = () => {
 
                 {Array.from({ length: 20 }, (ele, index) => {
                     return (<>
-                        <div className='w-80 h-80 border border-black rounded-2xl flex flex-col items-center justify-center  '>
+                        <div className='w-64 h-80 border border-black rounded-2xl flex flex-col items-center justify-center  '>
                             <div className='w-full'>
                                 <Skeleton borderRadius={10} baseColor='#333333 ' width="100%" height={40} highlightColor='#555555 ' duration={2.5} />
                             </div>
