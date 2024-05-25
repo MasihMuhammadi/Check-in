@@ -38,7 +38,7 @@ const Information = () => {
 
     fetchData();
   }, []);
-  console.log(courseData, 'xxxxxxxxxxxxxx')
+
 
   return (
     <div>
