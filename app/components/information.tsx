@@ -7,7 +7,7 @@ import Masih from "../../public/images/Masih.jpg";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHistory, faPeopleArrowsLeftRight, faRocket } from '@fortawesome/free-solid-svg-icons'
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Buttons from "./buttons";
 import SonAndFather from "@/public/mockups/sonAndFather";
 import RealTimeUpdate from "@/public/smallIcons/realtimeUpdate";
@@ -18,37 +18,59 @@ import Image from 'next/image';
 import masihImage from "../../public/images/Masih.jpg"
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import axios from "axios";
 
 const Information = () => {
+  const [courseData, setCourseData] = useState<any>()
   const courseId = "course_123abc"
+  const baseUrl = "http://localhost:5000";
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(`${baseUrl}/api/users/`);
+        setCourseData(response?.data)
+
+      } catch (error) {
+        console.error("Error:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
+  console.log(courseData, 'xxxxxxxxxxxxxx')
 
   return (
     <div>
-      <div className=" grid grid-cols-1 sm:gap-x-1 sm:grid-cols-2 md:grid-cols-3  md:gap-x-2 lg:grid-cols-4 items-center content-center justify-center gap-4  ">
-        {/* Display three cards in a row */}
-        {Array.from({ length: 4 }, (_, index) => (
-          <div key={index} className=" flex justify-center items-center">
-            <div key={index} className="border border-black w-64 h-80 rounded-xl text-blue-500">
-              <div className="px-2">
-                <Skeleton borderRadius={10} width={240} baseColor="#0B3353" height={50} duration={2.5} />
-              </div>
-              <div className="flex items-center justify-center">
-                <Image src={masihImage} width={150} height={60} className="text-center content-center " alt="" />
-              </div>
-              <div className="px-4">
-                <Skeleton count={2} borderRadius={4} />
-                {/* <Skeleton width={100} height={30} borderRadius={4} style={{ textAlign: "center", content: "center" }} /> */}
-                <Buttons secondary={true} style="px-5  text-black">
-                  <Link href={`/courses/${courseId}`} >
-                    {/* <button>View Course</button> */}
-                    view course
-                  </Link>
-                </Buttons>
+      <div className=" grid grid-cols-1 sm:gap-x-1 sm:grid-cols-2 md:grid-cols-3  md:gap-x-2 lg:grid-cols-3 xl:grid-cold-4 items-center content-center justify-center gap-4  ">
+
+        {courseData?.map((course: any, index: number) => {
+          return (<>
+
+            <div key={index} className=" flex justify-center items-center">
+              <div key={index} className="border border-black w-64 h-80 rounded-xl text-blue-500">
+                <div className="px-2">
+                  <Skeleton borderRadius={10} width={240} baseColor="#0B3353" height={50} duration={2.5} />
+                </div>
+                <div className="flex items-center justify-center">
+                  <Image src={masihImage} width={150} height={60} className="text-center content-center " alt="" />
+                </div>
+                <div className="px-4">
+                  {/* <Skeleton count={2} borderRadius={4} /> */}
+                  <p className="text-black">{course?.courseName}</p>
+
+                  <Buttons secondary={true} style="px-5  text-black">
+                    <Link href={`/courses/${courseId}`} >
+                      view course
+                    </Link>
+                  </Buttons>
+                </div>
               </div>
             </div>
-          </div>
+          </>)
+        })}
 
-        ))}
+        {/* ))} */}
         <Link href="/courses">
           <Buttons primary={true} style="px-10">See More</Buttons>
         </Link>

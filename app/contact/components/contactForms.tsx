@@ -63,7 +63,7 @@ const ContactForm = () => {
         initialValues={initialValues}
         validationSchema={validationSchema}
         onSubmit={onSubmit}
-        validateOnChange={false} // To prevent instant validation on password change
+        validateOnChange={false} // To prevent instant valid ation on password change
       >
         {({ values, handleChange, handleSubmit, isSubmitting }) => (
           <Form >
