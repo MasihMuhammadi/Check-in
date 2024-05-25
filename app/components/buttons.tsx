@@ -1,7 +1,7 @@
 "use client";
 import React, { ReactElement } from "react"
 interface CustomButtonInterface {
-  children: string | ReactElement | null
+  children: any
   clickHandler?: Function
   style?: string
   primary?: boolean
