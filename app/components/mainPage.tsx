@@ -1,7 +1,8 @@
-import ManAndLoudSpeaker from "@/public/mockups/manAndLoudSpeaker";
+
 import LandingPageText from "./landingPageText";
 import Buttons from "./buttons";
 import Link from "next/link";
+import ManAndLoudSpeaker from "../../public/mockups/manAndLoudSpeaker";
 
 const MainPage = () => {
 

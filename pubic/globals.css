@@ -562,10 +562,6 @@ video {
   position: relative;
 }
 
-.-left-5 {
-  left: -1.25rem;
-}
-
 .-right-6 {
   right: -1.5rem;
 }
@@ -588,10 +584,6 @@ video {
 
 .left-2 {
   left: 0.5rem;
-}
-
-.left-3 {
-  left: 0.75rem;
 }
 
 .left-4 {
@@ -824,10 +816,6 @@ video {
 
 .h-14 {
   height: 3.5rem;
-}
-
-.h-16 {
-  height: 4rem;
 }
 
 .h-8 {
@@ -1654,8 +1642,8 @@ video {
     width: 124px;
   }
 
-  .sm\:grid-cols-1 {
-    grid-template-columns: repeat(1, minmax(0, 1fr));
+  .sm\:grid-cols-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .sm\:flex-row {
@@ -1666,14 +1654,19 @@ video {
     flex-direction: column;
   }
 
+  .sm\:gap-x-1 {
+    -moz-column-gap: 0.25rem;
+         column-gap: 0.25rem;
+  }
+
+  .sm\:bg-primary {
+    --tw-bg-opacity: 1;
+    background-color: rgb(30 30 30 / var(--tw-bg-opacity));
+  }
+
   .sm\:px-7 {
     padding-left: 1.75rem;
     padding-right: 1.75rem;
-  }
-
-  .sm\:px-mobileScreen {
-    padding-left: 20px;
-    padding-right: 20px;
   }
 
   .sm\:py-\[10px\] {
@@ -1704,17 +1697,17 @@ video {
     width: 600px;
   }
 
-  .md\:grid-cols-2 {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+  .md\:grid-cols-3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
   .md\:flex-row {
     flex-direction: row;
   }
 
-  .md\:px-IpadScreen {
-    padding-left: 25px;
-    padding-right: 25px;
+  .md\:gap-x-2 {
+    -moz-column-gap: 0.5rem;
+         column-gap: 0.5rem;
   }
 }
 
@@ -1735,12 +1728,11 @@ video {
     width: 800px;
   }
 
-  .lg\:grid-cols-4 {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
+  .lg\:grid-cols-3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
-  .lg\:px-laptopScreen {
-    padding-left: 0px 50px;
-    padding-right: 0px 50px;
+  .lg\:flex-row {
+    flex-direction: row;
   }
 }

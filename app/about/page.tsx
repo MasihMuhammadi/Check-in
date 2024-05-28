@@ -1,12 +1,10 @@
 "use client";
 
-import SonAndFather from "@/public/mockups/sonAndFather";
 import Buttons from "../components/buttons";
 import { useState } from "react";
-import TeacherAndStudent from "@/public/mockups/teacherAndStudent";
 import Header from "../components/header";
-import ArrowIcon from "@/public/smallIcons/arrowIcon";
 import Footer from "../components/footer/footer";
+import SonAndFather from "../../public/mockups/sonAndFather";
 
 
 const About = () => {

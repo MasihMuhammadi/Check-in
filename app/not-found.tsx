@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Header from "./components/header";
-import NotFoundMockup from "@/public/mockups/notfoundMockup";
 import Buttons from "./components/buttons";
+import NotFoundMockup from "../public/mockups/notfoundMockup";
 
 export default function NotFound() {
     return (

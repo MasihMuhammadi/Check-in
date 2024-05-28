@@ -21,12 +21,16 @@ const config: Config = {
         secondary: "#1e1e1ede"
       },
       padding: {
-        laptopScreen: "0px 50px",
-        IpadScreen: "25px",
-        mobileScreen: "20px",
+        laptopScreen: "70px",
+        tabletScreen: "50px",
+        mobileScreen: "30px",
+
       },
       borderColor: {
         primary: "#1e1e1e",
+        laptopBG: "blue",
+        ipadBG: "red",
+        tabletBG: "",
       },
     },
   },

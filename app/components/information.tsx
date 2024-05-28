@@ -1,5 +1,5 @@
 "use client";
-import ManAndLoudSpeaker from "@/public/mockups/manAndLoudSpeaker";
+
 // import AOS from "aos";
 import "aos/dist/aos.css";
 // import Image from "next/image";
@@ -9,8 +9,7 @@ import { faHistory, faPeopleArrowsLeftRight, faRocket } from '@fortawesome/free-
 
 import { useEffect, useState } from "react";
 import Buttons from "./buttons";
-import SonAndFather from "@/public/mockups/sonAndFather";
-import RealTimeUpdate from "@/public/smallIcons/realtimeUpdate";
+
 import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
 // import MasihImage from "../../public/images/Masih.jpg"
@@ -19,6 +18,7 @@ import masihImage from "../../public/images/Masih.jpg"
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import axios from "axios";
+import SonAndFather from "../../public/mockups/sonAndFather";
 
 const Information = () => {
   const [courseData, setCourseData] = useState<any>()
