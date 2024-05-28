@@ -1,8 +1,9 @@
 
 import React from 'react';
-import ThreeDotIcon from '@/public/smallIcons/threeDotIcon'
-import PresentIcon from '@/public/smallIcons/presentIcon';
-import AbsentIcon from '@/public/smallIcons/absentIcon';
+import AbsentIcon from '../../../public/smallIcons/absentIcon';
+import PresentIcon from '../../../public/smallIcons/presentIcon';
+import ThreeDotIcon from '../../../public/smallIcons/threeDotIcon';
+
 const TableForMobileScreen = ({ isStudent }: { isStudent: boolean }) => {
     return (
         <>

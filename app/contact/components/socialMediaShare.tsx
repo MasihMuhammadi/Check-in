@@ -1,10 +1,10 @@
 "use client";
-import FacebookIcon from "@/public/smallIcons/facebookIcon";
-import InstagramIcon from "@/public/smallIcons/instagramIcon";
-import LinkedinIcon from "@/public/smallIcons/linkedinIcon";
-import WhatsappIcon from "@/public/smallIcons/whatsappIcon";
-import Twilio from "twilio";
+
 import { useState } from "react";
+import FacebookIcon from "../../../public/smallIcons/facebookIcon";
+import LinkedinIcon from "../../../public/smallIcons/linkedinIcon";
+import WhatsappIcon from "../../../public/smallIcons/whatsappIcon";
+import InstagramIcon from "../../../public/smallIcons/instagramIcon";
 
 const SocialMediaShare = () => {
   return (

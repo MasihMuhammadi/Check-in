@@ -14,7 +14,7 @@ import AccountIcon from '../../../public/smallIcons/accountIcon';
 import OpenedEye from '../../../public/smallIcons/openedEye';
 import ClosedEye from '../../../public/smallIcons/closedEye';
 import Buttons from '../../components/buttons';
-// import { Controller, useForm } from 'react-hook-form'
+
 
 
 const SignUpFormInputes = () => {

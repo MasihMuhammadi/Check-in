@@ -1,4 +1,4 @@
-import SignUpMuckup from '../../public/mockups/signUpMockup'
+
 import Header from "../components/header";
 import SignUpFormInputes from "./components/signUpFormInputes";
 import Footer from "../components/footer/footer";

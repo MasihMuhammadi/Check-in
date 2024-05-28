@@ -1,7 +1,8 @@
 "use client";
-import Female from '@/public/mockups/female';
-import Male from '@/public/mockups/male';
+
 import React, { useState } from 'react';
+import Male from '../../public/mockups/male';
+import Female from '../../public/mockups/female';
 
 const MaleOrFemale = () => {
     const [selectedOption, setSelectedOption] = useState<string>("")

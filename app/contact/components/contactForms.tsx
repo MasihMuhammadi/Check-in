@@ -1,19 +1,13 @@
-// SignUpFormInputes.tsx
 "use client";
 
 import React, { useEffect, useState } from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
-import Buttons from "@/app/components/buttons";
-import AccountIcon from "@/public/smallIcons/accountIcon";
-import CourseIcon from "@/public/smallIcons/courseIcon";
-import PasswordIcon from "@/public/smallIcons/passwordIcon";
-import PhoneIcon from "@/public/smallIcons/phoneIcon";
 import Link from "next/link";
-import ClosedEye from '@/public/smallIcons/closedEye';
-import OpenedEye from '@/public/smallIcons/openedEye';
-import axios from 'axios';
-// import { Controller, useForm } from 'react-hook-form'
+
+import AccountIcon from '../../../public/smallIcons/accountIcon';
+import Buttons from '../../components/buttons';
+
 
 
 const ContactForm = () => {

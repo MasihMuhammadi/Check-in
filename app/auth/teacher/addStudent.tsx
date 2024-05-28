@@ -1,10 +1,11 @@
 "use client";
 import React, { useState } from "react";
-import MaleOrFemale from "@/app/components/maleOrFemale";
-import Header from "@/app/components/header";
-import Buttons from "@/app/components/buttons";
-import TeacherInfo from "@/app/components/teacherInformationForm/teacherInfo";
-import StudentInfo from "@/app/components/studentInfomationForm/studentInfo";
+import MaleOrFemale from "../../components/maleOrFemale";
+import Header from "../../components/header";
+import TeacherInfo from "../../components/teacherInformationForm/teacherInfo";
+import StudentInfo from "../../components/studentInfomationForm/studentInfo";
+import Buttons from "../../components/buttons";
+
 
 const AddStudent = () => {
     const [step, setStep] = useState(1)

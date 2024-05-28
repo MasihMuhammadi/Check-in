@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState } from 'react';
-// import { useRouter } from 'next/router'; // Ensure useRouter is imported correctly
 import { useRouter } from 'next/navigation';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
@@ -117,7 +116,7 @@ const LoginForm = () => {
                                     Login
                                 </Buttons>
                                 <p className="mt-4">
-                                    You dont haven't account?{" "}
+                                    You dont have not account?{" "}
                                     <Link href="/signUp" className="underline">
                                         SignUp
                                     </Link>

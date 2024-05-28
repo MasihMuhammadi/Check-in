@@ -6,7 +6,8 @@ import DeleteIcon from '../../../../public/smallIcons/deleteIcon';
 import EditIcon from '../../../../public/smallIcons/editIcon';
 import Header from '../../../components/header'
 import ArrowIcon from '../../../../public/smallIcons/arrowIcon'
-import TableForMobileScreen from '@/app/components/table/tableForMobileScreen'
+import TableForMobileScreen from '../../../components/table/tableForMobileScreen';
+
 
 
 const SingleTeacher = ({ params }: { params: any }) => {
