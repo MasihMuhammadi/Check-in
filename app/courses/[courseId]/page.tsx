@@ -1,14 +1,15 @@
 
 import React from 'react'
 import NotFound from '../../not-found'
-import Header from '@/app/components/header'
 import Image from 'next/image'
 import masihImage from "../../../public/images/Masih.jpg"
 import LocationIcon from '../../../public/smallIcons/location'
 import SubjectIcon from '../../../public/smallIcons/subject'
 import StudentsIcon from '../../../public/smallIcons/students'
 import Buttons from '../../components/buttons'
-import Footer from '@/app/components/footer/footer'
+import Header from '../../components/header'
+import Footer from '../../components/footer/footer'
+
 
 export default function Page({ params }: { params: any }) {
 

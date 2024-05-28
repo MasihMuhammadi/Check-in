@@ -3,8 +3,6 @@ import Image from 'next/image';
 import React from 'react';
 import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
-import Buttons from '../components/buttons';
-import Link from 'next/link';
 import masihImage from '../../public/images/Masih.jpg'
 import Header from '../components/header';
 import SearchInput from '../components/SearchInput';

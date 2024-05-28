@@ -1,8 +1,7 @@
 "use client";
 import React, { useState } from 'react';
 import EditOrDelete from './editOrDelete';
-import PresentIcon from '../../../public/smallIcons/presentIcon';
-import AbsentIcon from '../../../public/smallIcons/absentIcon';
+
 
 const Table = ({ headers, bodyRows }: { headers: string[], bodyRows: any[] }) => {
     const [background, setBackground] = useState("");
