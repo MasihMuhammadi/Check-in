@@ -13,11 +13,11 @@ const Navbar = () => {
         {/* <Link className="mx-2 lg:mx-4 " href="#">
           Services
         </Link> */}
-        <Link className="mx-2 lg:mx-4 " href="/contact">
-          Contact
-        </Link>
         <Link className="mx-2 lg:mx-4 " href="/courses">
           Courses
+        </Link>
+        <Link className="mx-2 lg:mx-4 " href="/contact">
+          Contact
         </Link>
       </nav>
     </>

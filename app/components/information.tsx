@@ -69,8 +69,7 @@ const Information = () => {
             </div>
           </>)
         })}
-
-        {/* ))} */}
+        <br />
         <Link href="/courses">
           <Buttons primary={true} style="px-10">See More</Buttons>
         </Link>
