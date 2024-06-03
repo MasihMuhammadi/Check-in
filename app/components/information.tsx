@@ -50,8 +50,10 @@ const Information = () => {
       <div className="grid grid-cols-1 gap-x-5 sm:gap-x-1 sm:grid-cols-2 md:grid-cols-3 md:gap-x-6 lg:grid-cols-4 xl:grid-cols-4 items-center content-center justify-center gap-4">
         {isLoading ? (
           Array.from({ length: 8 }).map((_, id) => (
-            <div key={id} className="">
-              <Skeleton borderRadius={10} baseColor="#ccc" className="h-80 w-[300px]" duration={2.5} />
+            <div key={id} className="border border-gray-400 rounded-2xl px-1 ">
+              <Skeleton borderRadius={10} baseColor="#f0f0f0" className="h-64 w-full" duration={2.5} />
+              <Skeleton borderRadius={10} baseColor="#f0f0f0" className="h-10 w-full" duration={2.5} />
+              <Skeleton borderRadius={0} baseColor="#f0f0f0" className="mb-1" width={200} height={30} duration={2.5} />
             </div>
           ))
         ) : (
