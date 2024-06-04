@@ -22,6 +22,7 @@ import SonAndFather from "../../public/mockups/sonAndFather";
 
 const Information = () => {
   const [courseData, setCourseData] = useState<any>()
+  const [isLoading, setIsLoading] = useState<boolean>(true)
   const courseId = "course_123abc"
   const baseUrl = "http://localhost:5000";
 
@@ -30,6 +31,10 @@ const Information = () => {
       try {
         const response = await axios.get(`${baseUrl}/api/users/`);
         setCourseData(response?.data)
+        if (response?.data?.length) {
+          setIsLoading(false)
+        }
+
 
       } catch (error) {
         console.error("Error:", error);
@@ -42,38 +47,42 @@ const Information = () => {
 
   return (
     <div>
-      <div className=" grid grid-cols-1 sm:gap-x-1 sm:grid-cols-2 md:grid-cols-3  md:gap-x-2 lg:grid-cols-3 xl:grid-cold-4 items-center content-center justify-center gap-4  ">
+      <div className="grid grid-cols-1 gap-x-5 sm:gap-x-1 sm:grid-cols-2 md:grid-cols-3 md:gap-x-6 lg:grid-cols-4 xl:grid-cols-4 items-center content-center justify-center gap-4">
+        {isLoading ? (
+          Array.from({ length: 8 }).map((_, id) => (
+            <div key={id} className="border border-gray-400 rounded-2xl px-1 ">
+              <Skeleton borderRadius={10} baseColor="#f0f0f0" className="h-64 w-full" duration={2.5} />
+              <Skeleton borderRadius={10} baseColor="#f0f0f0" className="h-10 w-full" duration={2.5} />
+              <Skeleton borderRadius={0} baseColor="#f0f0f0" className="mb-1" width={200} height={30} duration={2.5} />
+            </div>
+          ))
+        ) : (
+          <>
+            {courseData?.map((course: any, index: number) => (
+              <div key={index} className="flex justify-center items-center">
+                <div className="border border-black w-[300px] h-80 rounded-xl text-blue-500">
+                  <div className="flex items-center justify-center">
+                    <Image src={masihImage} width={150} height={60} className="text-center content-center" alt="" />
+                  </div>
+                  <div className="px-4">
+                    <p className="text-black">{course?.courseName}</p>
 
-        {courseData?.map((course: any, index: number) => {
-          return (<>
-
-            <div key={index} className=" flex justify-center items-center">
-              <div key={index} className="border border-black w-64 h-80 rounded-xl text-blue-500">
-                <div className="px-2">
-                  <Skeleton borderRadius={10} width={240} baseColor="#0B3353" height={50} duration={2.5} />
-                </div>
-                <div className="flex items-center justify-center">
-                  <Image src={masihImage} width={150} height={60} className="text-center content-center " alt="" />
-                </div>
-                <div className="px-4">
-                  {/* <Skeleton count={2} borderRadius={4} /> */}
-                  <p className="text-black">{course?.courseName}</p>
-
-                  <Buttons secondary={true} style="px-5  text-black">
-                    <Link href={`/courses/${courseId}`} >
-                      view course
-                    </Link>
-                  </Buttons>
+                    <Buttons secondary={true} style="px-5 text-black">
+                      <Link href={`/courses/${courseId}`}>
+                        view course
+                      </Link>
+                    </Buttons>
+                  </div>
                 </div>
               </div>
-            </div>
-          </>)
-        })}
-        <br />
-        <Link href="/courses">
-          <Buttons primary={true} style="px-10">See More</Buttons>
-        </Link>
+            ))}
+            <Link href="/courses">
+              <Buttons primary={true} style="px-10">See More</Buttons>
+            </Link>
+          </>
+        )}
       </div>
+
 
       <h1 className="text-2xl mt-10 font-bold mx-4">Why Should We Use Edu Echo?</h1>
       <div className="flex flex-col sm:flex-row justify-center items-center">
