@@ -7,6 +7,7 @@ import EditIcon from '../../../../public/smallIcons/editIcon';
 import Header from '../../../components/header'
 import ArrowIcon from '../../../../public/smallIcons/arrowIcon'
 import TableForMobileScreen from '../../../components/table/tableForMobileScreen';
+import AddStudent from '../../../auth/teacher/addStudent';
 
 
 
@@ -21,20 +22,7 @@ const SingleTeacher = ({ params }: { params: any }) => {
         <>
             <div className='overflow-x-hidden'>
 
-
                 <Header />
-                {/* <div className={`h-96 w-64 bg-gray-500 px-4 relative transition-all duration-400 inline-block ${showMenu ? "translate-x-0" : "-translate-x-64"}`}>
-                <div className='flex flex-col gap-y-2'>
-                    <div>Your Classes</div>
-                    <div>Your Student</div>
-                    <div>Add a  Class</div>
-                    <div>Add a  Student</div>
-                    </div>
-                    <div className={`absolute -right-6 text-3xl ${showMenu ? "-rotate-[90deg]" : "rotate-[90deg]"}`} onClick={handleShowMenu}>
-                    
-                    <ArrowIcon />
-                    </div>
-                </div> */}
                 <p className='mb-6'>Welcome Teacher {params?.teacherId} to this class </p>
                 <div className="hidden sm:block">
                     <Table
@@ -63,8 +51,6 @@ const SingleTeacher = ({ params }: { params: any }) => {
                 <div className="block sm:hidden ">
                     <TableForMobileScreen isStudent={false} />
                 </div>
-
-
             </div>
         </>
     );
