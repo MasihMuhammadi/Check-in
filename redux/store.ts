@@ -2,10 +2,12 @@
 import { configureStore } from '@reduxjs/toolkit';
 import rootReducer from './rootReducer';
 import classSlice from './slices/classSlice';
+import courseSlice from './slices/courseSlice';
 
 const store = configureStore({
     reducer: {
-        classSlice: classSlice
+        classSlice: classSlice,
+        courseSlice: courseSlice
     },
 });
 

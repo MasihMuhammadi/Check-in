@@ -4,7 +4,7 @@
 import React, { useEffect, useState } from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
-
+import { useRouter } from 'next/navigation'
 import Link from "next/link";
 import axios from 'axios';
 import PasswordIcon from '../../../public/smallIcons/passwordIcon';
@@ -17,7 +17,7 @@ import Buttons from '../../components/buttons';
 
 
 
-const SignUpFormInputes = () => {
+const ManagerSignUpFormInputes = ({ role }: { role: any }) => {
 
   const [isPassword, setIsPassword] = useState<boolean>(false)
   const [password, setPassword] = useState<any>()
@@ -31,7 +31,7 @@ const SignUpFormInputes = () => {
     password: Yup.string().required('Password is required').min(6, 'password should be at least 6 chracte'),
   });
 
-
+  const route = useRouter()
   const showPassword = () => {
     setIsPassword(!isPassword)
   }
@@ -41,15 +41,35 @@ const SignUpFormInputes = () => {
     course: '',
     phone: '',
     password: '',
+    role: role
   };
 
+  //   {
+  //     "fullName":"Masih Muhammadi",
+  //     "email":"masihmuhammadi303@gmail.com",
+  //     "courseName":"thunder",
+  //     "phone":"+987654321",
+  //     "password":"masih123",
+  //     "role":"manager"
+  // }
   let baseUrl = "http://localhost:5000"
 
 
   const onSubmit = async (values: any, { setSubmitting }: { setSubmitting: any }) => {
+
+    const payload = {
+      fullName: values.fullName,
+      email: values.email,
+      courseName: values.course,
+      phone: values.phone,
+      password: values.password,
+      role: role
+    }
     try {
-      const response = await axios.post(`${baseUrl}/api/users/user`, values);
-      console.log('User created:', response.data);
+      const response = await axios.post(`${baseUrl}/api/courses/course`, payload);
+      console.log('Course created:', response.data);
+      // route.push(`/course/${response.data?.}`)
+
     } catch (error) {
 
       console.log('Error creating user: maybe user is alreaady exist');
@@ -189,4 +209,4 @@ const SignUpFormInputes = () => {
   );
 };
 
-export default SignUpFormInputes;
+export default ManagerSignUpFormInputes;

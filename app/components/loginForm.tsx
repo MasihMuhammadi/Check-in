@@ -12,11 +12,14 @@ import axios from 'axios';
 import Buttons from './buttons';
 import Link from 'next/link';
 import LoginMockup from '../../public/mockups/loginMockup';
+import { useDispatch } from 'react-redux';
+import { setLoggedIn } from '../../redux/slices/courseSlice';
 
 
 
 const LoginForm = () => {
     const [isPassword, setIsPassword] = useState<boolean>(false);
+    const dispatch = useDispatch();
     const [password, setPassword] = useState<any>();
     const router = useRouter(); // Move useRouter here, outside of any function
 
@@ -39,8 +42,7 @@ const LoginForm = () => {
     const onSubmit = async (values: any, { setSubmitting }: { setSubmitting: any }) => {
         try {
             const response = await axios.post(`${baseUrl}/api/auth/login`, values);
-            console.log(response, 'rrrrrrrrrrrrrrr'); // Check the entire response object for debugging
-
+            dispatch(setLoggedIn(true))
             if (response?.data?.success) {
                 console.log("Login successful");
                 router.push(`/teacher/${response.data?.data?.fullName}/classes`); // Redirect to the specified route
@@ -48,6 +50,7 @@ const LoginForm = () => {
                 console.log('Login failed:', response?.data?.message);
             }
         } catch (error) {
+            dispatch(setLoggedIn(false))
             console.error("Error:", error);
             console.log("An error occurred while logging in");
         }
