@@ -10,14 +10,14 @@ import { useEffect } from "react";
 export default function Home() {
   const isLoggedIn = useSelector((state: any) => state.courseSlice.isLoggedIn);
   const router = useRouter();
-  useEffect(() => {
-    const currentRoute = window.location.href.includes("teacher");
-    console.log(currentRoute, 'cccccccc', isLoggedIn)
+  // useEffect(() => {
+  //   const currentRoute = window.location.href.includes("teacher");
+  //   console.log(currentRoute, 'cccccccc', isLoggedIn)
 
-    if (!isLoggedIn && currentRoute) {
-      router.push('/login');
-    }
-  }, [isLoggedIn]);
+  //   if (!isLoggedIn && currentRoute) {
+  //     router.push('/login');
+  //   }
+  // }, [isLoggedIn]);
   return (
     <div className=" no-scrollbar overflow-hidden sm:px-mobileScreen md:tabletScreen lg:laptopScreen ">
       <LandingPage />

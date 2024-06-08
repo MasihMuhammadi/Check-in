@@ -10,7 +10,7 @@ const initialState: any = {
 }
 
 // Define the async thunk
-export const fetchData = createAsyncThunk(
+export const fetchData: any = createAsyncThunk(
     'classSlice/fetchData',
     async (payload: any) => {
         try {

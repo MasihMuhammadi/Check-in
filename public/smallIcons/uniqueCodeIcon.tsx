@@ -1,4 +1,5 @@
 
+
 const UniqueCodeIcon = ({ width, height }: { width: any, height: any }) => {
     <svg width={width} height={height} viewBox="0 0 254 144" fill="none" xmlns="http://www.w3.org/2000/svg">
         <rect x="10" y="10" width="234" height="124" rx="20" fill="#D9D9D9" stroke="#010214" stroke-width="20" />

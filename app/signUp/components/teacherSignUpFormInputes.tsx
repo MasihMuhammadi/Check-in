@@ -121,7 +121,7 @@ const TeacherSignUpFormInputes = ({ role }: { role: any }) => {
 
                             <div className="relative">
                                 <i className="absolute top-5 left-4">
-                                    <UniqueCodeIcon width="24" height="24" />
+                                    {/* <UniqueCodeIcon width="24" height="24" /> */}
 
                                 </i>
                                 <label className="absolute -top-3.5 right-6 bg-gradientPrimary p-1 px-2 text-xs text-white rounded-lg">
