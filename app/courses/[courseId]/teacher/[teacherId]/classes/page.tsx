@@ -1,12 +1,12 @@
 
 "use client";
 import React, { useState } from 'react';
-import Table from "../../../../../../components/table/table"
+import Table from "../../../../../components/table/table"
 import DeleteIcon from '../../../../../../public/smallIcons/deleteIcon'
 import EditIcon from '../../../../../../public/smallIcons/editIcon';
-import Header from '../../../../../../components/header'
+import Header from '../../../../../components/header'
 import ArrowIcon from '../../../../../../public/smallIcons/arrowIcon'
-import TableForMobileScreen from '../../../../../../components/table/tableForMobileScreen';
+import TableForMobileScreen from '../../../../../components/table/tableForMobileScreen';
 import AddStudent from '../../../../../auth/teacher/addStudent';
 import AddClass from '../../../../../auth/teacher/addClass';
 

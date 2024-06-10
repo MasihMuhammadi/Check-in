@@ -1,4 +1,3 @@
-// src/api/api.ts
 import axios from 'axios';
 
 const baseUrl = 'http://localhost:5000';
@@ -24,6 +23,23 @@ export const addClass = async (payload: any) => {
         throw error;
     }
 };
+export const loginAsTeacher = async (payload: any) => {
+    try {
+        const response = await axios.post(`${baseUrl}/api/auth/login`, payload);
+        return response.data;
+    } catch (error) {
+        throw error;
+    }
+};
+export const loginAsManager = async (payload: any) => {
+    try {
+        const response = await axios.post(`${baseUrl}/api/auth/login`, payload);
+        return response.data;
+    } catch (error) {
+        throw error;
+    }
+};
+
 
 // Example of another API request (e.g., fetch classes)
 // export const fetchClasses = async () => {
