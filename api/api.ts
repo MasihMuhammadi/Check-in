@@ -1,0 +1,46 @@
+// src/api/api.ts
+import axios from 'axios';
+
+const baseUrl = 'http://localhost:5000';
+
+// Interface for AddClass payload
+// export interface AddClassPayload {
+//     class_name: string;
+//     course_name: string;
+//     teacher: string;
+//     duration: string;
+//     start_day: string;
+//     finish_day: string;
+//     started_time: string;
+//     finish_time: string;
+// }
+
+// Add Class API request
+export const addClass = async (payload: any) => {
+    try {
+        const response = await axios.post(`${baseUrl}/api/class/add-class`, payload);
+        return response.data;
+    } catch (error) {
+        throw error;
+    }
+};
+
+// Example of another API request (e.g., fetch classes)
+// export const fetchClasses = async () => {
+//   try {
+//     const response = await axios.get(`${baseUrl}/api/class/get-classes`);
+//     return response.data;
+//   } catch (error) {
+//     throw error;
+//   }
+// };
+
+// Example of another API request (e.g., delete class)
+// export const deleteClass = async (classId: string) => {
+//   try {
+//     const response = await axios.delete(`${baseUrl}/api/class/delete-class/${classId}`);
+//     return response.data;
+//   } catch (error) {
+//     throw error;
+//   }
+// };

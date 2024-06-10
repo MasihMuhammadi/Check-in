@@ -11,17 +11,13 @@ import axios from "axios";
 const AddStudent = () => {
     const [step, setStep] = useState(1)
 
-    const addNewStudent = async () => {
-        let baseUrl = "http://localhost:5000"
-        axios.post(`${baseUrl}/api/students/add-student`, {
-
-        })
 
 
-        // if (step !== 2) {
-        //     setStep(prevStep => prevStep + 1);
-        // }
-    };
+
+    // if (step !== 2) {
+    //     setStep(prevStep => prevStep + 1);
+    // }
+    // };
     // const changeStepToBack = () => {
     //     if (step > 1) {
     //         setStep(prevStep => prevStep - 1)
