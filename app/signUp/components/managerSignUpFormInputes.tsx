@@ -4,7 +4,7 @@
 import React, { useEffect, useState } from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
-
+import { useRouter } from 'next/navigation'
 import Link from "next/link";
 import axios from 'axios';
 import PasswordIcon from '../../../public/smallIcons/passwordIcon';
@@ -14,13 +14,19 @@ import AccountIcon from '../../../public/smallIcons/accountIcon';
 import OpenedEye from '../../../public/smallIcons/openedEye';
 import ClosedEye from '../../../public/smallIcons/closedEye';
 import Buttons from '../../components/buttons';
+import Notification from '../../components/notification';
 
 
 
-const SignUpFormInputes = () => {
+const ManagerSignUpFormInputes = ({ role }: { role: any }) => {
 
   const [isPassword, setIsPassword] = useState<boolean>(false)
   const [password, setPassword] = useState<any>()
+  const [notification, setNotification] = useState({
+    success: false,
+    isShow: false,
+    content: ''
+  })
 
   const phoneValidation = new RegExp(/^(?:\+|00)?(?:[0-9] ?){6,14}[0-9]$/i)
   const validationSchema = Yup.object({
@@ -31,7 +37,7 @@ const SignUpFormInputes = () => {
     password: Yup.string().required('Password is required').min(6, 'password should be at least 6 chracte'),
   });
 
-
+  const route = useRouter()
   const showPassword = () => {
     setIsPassword(!isPassword)
   }
@@ -41,15 +47,41 @@ const SignUpFormInputes = () => {
     course: '',
     phone: '',
     password: '',
+    role: role
   };
 
+  //   {
+  //     "fullName":"Masih Muhammadi",
+  //     "email":"masihmuhammadi303@gmail.com",
+  //     "courseName":"thunder",
+  //     "phone":"+987654321",
+  //     "password":"masih123",
+  //     "role":"manager"
+  // }
   let baseUrl = "http://localhost:5000"
 
 
   const onSubmit = async (values: any, { setSubmitting }: { setSubmitting: any }) => {
+
+    setNotification({
+      success: true,
+      content: "success is only things you need",
+      isShow: true
+    })
+
+    const payload = {
+      fullName: values.fullName,
+      email: values.email,
+      courseName: values.course,
+      phone: values.phone,
+      password: values.password,
+      role: role
+    }
     try {
-      const response = await axios.post(`${baseUrl}/api/users/user`, values);
-      console.log('User created:', response.data);
+      const response = await axios.post(`${baseUrl}/api/courses/course`, payload);
+      console.log('Course created:', response.data);
+      // route.push(`/course/${response.data?.}`)
+
     } catch (error) {
 
       console.log('Error creating user: maybe user is alreaady exist');
@@ -58,9 +90,26 @@ const SignUpFormInputes = () => {
     setSubmitting(false);
   };
 
+  useEffect(() => {
+    const noti = setTimeout(() => {
+      setNotification({
+        success: false,
+        isShow: false,
+        content: ""
+      });
+    }, 5000);
+
+    return () => clearTimeout(noti); // This ensures clearTimeout is called correctly
+  }, [notification]);
+
+
 
   return (
     <div className="">
+      {notification.isShow &&
+        <Notification isShow={notification?.isShow} success={notification.success}>
+          {notification.content}
+        </Notification>}
       <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}
@@ -69,6 +118,9 @@ const SignUpFormInputes = () => {
       >
         {({ values, handleChange, handleSubmit, isSubmitting }) => (
           <Form >
+            {/* <div className='bg-red-500'>
+              masihullah
+            </div> */}
             <div className="flex flex-col gap-6  place-items-center ">
               <div className="relative ">
                 <i className="absolute top-5 left-4">
@@ -189,4 +241,4 @@ const SignUpFormInputes = () => {
   );
 };
 
-export default SignUpFormInputes;
+export default ManagerSignUpFormInputes;
