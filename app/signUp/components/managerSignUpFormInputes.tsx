@@ -14,6 +14,7 @@ import AccountIcon from '../../../public/smallIcons/accountIcon';
 import OpenedEye from '../../../public/smallIcons/openedEye';
 import ClosedEye from '../../../public/smallIcons/closedEye';
 import Buttons from '../../components/buttons';
+import Notification from '../../components/notification';
 
 
 
@@ -21,6 +22,11 @@ const ManagerSignUpFormInputes = ({ role }: { role: any }) => {
 
   const [isPassword, setIsPassword] = useState<boolean>(false)
   const [password, setPassword] = useState<any>()
+  const [notification, setNotification] = useState({
+    success: false,
+    isShow: false,
+    content: ''
+  })
 
   const phoneValidation = new RegExp(/^(?:\+|00)?(?:[0-9] ?){6,14}[0-9]$/i)
   const validationSchema = Yup.object({
@@ -57,6 +63,12 @@ const ManagerSignUpFormInputes = ({ role }: { role: any }) => {
 
   const onSubmit = async (values: any, { setSubmitting }: { setSubmitting: any }) => {
 
+    setNotification({
+      success: true,
+      content: "success is only things you need",
+      isShow: true
+    })
+
     const payload = {
       fullName: values.fullName,
       email: values.email,
@@ -78,9 +90,26 @@ const ManagerSignUpFormInputes = ({ role }: { role: any }) => {
     setSubmitting(false);
   };
 
+  useEffect(() => {
+    const noti = setTimeout(() => {
+      setNotification({
+        success: false,
+        isShow: false,
+        content: ""
+      });
+    }, 5000);
+
+    return () => clearTimeout(noti); // This ensures clearTimeout is called correctly
+  }, [notification]);
+
+
 
   return (
     <div className="">
+      {notification.isShow &&
+        <Notification isShow={notification?.isShow} success={notification.success}>
+          {notification.content}
+        </Notification>}
       <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}
@@ -89,6 +118,9 @@ const ManagerSignUpFormInputes = ({ role }: { role: any }) => {
       >
         {({ values, handleChange, handleSubmit, isSubmitting }) => (
           <Form >
+            {/* <div className='bg-red-500'>
+              masihullah
+            </div> */}
             <div className="flex flex-col gap-6  place-items-center ">
               <div className="relative ">
                 <i className="absolute top-5 left-4">
