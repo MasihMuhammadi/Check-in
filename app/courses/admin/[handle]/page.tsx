@@ -3,10 +3,11 @@
 import React from 'react';
 
 const CourseAdmin = ({ params }: { params: any }) => {
-    console.log(params, 'pppppppp')
+    // console.log(params.name, 'pppppppp')
     return (
         <>
-            This is the course admin dashboard
+            {params.handle}
+            This is the <b>{params.handle}</b> course admin dashboard
         </>
     );
 };

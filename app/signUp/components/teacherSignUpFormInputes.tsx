@@ -13,13 +13,17 @@ import CourseIcon from '../../../public/smallIcons/courseIcon';
 import AccountIcon from '../../../public/smallIcons/accountIcon';
 import OpenedEye from '../../../public/smallIcons/openedEye';
 import ClosedEye from '../../../public/smallIcons/closedEye';
-import UniqueCodeIcon from '../../../public/smallIcons/uniqueCodeIcon';
 import Buttons from '../../components/buttons';
+import UniqueCodeIcon from '../../../public/smallIcons/uniqueCodeIcon';
+import { useDispatch } from 'react-redux';
+import { signUpTeacher } from '../../../redux/slices/courseSlice';
+// import { createTeacher } from '../../../api/api';
 
 
 
 const TeacherSignUpFormInputes = ({ role }: { role: any }) => {
 
+    const dispatch = useDispatch()
     const [isPassword, setIsPassword] = useState<boolean>(false)
     const [password, setPassword] = useState<any>()
 
@@ -42,51 +46,40 @@ const TeacherSignUpFormInputes = ({ role }: { role: any }) => {
         course_unique_code: "",
         teacher_name: '',
         teacher_email: '',
-        // phone: '',
         password: '',
         role: role
     };
-    // "courseName":"thunder",
-    // "course_unique_code":"MasihMuhammadi_thunder_86429642",
-    // "teacher_name":"Masihullah",
-    // "teacher_teacher_email":"khalidturabi@gmail.com",
-    // "password":"masih123",
-    // "role":"teacher"
+
     let baseUrl = "http://localhost:5000"
 
 
     const onSubmit = async (values: any) => {
-        // console.log('.................clicked')
-
-        //     {
-        //         "courseName":"thunder",
-        //         "course_unique_code":"MasihMuhammadi_thunder_86429642",
-        //         "teacher_name":"Masihullah",
-        //         "teacher_email":"khalidturabi@gmail.com",
-        //         "password":"masih123",
-        //         "role":"teacher"
-        // }
-
         const payload = {
             courseName: values.courseName,
             course_unique_code: values.course_unique_code,
             teacher_name: values.teacher_name,
             teacher_email: values.teacher_email,
-            // phone: values.phone,
+            handle: `${values.teacher_name?.split(" ")?.join("-")}-${values.courseName?.split(" ")?.join("-")}`,
             password: values.password,
             role: role
         }
         try {
-            const response = await axios.post(`${baseUrl}/api/teachers/teacher`, payload);
-            console.log('Teacher created:', response.data);
-            // route.push(`/course/${response.data?.}`)
+            // const response = await axios.post(`${baseUrl}/api/teachers/teacher`, payload);
+            const response = await dispatch(signUpTeacher(payload))
+            console.log(response)
 
-        } catch (error) {
+            if (response?.payload?.courseName) {
+                route.push("/login")
+                console.log('Teacher created:');
+            }
+            else {
+                console.log('teacher cant created');
+            }
+        } catch (err: any) {
 
-            console.log('Error creating user: maybe Teacher is alreaady exist');
+            console.log(err?.message);
 
         }
-        // setSubmitting(false);
     };
 
 
@@ -120,9 +113,8 @@ const TeacherSignUpFormInputes = ({ role }: { role: any }) => {
                             </div>
 
                             <div className="relative">
-                                <i className="absolute top-5 left-4">
-                                    {/* <UniqueCodeIcon width="24" height="24" /> */}
-
+                                <i className="absolute top-2 left-1">
+                                    <UniqueCodeIcon width={40} height={40} />
                                 </i>
                                 <label className="absolute -top-3.5 right-6 bg-gradientPrimary p-1 px-2 text-xs text-white rounded-lg">
                                     Unique Code

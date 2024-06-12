@@ -15,6 +15,24 @@ const baseUrl = 'http://localhost:5000';
 // }
 
 // Add Class API request
+export const createaCourse = async (payload: any) => {
+    try {
+        const response = await axios.post(`${baseUrl}/api/courses/course`, payload);
+        // api/courses/course
+        return response.data;
+    } catch (error) {
+        throw error;
+    }
+};
+export const createTeacher = async (payload: any) => {
+    try {
+        const response = await axios.post(`${baseUrl}/api/teachers/teacher`, payload);
+        // api/courses/course
+        return response.data;
+    } catch (error) {
+        throw error;
+    }
+};
 export const addClass = async (payload: any) => {
     try {
         const response = await axios.post(`${baseUrl}/api/class/add-class`, payload);

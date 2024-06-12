@@ -33,9 +33,9 @@ const initialState: AuthState = {
 
 export const loginTeacher = createAsyncThunk(
     'authSlice/loginTeacher',
-    async (payload: { data: any }) => {
+    async (payload: any) => {
         try {
-            const response = await loginAsTeacher(payload.data)
+            const response = await loginAsTeacher(payload)
             return response
         } catch (error) {
             throw error

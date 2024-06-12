@@ -24,7 +24,10 @@ const SingleTeacher = ({ params }: { params: any }) => {
             <div className='overflow-x-hidden'>
 
                 <Header />
-                <p className='mb-6'>Welcome Teacher {params?.teacherId.split("_")[0]} to this class </p>
+                <div>
+                    <h1>main page for teachers redirect after signing in</h1>
+                </div>
+                {/* <p className='mb-6'>Welcome Teacher {params?.teacherId.split("_")[0]} to this class </p>
                 <div className="hidden sm:block">
                     <Table
                         headers={[
@@ -51,7 +54,7 @@ const SingleTeacher = ({ params }: { params: any }) => {
                 </div>
                 <div className="block sm:hidden ">
                     <TableForMobileScreen isStudent={false} />
-                </div>
+                </div> */}
             </div>
         </>
     );
