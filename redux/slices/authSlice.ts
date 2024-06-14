@@ -31,7 +31,7 @@ const initialState: AuthState = {
     isLoggedIn: false
 }
 
-export const loginTeacher = createAsyncThunk(
+export const loginTeacher: any = createAsyncThunk(
     'authSlice/loginTeacher',
     async (payload: any) => {
         try {
@@ -43,7 +43,7 @@ export const loginTeacher = createAsyncThunk(
     }
 )
 
-export const loginManager = createAsyncThunk(
+export const loginManager: any = createAsyncThunk(
     'authSlice/loginManager',
     async (payload: { data: any }) => {
         try {

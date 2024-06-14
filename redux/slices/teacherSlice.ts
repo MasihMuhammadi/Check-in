@@ -22,7 +22,7 @@ const initialState: teacherState = {
 
 // Define the async thunk
 
-export const getTeacherData = createAsyncThunk(
+export const getTeacherData: any = createAsyncThunk(
     'teacherSlice/getTeacherData',
     async (handle, { rejectWithValue }) => {
         try {

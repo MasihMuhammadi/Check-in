@@ -75,8 +75,7 @@ const ManagerLoginForm = ({ role, setRole }: { role: any, setRole: any }) => {
                 })
             }
 
-        } catch (error) {
-            console.log('...............')
+        } catch (error: any) {
             setNotification({
                 success: false,
                 isShow: true,

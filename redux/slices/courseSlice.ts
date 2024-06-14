@@ -32,7 +32,7 @@ const initialState: CourseState = {
 
 // Define the async thunk
 
-export const signUpManager = createAsyncThunk(
+export const signUpManager: any = createAsyncThunk(
     'courseSlice/createCourse',
     async (payload: { data: any }) => {
         try {
@@ -43,7 +43,7 @@ export const signUpManager = createAsyncThunk(
         }
     }
 )
-export const signUpTeacher = createAsyncThunk(
+export const signUpTeacher: any = createAsyncThunk(
     'courseSlice/createTeacher',
     async (payload: any) => {
         try {

@@ -82,7 +82,7 @@ const ManagerSignUpFormInputes = ({ role }: { role: any }) => {
       role: role
     }
     try {
-      const response = await dispatch(signUpManager({ data: payload }))
+      const response: any = await dispatch(signUpManager({ data: payload }))
       if (response?.payload?.success) {
         setNotification({
           success: true,
