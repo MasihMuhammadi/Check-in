@@ -2,27 +2,24 @@
 import React from 'react'
 import NotFound from '../../not-found'
 import Image from 'next/image'
-import masihImage from "../../../public/images/Masih.jpg"
+// import masihImage from '../../../public/images/Masih.jpg'
 import LocationIcon from '../../../public/smallIcons/location'
 import SubjectIcon from '../../../public/smallIcons/subject'
 import StudentsIcon from '../../../public/smallIcons/students'
 import Buttons from '../../components/buttons'
-import Header from '../../components/header'
 import Footer from '../../components/footer/footer'
 
 
 export default function Page({ params }: { params: any }) {
-
 
     const courseId = "course_123abc"
 
     return <>
         {params.courseId === courseId ? <>
             <div>
-                <Header />
                 <div>
                     <div className="flex flex-col lg:flex-row gap-y-5 p-10 items-start gap-x-5 justify-between ">
-                        <Image src={masihImage} width={500} height={500} className="text-center content-center " alt="" />
+                        {/* <Image src={masihImage} width={500} height={500} className="text-center content-center " alt="" /> */}
                         <div>
                             <p className='text-[32px] text-medium'>Description:</p>
                             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure vitae enim obcaecati repellendus quisquam quas rem laboriosam, facere molestiae esse aperiam eius fugit numquam perferendis laborum expedita tenetur maxime. Numquam.</p>
@@ -59,7 +56,7 @@ export default function Page({ params }: { params: any }) {
 
                     </div>
                 </div>
-            </div>
+            </div >
         </> :
             <><NotFound /></>
         }

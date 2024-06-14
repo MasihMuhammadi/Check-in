@@ -3,7 +3,7 @@ import React from 'react';
 
 import Table from '../../../../../components/table/table';
 import DeleteIcon from '../../../../../../public/smallIcons/deleteIcon';
-import EditIcon from '../../../../../..//public/smallIcons/editIcon';
+import EditIcon from '../../../../../../public/smallIcons/editIcon';
 import TableForMobileScreen from '../../../../../components/table/tableForMobileScreen';
 import PopUp from '../../../../../components/popUp';
 
