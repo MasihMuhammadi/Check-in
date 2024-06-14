@@ -17,7 +17,7 @@ const Login = () => {
   return (
     <>
       <div className="">
-        <Header />
+
         {/* <MaleOrFemale role={role} setRole={setRole} /> */}
         <div className="flex gap-x-4 justify-between items-center ">
           {/* <LoginMockup className="bg-primary w-[700px] h-[600px] rounded-xl  border border-white m-10" /> */}

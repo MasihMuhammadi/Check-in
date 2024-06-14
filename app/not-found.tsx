@@ -6,7 +6,6 @@ import NotFoundMockup from "../public/mockups/notfoundMockup";
 export default function NotFound() {
     return (
         <div className="">
-            <Header />
             <div className="flex flex-col justify-center items-center">
                 <NotFoundMockup width={700} height={400} />
 

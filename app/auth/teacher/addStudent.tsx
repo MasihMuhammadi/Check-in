@@ -25,7 +25,7 @@ const AddStudent = () => {
     // }
     // console.log(step, 'sssssssssss')
     return <>
-        <Header />
+
         <div className="mt-2">
             <div className={`flex flex-col h-[450px] justifiy-center items-center  overflow-x-hidden  transition-all duration-1000 `}>
                 {/* <div className={`transitin-all mt-5 duration-1000 ${step == 1 ? "" : "translate-y-[450px]"}`}>

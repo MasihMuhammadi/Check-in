@@ -7,7 +7,6 @@ const Contact = () => {
   return (
     <>
       <div className="">
-        <Header />
         <div className="flex justify-between items-center flex-row">
           <div className="bg-gray-50 p-5 rounded ">
             <ContactForms />

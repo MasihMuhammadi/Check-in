@@ -57,6 +57,16 @@ export const loginAsManager = async (payload: any) => {
         throw error;
     }
 };
+export const getSingleTeacherData = async (handle: any) => {
+    try {
+        const response = await axios.get(`${baseUrl}/api/teachers/teacher/${handle}`);
+        return response.data;
+    } catch (error) {
+        throw error;
+    }
+};
+
+// export const getSingleTeacherData = axios.post(`${baseUrl}/api/teachers/teacher/:handle`,handle)
 
 
 // Example of another API request (e.g., fetch classes)
