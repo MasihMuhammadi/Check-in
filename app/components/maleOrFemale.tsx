@@ -6,9 +6,8 @@ import Female from '../../public/mockups/female';
 import TeacherMockup from '../../public/mockups/teacherMockup';
 import ManagerMockup from '../../public/mockups/managerMockup';
 
-const MaleOrFemale = ({ role, setRole }: { role: any, setRole: Function }) => {
+const MaleOrFemale = ({ role, setRole }: { role: any, setRole: any }) => {
     const [selectedOption, setSelectedOption] = useState<string>("")
-    console.log(role, 'sssssssss')
     const handleChange = (e: any) => {
         setSelectedOption(e.target.value)
         setRole(e.target.value)

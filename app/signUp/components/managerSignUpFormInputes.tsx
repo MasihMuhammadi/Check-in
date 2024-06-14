@@ -15,12 +15,15 @@ import OpenedEye from '../../../public/smallIcons/openedEye';
 import ClosedEye from '../../../public/smallIcons/closedEye';
 import Buttons from '../../components/buttons';
 import Notification from '../../components/notification';
+import { useDispatch } from 'react-redux';
+import { signUpManager } from '../../../redux/slices/courseSlice';
 
 
 
 const ManagerSignUpFormInputes = ({ role }: { role: any }) => {
 
   const [isPassword, setIsPassword] = useState<boolean>(false)
+  const dispatch = useDispatch()
   const [password, setPassword] = useState<any>()
   const [notification, setNotification] = useState({
     success: false,
@@ -73,17 +76,33 @@ const ManagerSignUpFormInputes = ({ role }: { role: any }) => {
       fullName: values.fullName,
       email: values.email,
       courseName: values.course,
+      handle: `${values.fullName?.split(" ")?.join("-")}-${values.course?.split(" ")?.join("-")}`,
       phone: values.phone,
       password: values.password,
       role: role
     }
     try {
-      const response = await axios.post(`${baseUrl}/api/courses/course`, payload);
-      console.log('Course created:', response.data);
-      // route.push(`/course/${response.data?.}`)
-
-    } catch (error) {
-
+      const response: any = await dispatch(signUpManager({ data: payload }))
+      if (response?.payload?.success) {
+        setNotification({
+          success: true,
+          isShow: true,
+          content: "account created successfully"
+        })
+      }
+      else {
+        setNotification({
+          success: false,
+          isShow: true,
+          content: response?.error?.message,
+        })
+      }
+    } catch (err: any) {
+      setNotification({
+        success: false,
+        isShow: true,
+        content: err,
+      })
       console.log('Error creating user: maybe user is alreaady exist');
 
     }
@@ -91,7 +110,7 @@ const ManagerSignUpFormInputes = ({ role }: { role: any }) => {
   };
 
   useEffect(() => {
-    const noti = setTimeout(() => {
+    const notif = setTimeout(() => {
       setNotification({
         success: false,
         isShow: false,
@@ -99,7 +118,7 @@ const ManagerSignUpFormInputes = ({ role }: { role: any }) => {
       });
     }, 5000);
 
-    return () => clearTimeout(noti); // This ensures clearTimeout is called correctly
+    return () => clearTimeout(notif);
   }, [notification]);
 
 

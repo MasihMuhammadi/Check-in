@@ -16,7 +16,6 @@ const SignUp = () => {
   return (
     <>
       <div className="">
-        <Header />
         <div className="flex flex-row justify-center items-center mt-10 ">
           <div className='hidden md:block w-full'>
             <SignUpMockup className={"w-[460px] h-[460px] md:w-[400px] md:h-[400px]"} />
