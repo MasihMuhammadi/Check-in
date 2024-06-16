@@ -54,6 +54,8 @@ const ManagerLoginForm = ({ role, setRole }: { role: any, setRole: any }) => {
             role: role
         }
 
+        console.log(payload, 'rooooooooooooole')
+
         try {
             const response: any = await dispatch(loginManager(payload))
             if (response?.payload?.success) {
@@ -162,7 +164,7 @@ const ManagerLoginForm = ({ role, setRole }: { role: any, setRole: any }) => {
                             <div className=" flex  flex-col text-center items-center mt-5">
                                 <Buttons primary={true} type="submit" style="px-12 py-2"
                                 >
-                                    Login
+                                    Loginnn
                                 </Buttons>
                                 <p className="mt-4">
                                     You dont have not account?{" "}

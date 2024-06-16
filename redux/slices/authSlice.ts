@@ -45,9 +45,10 @@ export const loginTeacher: any = createAsyncThunk(
 
 export const loginManager: any = createAsyncThunk(
     'authSlice/loginManager',
-    async (payload: { data: any }) => {
+    async (payload: any) => {
         try {
-            const response = await loginAsManager(payload.data)
+            const response = await loginAsManager(payload)
+            console.log(response, 'rrrrrrrrr')
             return response
         } catch (error) {
             throw error

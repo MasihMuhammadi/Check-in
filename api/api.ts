@@ -35,7 +35,7 @@ export const createTeacher = async (payload: any) => {
 };
 export const addClass = async (payload: any) => {
     try {
-        const response = await axios.post(`${baseUrl}/api/class/add-class`, payload);
+        const response = await axios.post(`${baseUrl}/api/classes/class`, payload);
         return response.data;
     } catch (error) {
         throw error;
