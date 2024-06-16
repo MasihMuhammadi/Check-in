@@ -2,12 +2,12 @@
 
 import React from 'react';
 
-const AllTeacher = () => {
+const AccountTab = () => {
     return (
         <>
-            all teachers
+            this is account tab
         </>
     );
 };
 
-export default AllTeacher;
+export default AccountTab;

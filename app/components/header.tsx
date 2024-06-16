@@ -26,7 +26,7 @@ const Header = () => {
         <div className="hidden sm:hidden md:flex lg:flex">
           <ToggleButton />
         </div>
-        <div className="flex sm:flex relative md:hidden lg:hidden w-8 h-8 z-[1000]">
+        <div className="flex sm:flex relative md:hidden lg:hidden w-8 h-8 z-[1000] overflow-hidden">
           <div className="absolute top-0">
             <BurgerLines crossBurger={crossBurger} setCrossBurger={setCrossBurger} />
           </div>
