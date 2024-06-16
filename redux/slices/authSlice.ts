@@ -31,11 +31,11 @@ const initialState: AuthState = {
     isLoggedIn: false
 }
 
-export const loginTeacher = createAsyncThunk(
+export const loginTeacher: any = createAsyncThunk(
     'authSlice/loginTeacher',
-    async (payload: { data: any }) => {
+    async (payload: any) => {
         try {
-            const response = await loginAsTeacher(payload.data)
+            const response = await loginAsTeacher(payload)
             return response
         } catch (error) {
             throw error
@@ -43,11 +43,12 @@ export const loginTeacher = createAsyncThunk(
     }
 )
 
-export const loginManager = createAsyncThunk(
+export const loginManager: any = createAsyncThunk(
     'authSlice/loginManager',
-    async (payload: { data: any }) => {
+    async (payload: any) => {
         try {
-            const response = await loginAsManager(payload.data)
+            const response = await loginAsManager(payload)
+            console.log(response, 'rrrrrrrrr')
             return response
         } catch (error) {
             throw error

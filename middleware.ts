@@ -4,10 +4,10 @@ import type { NextRequest } from 'next/server'
 // This function can be marked `async` if using `await` inside
 export function middleware(request: NextRequest) {
     // Get the 'loggedIn' cookie
-    const loggedIn: any = request.cookies.get('loggedIn');
+    const loggedIn = request.cookies.get('loggedIn');
 
     // Check the condition and redirect based on it
-    if (loggedIn === 'true') {
+    if (false) {
         return NextResponse.redirect(new URL('/login', request.url));
     }
 
@@ -17,5 +17,5 @@ export function middleware(request: NextRequest) {
 
 // See "Matching Paths" below to learn more
 export const config = {
-    matcher: ['/teacher/:path*'],
+    matcher: ['/courses/admin/:path*', '/courses/path/teacher/:path*'],
 }
