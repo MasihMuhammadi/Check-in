@@ -57,3 +57,30 @@
   scrollbar-width: none;
   /* Firefox */
 }
+/* styles.css */
+@keyframes countdown {
+  from {
+      stroke-dasharray: 283;
+  }
+  to {
+      stroke-dasharray: 0;
+  }
+}
+
+.circle {
+  position: relative;
+  width: 50px;
+  height: 50px;
+}
+
+.circle svg {
+  transform: rotate(-90deg);
+}
+
+.circle circle {
+  fill: none;
+  stroke: #4caf50;
+  stroke-width: 5;
+  stroke-dasharray: 283;
+  animation: countdown 5s linear forwards;
+}

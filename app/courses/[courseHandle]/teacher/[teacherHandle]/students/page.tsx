@@ -1,6 +1,5 @@
 
 import React from 'react';
-
 import Table from '../../../../../components/table/table';
 import DeleteIcon from '../../../../../../public/smallIcons/deleteIcon';
 import EditIcon from '../../../../../../public/smallIcons/editIcon';

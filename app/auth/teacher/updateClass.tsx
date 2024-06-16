@@ -1,25 +1,38 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { useState, } from 'react';
 import { useRouter } from 'next/navigation';
+
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import axios from 'axios';
 import Link from 'next/link';
-import Buttons from '../buttons';
+import Buttons from '../../components/buttons';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchData, setPageWillShow } from '../../../redux/slices/classSlice';
+import Notification from '../../components/notification'
 
-const StudentInfo = () => {
+const UpdateClass = ({ data }: { data: any }) => {
     const [isPassword, setIsPassword] = useState<boolean>(false);
+    const [notification, setNotification] = useState({
+        isShow: false,
+        content: "",
+        success: false
+    })
+    const singleTeacherData = useSelector((state: any) => state.teacherSlice.aTeacherData);
+    const classData = useSelector((state: any) => state.classSlice.classData);
+    const isEditable = useSelector((state: any) => state.classSlice.isEditable);
+    const dispatch = useDispatch()
     const router = useRouter();
 
     const validationSchema = Yup.object({
-        name: Yup.string().required('Name is required'),
-        father_name: Yup.string().required('Father name is required'),
-        course_name: Yup.string().required('Course name is required'),
-        class_name: Yup.string().required('Class name is required'),
-        phone: Yup.string().required('Phone number is required'),
-        email: Yup.string().email("Invalid email address").required("Email is required"),
-        address: Yup.string().required('Address is required'),
+        subject: Yup.string().required('Subject is required'),
+        duration: Yup.string().required('Class Duration is required'),
+        start_day: Yup.string().required('Start Day is required'),
+        finish_day: Yup.string().required('Finish Day is required'),
+        // phone: Yup.string().required('Phone number is required'),
+        // email: Yup.string().email("Invalid email address").required("Email is required"),
+        // address: Yup.string().required('Address is required'),
         started_time: Yup.string().required('Class started time is required'),
         finish_time: Yup.string().required('Class finish time is required'),
     });
@@ -28,56 +41,60 @@ const StudentInfo = () => {
         setIsPassword(!isPassword);
     };
 
+    console.log(data, 'XXX')
     const initialValues = {
-        name: "",
-        father_name: "",
-        course_name: "",
-        class_name: "",
-        teacher_name: "",
-        phone: "",
-        email: "",
-        address: "",
-        started_time: "",
-        finish_time: "",
-        verification_code: ""
+        // subject:  || "",
+        subject: data[0]?.class_name || "",
+        duration: data[0]?.duration || "",
+        start_day: data[0]?.start_day || "",
+        finish_day: data[0]?.finish_day || "",
+        started_time: data[0]?.started_time || "",
+        finish_time: data[0]?.finish_time || ""
     };
 
-    const baseUrl = "http://localhost:5000";
-
     const onSubmit = async (values: any) => {
-        // console.log('masih...................')
+
+
         const payload = {
-            name: values.name,
-            father_name: values.father_name,
-            course_name: "Mozamel",
-            class_name: values.class_name,
-            teacher_name: "Masihulllah",
-            phone: values.phone,
-            email: values.email,
-            address: values.address,
+            // course_name: data?.teacher?.teacher?.courseName,
+            course_name: singleTeacherData?.data?.data?.teacher?.courseName,
+            class_name: values.subject,
+            // teacher_name: data?.teacer?.teacher?.teacher_name,
+            teacher_name: singleTeacherData?.data?.data?.teacher?.teacher_name,
+            duration: values.duration,
+            start_day: values.start_day,
+            finish_day: values.finish_day,
             started_time: values.started_time,
             finish_time: values.finish_time,
-            verification_code: `${values.name}-${values.father_name}-Masihullah`
+            handle: singleTeacherData?.data?.data?.teacher?.handle
         };
 
-        console.log("Payload:", payload);
 
         try {
-            const response = await axios.post(`${baseUrl}/api/students/add-student`, payload);
-            console.log("Response:", response);
+            const res: any = await axios.put(`http://localhost:5000/api/classes/class/${data[0]?._id}`, payload)
 
-            if (response?.data?.success) {
-                console.log("Student added successfully");
-                router.push(`/teacher/${response.data?.data?.fullName}/classes`);
-            } else {
-                console.log('Submission failed:', response?.data?.message);
+            if (res?.data?.success) {
+                dispatch(setPageWillShow("classes"))
+                setNotification({
+                    isShow: true,
+                    content: res?.payload?.message,
+                    success: true
+                })
             }
-        } catch (error) {
-            console.error("Error:", error);
-            console.log("An error occurred while submitting the form");
-        }
+            else {
 
-        // setSubmitting(false);
+                setNotification({
+                    isShow: true,
+                    content: res?.payload?.message,
+                    success: false
+                })
+
+            }
+
+        }
+        catch (err) {
+            console.error(err)
+        }
     };
 
     return (
@@ -88,92 +105,86 @@ const StudentInfo = () => {
             validateOnChange={false} // To prevent instant validation on password change
         >
             {({ values, handleChange, handleSubmit, isSubmitting }) => (
-                <Form className='' onSubmit={handleSubmit}>
+                <Form className='oveflow-x-hidden' onSubmit={handleSubmit} >
+                    {notification?.isShow && <Notification isShow={notification.isShow} success={notification.success}>
+                        {notification.content}
+                    </Notification>}
                     <div className="">
                         <div className="mt-4 w-full flex justify-center items-center flex-row gap-6 place-items-center px-10">
                             <div className="relative">
                                 <label className="absolute -top-3.5 right-6 transition-position duration-[5000ms] bg-gradientPrimary p-1 px-2 text-xs text-white rounded-lg">
-                                    Student Name
+                                    Subject
                                 </label>
                                 <Field
-                                    name="name"
+
+                                    name="subject"
                                     type="text"
                                     onChange={handleChange}
-                                    value={values.name}
+                                    value={values.subject}
                                     className="border bordre-2 border-gray-700 w-[530px] p-2 px-14 h-14 rounded-md focus:outline-none focus:border-[#1e1e1e] focus:ring-1 focus:ring-[#1e1e1e]"
                                 />
-                                <ErrorMessage name="name" component="div" className=" text-xs text-red-500" />
+                                <ErrorMessage name="s   ubject" component="div" className=" text-xs text-red-500" />
                             </div>
                             <div className="relative">
                                 <label className="absolute -top-3.5 right-6 transition-position duration-[5000ms] bg-gradientPrimary p-1 px-2 text-xs text-white rounded-lg">
-                                    Father Name
+                                    Duration
                                 </label>
                                 <Field
-                                    name="father_name"
+                                    name="duration"
                                     type="text"
                                     onChange={handleChange}
-                                    value={values.father_name}
+                                    value={values.duration}
                                     className="border bordre-2 border-gray-700 w-[530px] p-2 px-14 h-14 rounded-md focus:outline-none focus:border-[#1e1e1e] focus:ring-1 focus:ring-[#1e1e1e]"
                                 />
-                                <ErrorMessage name="father_name" component="div" className=" text-xs text-red-500" />
+                                <ErrorMessage name="duration" component="div" className=" text-xs text-red-500" />
                             </div>
                         </div>
                         <div className="mt-4 w-full flex justify-center items-center flex-row gap-6 place-items-center px-10">
                             <div className="relative">
                                 <label className="absolute -top-3.5 right-6 transition-position duration-[5000ms] bg-gradientPrimary p-1 px-2 text-xs text-white rounded-lg">
-                                    Class Name
+                                    Start Day
                                 </label>
                                 <Field
-                                    name="class_name"
-                                    type="text"
+                                    as="select"
+                                    name="start_day"
+                                    // type="date"
+                                    option
                                     onChange={handleChange}
-                                    value={values.class_name}
+                                    value={values.start_day}
                                     className="border bordre-2 border-gray-700 w-[530px] p-2 px-14 h-14 rounded-md focus:outline-none focus:border-[#1e1e1e] focus:ring-1 focus:ring-[#1e1e1e]"
-                                />
-                                <ErrorMessage name="class_name" component="div" className=" text-xs text-red-500" />
+                                >
+                                    <option value="Saturday">Saturday</option>
+                                    <option value="Sunday">Sunday</option>
+                                    <option value="Monday">Monday</option>
+                                    <option value="Thursday">Thursday</option>
+                                    <option value="Wednsday">Wednsday</option>
+                                    <option value="Friday">Friday</option>
+                                </Field>
+                                <ErrorMessage name="start_day" component="div" className=" text-xs text-red-500" />
                             </div>
                             <div className="relative">
                                 <label className="absolute -top-3.5 right-6 transition-position duration-[5000ms] bg-gradientPrimary p-1 px-2 text-xs text-white rounded-lg">
-                                    Email
+                                    Finish Day
                                 </label>
                                 <Field
-                                    name="email"
-                                    type="text"
+                                    name="finish_day"
+                                    as="select"
+                                    // type="date"
                                     onChange={handleChange}
-                                    value={values.email}
+                                    value={values.finish_day}
                                     className="border bordre-2 border-gray-700 w-[530px] p-2 px-14 h-14 rounded-md focus:outline-none focus:border-[#1e1e1e] focus:ring-1 focus:ring-[#1e1e1e]"
-                                />
-                                <ErrorMessage name="email" component="div" className=" text-xs text-red-500" />
+                                >
+                                    <option value="Saturday">Saturday</option>
+                                    <option value="Sunday">Sunday</option>
+                                    <option value="Monday">Monday</option>
+                                    <option value="Thursday">Thursday</option>
+                                    <option value="Wednsday">Wednsday</option>
+                                    <option value="Friday">Friday</option>
+                                </Field>
+                                <ErrorMessage name="finish_day" component="div" className=" text-xs text-red-500" />
                             </div>
                         </div>
-                        <div className="mt-4 w-full flex justify-center items-center flex-row gap-6 place-items-center px-10">
-                            <div className="relative">
-                                <label className="absolute -top-3.5 right-6 transition-position duration-[5000ms] bg-gradientPrimary p-1 px-2 text-xs text-white rounded-lg">
-                                    Phone
-                                </label>
-                                <Field
-                                    name="phone"
-                                    type="text"
-                                    onChange={handleChange}
-                                    value={values.phone}
-                                    className="border bordre-2 border-gray-700 w-[530px] p-2 px-14 h-14 rounded-md focus:outline-none focus:border-[#1e1e1e] focus:ring-1 focus:ring-[#1e1e1e]"
-                                />
-                                <ErrorMessage name="phone" component="div" className=" text-xs text-red-500" />
-                            </div>
-                            <div className="relative">
-                                <label className="absolute -top-3.5 right-6 transition-position duration-[5000ms] bg-gradientPrimary p-1 px-2 text-xs text-white rounded-lg">
-                                    Address
-                                </label>
-                                <Field
-                                    name="address"
-                                    type="text"
-                                    onChange={handleChange}
-                                    value={values.address}
-                                    className="border bordre-2 border-gray-700 w-[530px] p-2 px-14 h-14 rounded-md focus:outline-none focus:border-[#1e1e1e] focus:ring-1 focus:ring-[#1e1e1e]"
-                                />
-                                <ErrorMessage name="address" component="div" className=" text-xs text-red-500" />
-                            </div>
-                        </div>
+
                         <div className="mt-4 w-full flex justify-center items-center flex-row gap-6 place-items-center px-10">
                             <div className="relative">
                                 <label className="absolute -top-3.5 right-6 transition-position duration-[5000ms] bg-gradientPrimary p-1 px-2 text-xs text-white rounded-lg">
@@ -203,8 +214,8 @@ const StudentInfo = () => {
                             </div>
                         </div>
                         <div className="mt-4 flex flex-col text-center items-center mt-5">
-                            <Buttons primary={true} clickHandler={() => onSubmit(values)} type="submit" style="px-12 py-2" disabled={isSubmitting}>
-                                Submit
+                            <Buttons primary={true} type="submit" style="px-12 py-2" disabled={isSubmitting} clickHandler={() => onSubmit(values)}>
+                                Updateeee
                             </Buttons>
                         </div>
                     </div>
@@ -214,4 +225,4 @@ const StudentInfo = () => {
     );
 };
 
-export default StudentInfo;
+export default UpdateClass;
