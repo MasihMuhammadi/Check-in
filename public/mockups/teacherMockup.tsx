@@ -1,10 +1,10 @@
 
 import React from 'react';
 
-const TeacherMockup = ({ width, height }: { width: any, height: any }) => {
+const TeacherMockup = ({ width, height, className }: { width?: any, height?: any, className: any }) => {
     return (
         <>
-            <svg width={width} height={height} viewBox="0 0 4116 3774" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <svg width={width} height={height} className={className} viewBox="0 0 4116 3774" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M75.7905 2230.03H4106.92" stroke="#263238" stroke-width="0.950299" stroke-linecap="round" stroke-linejoin="round" />
                 <path d="M75.7905 2289.66H4106.92" stroke="#263238" stroke-width="0.950299" stroke-linecap="round" stroke-linejoin="round" />
                 <path d="M3135.93 5.63281H110.408V1863.58H3135.93V5.63281Z" stroke="#263238" stroke-width="0.950299" stroke-linecap="round" stroke-linejoin="round" />

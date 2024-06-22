@@ -89,7 +89,7 @@ const authSlice = createSlice({
                 state.isLoggedIn = false
             })
             .addCase(loginManager.fulfilled, (state, action: PayloadAction<any>) => {
-                state.managerData.loading = false
+                state.managerData.loading = true
                 state.managerData.data = action.payload
                 state.managerData.error = null
                 state.isLoggedIn = true

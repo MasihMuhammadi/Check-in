@@ -14,7 +14,7 @@ import Buttons from './buttons';
 import { setIsEditable, setPageWillShow } from '../../redux/slices/classSlice'
 import UpdateClass from '../auth/teacher/updateClass';
 
-const AllClassesTab = ({ data }: { data: any }) => {
+const AllClassesTab = ({ data, params }: { data: any, params: any }) => {
 
     // Global Redux States
     const [updatedClass, setUpdatedClass] = useState([]);
@@ -32,6 +32,13 @@ const AllClassesTab = ({ data }: { data: any }) => {
     const [classIdToDelete, setClassIdToDelete] = useState<string | null>(null);
     const [proceedWithDelete, setProceedWithDelete] = useState<boolean>(true);
     const [showFullModal, setShowFullModal] = useState<boolean>(false)
+
+    // useEffect(() => {
+    //     console.log(params, 'vvvvvvvvvvvvvv')
+    //     const response = axios.get(`http://localhost:5000/api/students/c-student/${params?.courseHandle}/${params?.classHandle}/${params?.teacherHandle}`)
+    //     console.log(response, 'ressssssssssssponse')
+    // }, [])
+
 
     useEffect(() => {
         const getClasses = async () => {
@@ -158,7 +165,10 @@ const AllClassesTab = ({ data }: { data: any }) => {
                         <>
                             <div className='hidden md:block'>
                                 <Table
+                                    // onRowDoubleclick={}
+                                    isClass={true}
                                     headers={["Subject", "Course", "Days", "Time", "Finish Time", "Delete"]}
+                                    teacherData={singleTeacherData}
                                     bodyRows={filteredClasses.map((cls: any) => [
                                         cls.class_name,
                                         cls.course_name,

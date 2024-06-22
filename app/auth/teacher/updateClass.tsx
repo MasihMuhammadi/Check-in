@@ -110,7 +110,8 @@ const UpdateClass = ({ data }: { data: any }) => {
                         {notification.content}
                     </Notification>}
                     <div className="">
-                        <div className="mt-4 w-full flex justify-center items-center flex-row gap-6 place-items-center px-10">
+
+                        <div className="mt-4 w-full flex justify-center items-center flex-col md:flex-row  gap-6 place-items-center px-10">
                             <div className="relative">
                                 <label className="absolute -top-3.5 right-6 transition-position duration-[5000ms] bg-gradientPrimary p-1 px-2 text-xs text-white rounded-lg">
                                     Subject
@@ -121,9 +122,9 @@ const UpdateClass = ({ data }: { data: any }) => {
                                     type="text"
                                     onChange={handleChange}
                                     value={values.subject}
-                                    className="border bordre-2 border-gray-700 w-[530px] p-2 px-14 h-14 rounded-md focus:outline-none focus:border-[#1e1e1e] focus:ring-1 focus:ring-[#1e1e1e]"
+                                    className="border bordre-2 border-gray-700 w-[320px] max-w-full p-2 px-14 h-14 rounded-md focus:outline-none focus:border-[#1e1e1e] focus:ring-1 focus:ring-[#1e1e1e]"
                                 />
-                                <ErrorMessage name="s   ubject" component="div" className=" text-xs text-red-500" />
+                                <ErrorMessage name="subject" component="div" className=" text-xs text-red-500" />
                             </div>
                             <div className="relative">
                                 <label className="absolute -top-3.5 right-6 transition-position duration-[5000ms] bg-gradientPrimary p-1 px-2 text-xs text-white rounded-lg">
@@ -134,12 +135,13 @@ const UpdateClass = ({ data }: { data: any }) => {
                                     type="text"
                                     onChange={handleChange}
                                     value={values.duration}
-                                    className="border bordre-2 border-gray-700 w-[530px] p-2 px-14 h-14 rounded-md focus:outline-none focus:border-[#1e1e1e] focus:ring-1 focus:ring-[#1e1e1e]"
+                                    className="border bordre-2 border-gray-700  w-[320px] max-w-full p-2 px-14 h-14 rounded-md focus:outline-none focus:border-[#1e1e1e] focus:ring-1 focus:ring-[#1e1e1e]"
                                 />
                                 <ErrorMessage name="duration" component="div" className=" text-xs text-red-500" />
                             </div>
                         </div>
-                        <div className="mt-4 w-full flex justify-center items-center flex-row gap-6 place-items-center px-10">
+
+                        <div className="mt-4 w-full flex justify-center items-center flex-col md:flex-row gap-6 place-items-center px-10">
                             <div className="relative">
                                 <label className="absolute -top-3.5 right-6 transition-position duration-[5000ms] bg-gradientPrimary p-1 px-2 text-xs text-white rounded-lg">
                                     Start Day
@@ -151,7 +153,7 @@ const UpdateClass = ({ data }: { data: any }) => {
                                     option
                                     onChange={handleChange}
                                     value={values.start_day}
-                                    className="border bordre-2 border-gray-700 w-[530px] p-2 px-14 h-14 rounded-md focus:outline-none focus:border-[#1e1e1e] focus:ring-1 focus:ring-[#1e1e1e]"
+                                    className="border bordre-2 border-gray-700  w-[320px] min-w-full p-2 px-14 h-14 rounded-md focus:outline-none focus:border-[#1e1e1e] focus:ring-1 focus:ring-[#1e1e1e]"
                                 >
                                     <option value="Saturday">Saturday</option>
                                     <option value="Sunday">Sunday</option>
@@ -172,7 +174,7 @@ const UpdateClass = ({ data }: { data: any }) => {
                                     // type="date"
                                     onChange={handleChange}
                                     value={values.finish_day}
-                                    className="border bordre-2 border-gray-700 w-[530px] p-2 px-14 h-14 rounded-md focus:outline-none focus:border-[#1e1e1e] focus:ring-1 focus:ring-[#1e1e1e]"
+                                    className="border bordre-2 border-gray-700  w-[320px] min-w-full p-2 px-14 h-14 rounded-md focus:outline-none focus:border-[#1e1e1e] focus:ring-1 focus:ring-[#1e1e1e]"
                                 >
                                     <option value="Saturday">Saturday</option>
                                     <option value="Sunday">Sunday</option>
@@ -185,7 +187,7 @@ const UpdateClass = ({ data }: { data: any }) => {
                             </div>
                         </div>
 
-                        <div className="mt-4 w-full flex justify-center items-center flex-row gap-6 place-items-center px-10">
+                        <div className="mt-4 w-full flex justify-center items-center flex-col  md:flex-row gap-6 place-items-center px-10">
                             <div className="relative">
                                 <label className="absolute -top-3.5 right-6 transition-position duration-[5000ms] bg-gradientPrimary p-1 px-2 text-xs text-white rounded-lg">
                                     Started Time
@@ -195,7 +197,7 @@ const UpdateClass = ({ data }: { data: any }) => {
                                     type="time"
                                     onChange={handleChange}
                                     value={values.started_time}
-                                    className="border bordre-2 border-gray-700 w-[530px] p-2 px-14 h-14 rounded-md focus:outline-none focus:border-[#1e1e1e] focus:ring-1 focus:ring-[#1e1e1e]"
+                                    className="border bordre-2 border-gray-700  w-[320px] max-w-full p-2 px-14 h-14 rounded-md focus:outline-none focus:border-[#1e1e1e] focus:ring-1 focus:ring-[#1e1e1e]"
                                 />
                                 <ErrorMessage name="started_time" component="div" className=" text-xs text-red-500" />
                             </div>
@@ -208,14 +210,15 @@ const UpdateClass = ({ data }: { data: any }) => {
                                     type="time"
                                     onChange={handleChange}
                                     value={values.finish_time}
-                                    className="border bordre-2 border-gray-700 w-[530px] p-2 px-14 h-14 rounded-md focus:outline-none focus:border-[#1e1e1e] focus:ring-1 focus:ring-[#1e1e1e]"
+                                    className="border bordre-2 border-gray-700  w-[320px] max-w-full p-2 px-14 h-14 rounded-md focus:outline-none focus:border-[#1e1e1e] focus:ring-1 focus:ring-[#1e1e1e]"
                                 />
                                 <ErrorMessage name="finish_time" component="div" className=" text-xs text-red-500" />
                             </div>
                         </div>
+
                         <div className="mt-4 flex flex-col text-center items-center mt-5">
                             <Buttons primary={true} type="submit" style="px-12 py-2" disabled={isSubmitting} clickHandler={() => onSubmit(values)}>
-                                Updateeee
+                                Submit
                             </Buttons>
                         </div>
                     </div>

@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation';
 import AccountTab from '../../../../components/accountTab';
 import Link from 'next/link';
 import AllClassesTab from '../../../../components/allClassesTab';
+import axios from 'axios';
 
 const TeacherPage = ({ params }: { params: any }) => {
     const [showMenu, setShowMenu] = useState(false);
@@ -18,10 +19,12 @@ const TeacherPage = ({ params }: { params: any }) => {
     }, [dispatch, params?.teacherHandle]);
 
 
+
     return (
         <>
+            <AllClassesTab data={singleTeacherData?.data?.data} params={params} />
             {/* single Teacher Page */}
-            <nav className='flex items-center justify-center'>
+            {/* <nav className='flex items-center justify-center'>
                 <ul className='flex gap-x-5'>
                     <li>
                         <span onClick={() => setTab("account")}>
@@ -48,7 +51,7 @@ const TeacherPage = ({ params }: { params: any }) => {
                 <AllClassesTab data={singleTeacherData?.data?.data} />
             ) : (
                 <div>Not Found</div>
-            )}
+            )} */}
         </>
     );
 };
