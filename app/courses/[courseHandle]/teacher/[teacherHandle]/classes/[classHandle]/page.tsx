@@ -12,12 +12,15 @@ import TableForMobileScreen from '../../../../../../components/table/tableForMob
 import Buttons from '../../../../../../components/buttons';
 import FullModal from '../../../../../../components/fullModal';
 import PopUp from '../../../../../../components/popUp';
+import { useRouter } from 'next/navigation';
+import BackButton from '../../../../../../../public/smallIcons/backButton';
 
 const SingleClass = ({ params }: { params: any }) => {
 
     const [students, setStudent] = useState<any>()
     const [showAddStudentModal, setShowAddStudentModal] = useState<boolean>(false)
     const [clickedId, setClickedId] = useState<string>("")
+    const route = useRouter()
 
     // console.log(params?.classHandle, 'pppppppppparams')
     useEffect(() => {
@@ -58,55 +61,66 @@ const SingleClass = ({ params }: { params: any }) => {
     const handleDelete = async () => {
         const response = await axios.delete(`http://localhost:5000/api/students/student/${clickedId}`)
         const filterDeleted = students.filter((stu) => stu?._id !== clickedId)
-        // console.log9
         setStudent(filterDeleted)
         console.log(response, 'ccccccccllllllllllicked')
+    }
+    const goBack = () => {
+        route.back()
+
     }
 
 
     return (
         <div>
+            <div className="cursor-pointer" onClick={goBack}>
+                <BackButton />
+            </div>
             {showPopUp && <PopUp data={students} showEditModal={handleRowDoubleClick} handleDelete={handleDelete} handleEdit={handleEdit} setShowPopUp={setShowPopUp} />}
             {showAddStudentModal && <FullModal showModal={true} handleClose={() => { setShowAddStudentModal(false) }}>
                 <AddStudent />
             </FullModal>}
-            <div className='hidden md:block'>
-                <Table
-                    isClass={false}
-                    headers={["", "Name", "Father Name", "Phone", "Subject", "Delete"]}
-                    teacherData={students}
-                    // onDoubleClick={() => alert(`table with should be edited`)}
-                    onRowDoubleclick={handleRowDoubleClick}
-                    bodyRows={students?.map((cls: any) => [
+            {students?.length ?
+                <div>
+                    <div className='hidden md:block'>
+                        <Table
+                            isClass={false}
+                            headers={["", "Name", "Father Name", "Phone", "Subject", "Delete"]}
+                            teacherData={students}
+                            // onDoubleClick={() => alert(`table with should be edited`)}
+                            onRowDoubleclick={handleRowDoubleClick}
+                            bodyRows={students?.map((cls: any) => [
 
-                        <input type="checkbox" className='bg-blue-500' onChange={(e: any) => checkShowModal(e)} key={`checkbox-${cls.id}`} />,
+                                <input type="checkbox" className='bg-blue-500' onChange={(e: any) => checkShowModal(e)} key={`checkbox-${cls.id}`} />,
 
-                        cls.name,
-                        cls.father_name,
-                        cls.phone,
-                        cls.class_name,
-                        <>
-                            <div className="flex gap-x-4 items-center justify-center">
-                                <div className='cursor-pointer' onClick={() => alert("email should sent which your son is present")}>
-                                    <PresentIcon />
-                                </div>
-                                <div className='cursor-pointer' onClick={() => alert("email sent which your son is absent")}>
-                                    <AbsentIcon />
-                                </div>
-                            </div>
-                        </>
-                    ])}
-                />
+                                cls.name,
+                                cls.father_name,
+                                cls.phone,
+                                cls.class_name,
+                                <>
+                                    <div className="flex gap-x-4 items-center justify-center">
+                                        <div className='cursor-pointer' onClick={() => alert("email should sent which your son is present")}>
+                                            <PresentIcon />
+                                        </div>
+                                        <div className='cursor-pointer' onClick={() => alert("email sent which your son is absent")}>
+                                            <AbsentIcon />
+                                        </div>
+                                    </div>
+                                </>
+                            ])}
+                        />
 
-            </div>
+                    </div>
 
-            <div className='block md:hidden my-5'>
-                {students?.map((cls: any) => {
-                    return (
-                        <TableForMobileScreen key={cls._id} data={cls} isStudent={true} updatedClass={updateStudent} handleShowPopUp={editStudent} />
-                    )
-                })}
-            </div>
+                    <div className='block md:hidden my-5'>
+                        {students?.map((cls: any) => {
+                            return (
+                                <TableForMobileScreen key={cls._id} data={cls} isStudent={true} updatedClass={updateStudent} handleShowPopUp={editStudent} />
+                            )
+                        })}
+                    </div>
+                </div>
+                : <span className='flex justify-center items-cener text-center'>NO Course Found</span>
+            }
 
             <Buttons secondary={true} style=" px-4 py-2" type="button" clickHandler={addStudent}>
                 + Add Student

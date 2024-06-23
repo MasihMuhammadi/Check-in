@@ -33,13 +33,15 @@ const Table = ({ headers, bodyRows, teacherData, isClass = true, onRowDoubleclic
                             return (
                                 <React.Fragment key={rowIndex}>
                                     {isClass ? (
-                                        <Link href={`${teacherData?.data?.data?.teacher?.handle}/classes/${row[0].split(" ").join("-")}`} key={rowIndex}>
-                                            <tr className='odd:bg-gray-100 even:bg-gray-50 h-10 rounded-xl px-4 py-3 cursor-pointer'>
-                                                {row?.map((cell, cellIndex) => (
-                                                    <td key={cellIndex} className="m-auto">{cell}</td>
-                                                ))}
-                                            </tr>
-                                        </Link>
+                                        <tr className='odd:bg-gray-100 even:bg-gray-50 h-10 rounded-xl px-4 py-3 cursor-pointer' key={rowIndex}>
+                                            {row?.map((cell, cellIndex) => (
+                                                <td key={cellIndex} className="m-auto">
+                                                    <Link href={`${teacherData?.data?.data?.teacher?.handle}/classes/${row[0].split(" ").join("-")}`} >
+                                                        {cell}
+                                                    </Link>
+                                                </td>
+                                            ))}
+                                        </tr>
                                     ) : (
                                         <tr key={rowIndex} className='odd:bg-gray-100 even:bg-gray-50 h-10 rounded-xl px-4 py-3'>
                                             {row?.map((cell, cellIndex) => (
