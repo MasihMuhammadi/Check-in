@@ -2,10 +2,10 @@
 
 import React from 'react';
 
-const ManagerMockup = ({ width, height }: { width: any, height: any }) => {
+const ManagerMockup = ({ width, height, className }: { width?: any, height?: any, className?: any }) => {
     return (
         <>
-            <svg width={width} height={height} viewBox="0 0 4117 3961" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <svg width={width} height={height} className={className} viewBox="0 0 4117 3961" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M2547.94 165.322H1321.52V1700.89H2547.94V165.322Z" fill="#787878" />
                 <path d="M2483.15 246.497H1386.32V1619.71H2483.15V246.497Z" fill="white" />
                 <g opacity="0.4">

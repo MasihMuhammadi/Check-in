@@ -16,7 +16,7 @@ const MaleOrFemale = ({ role, setRole }: { role: any, setRole: any }) => {
         <>
             <form action="">
                 <div className='flex justify-center gap-x-5'>
-                    <label htmlFor="teacher" className={`inline p-2 rounded-2xl border border-black transition-all duration-500 cursor-pointer mx-1 ${selectedOption === "teacher" ? "bg-black text-white" : "bg-white text-black"}`} >
+                    <label htmlFor="teacher" className={`inline h-full p-2 rounded-2xl border border-black transition-all duration-500 cursor-pointer mx-1 ${selectedOption === "teacher" ? "bg-black text-white" : "bg-white text-black"}`} >
                         <input type="radio"
                             id="teacher"
                             value={"teacher"}
@@ -25,7 +25,7 @@ const MaleOrFemale = ({ role, setRole }: { role: any, setRole: any }) => {
                             className='hidden'
                             onChange={(e) => handleChange(e)}
                         />
-                        <TeacherMockup width={200} height={200} />
+                        <TeacherMockup className={'w-[100px] h-[100px] sm:w-[200px] sm:h-[200px]'} />
                     </label>
                     <label htmlFor="manager" className={`inline p-2 rounded-2xl border border-black transition-all duration-500  cursor-pointer  ${selectedOption === "manager" ? "bg-black text-white" : "bg-white text-black"}`}>
                         <input type="radio"
@@ -36,7 +36,7 @@ const MaleOrFemale = ({ role, setRole }: { role: any, setRole: any }) => {
                             name="role"
                             onChange={(e) => handleChange(e)}
                         />
-                        <ManagerMockup width={200} height={200} />
+                        <ManagerMockup className={'w-[100px] h-[100px] sm:w-[200px] sm:h-[200px]'} />
                     </label>
                 </div>
             </form>

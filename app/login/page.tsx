@@ -17,13 +17,13 @@ const Login = () => {
   return (
     <>
       <div className="">
-
-        {/* <MaleOrFemale role={role} setRole={setRole} /> */}
         <div className="flex gap-x-4 justify-between items-center ">
-          {/* <LoginMockup className="bg-primary w-[700px] h-[600px] rounded-xl  border border-white m-10" /> */}
+          <div className='w-full  bg-primary '>
+            <LoginMockup className="w-[500px] h-[500px ] rounded-xl  border border-white m-10" />
+          </div>
           <div>
+            <MaleOrFemale role={role} setRole={setRole} />
             <div>
-              {/* <MaleOrFemale role={role} setRole={setRole} /> */}
               {role == 'manager' ?
                 <ManagerLoginForm role={role} setRole={setRole} />
                 :
