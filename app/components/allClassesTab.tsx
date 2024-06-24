@@ -112,9 +112,7 @@ const AllClassesTab = ({ data, params }: { data: any, params: any }) => {
     const handleCloseModal = () => {
         dispatch(setIsEditable(false))
         dispatch(setPageWillShow("classes"))
-        // setShowFullModal(true)
         setShowFullModal(false)
-
     }
     const handleFullModal = () => {
         dispatch(setPageWillShow("addaClass"))
@@ -133,7 +131,6 @@ const AllClassesTab = ({ data, params }: { data: any, params: any }) => {
 
     return (
         <div className='relative'>
-
 
             {(showFullModal || isEditable) && pageToShow === "addaClass" &&
                 <FullModal handleClose={handleCloseModal} showModal={showFullModal} setShowModal={setShowFullModal}>

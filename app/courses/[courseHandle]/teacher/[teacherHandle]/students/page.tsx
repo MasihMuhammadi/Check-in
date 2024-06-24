@@ -27,6 +27,7 @@ const Students = () => {
                         ["Math", "Mozamel", "Sat - Thu", "12:00 PM", "1:00 PM", "20", <div key="edit"><EditIcon /></div>, <div key="delete"><DeleteIcon /></div>],
                         ["Science", "Mozamel", "Mon - Wed", "3:00 PM", "4:30 PM", "12", <div key="edit"><EditIcon /></div>, <div key="delete"><DeleteIcon /></div>]
                     ]}
+                    teacherData={{}}
                 />
             </div>
             <div className="block md:hidden ">

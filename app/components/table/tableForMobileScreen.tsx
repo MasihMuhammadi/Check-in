@@ -7,7 +7,6 @@ import ThreeDotIcon from '../../../public/smallIcons/threeDotIcon';
 
 const TableForMobileScreen = ({ isStudent, data, updatedClass, handleShowPopUp }: { isStudent: boolean, data?: any, updatedClass?: any, handleShowPopUp?: any }) => {
     const [showPopUp, setShowPopUp] = useState<boolean>(false);
-    console.log(updatedClass, '...');
     const handlePopUpMenu = () => {
         setShowPopUp(!showPopUp);
     };

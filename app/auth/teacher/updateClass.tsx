@@ -40,8 +40,6 @@ const UpdateClass = ({ data }: { data: any }) => {
     const showPassword = () => {
         setIsPassword(!isPassword);
     };
-
-    console.log(data, 'XXX')
     const initialValues = {
         // subject:  || "",
         subject: data[0]?.class_name || "",

@@ -30,9 +30,6 @@ const TeacherInfo = ({ data }: { data: any }) => {
         duration: Yup.string().required('Class Duration is required'),
         start_day: Yup.string().required('Start Day is required'),
         finish_day: Yup.string().required('Finish Day is required'),
-        // phone: Yup.string().required('Phone number is required'),
-        // email: Yup.string().email("Invalid email address").required("Email is required"),
-        // address: Yup.string().required('Address is required'),
         started_time: Yup.string().required('Class started time is required'),
         finish_time: Yup.string().required('Class finish time is required'),
     });
@@ -51,13 +48,9 @@ const TeacherInfo = ({ data }: { data: any }) => {
     };
 
     const onSubmit = async (values: any) => {
-
-
         const payload = {
-            // course_name: data?.teacher?.teacher?.courseName,
             course_name: singleTeacherData?.data?.data?.teacher?.courseName,
             class_name: values.subject,
-            // teacher_name: data?.teacer?.teacher?.teacher_name,
             teacher_name: singleTeacherData?.data?.data?.teacher?.teacher_name,
             duration: values.duration,
             start_day: values.start_day,
@@ -70,7 +63,6 @@ const TeacherInfo = ({ data }: { data: any }) => {
 
         try {
             const res: any = await dispatch(fetchData(payload))
-            console.log(res, 'rrrrrrrresssssssspooooooooooooooonnnnnnnnseeeeee')
             if (res?.payload?.success) {
                 dispatch(setPageWillShow("classes"))
                 setNotification({
@@ -94,27 +86,6 @@ const TeacherInfo = ({ data }: { data: any }) => {
             console.error(err)
         }
 
-
-        // try {
-        //     const response = await axios.post(`${baseUrl}/api/class/add-class`, payload);
-        //     console.log("Response:", response);
-
-        //     if (response?.data?.success) {
-        //         console.log(response?.data, "Class added successfully");
-
-        //         const teacherName = response.data?.data?.teacher_name;
-        //         if (teacherName) {
-        //             router.push(`/teacher/${teacherName}/classes`);
-        //         } else {
-        //             console.log("Teacher name is missing in the response data");
-        //         }
-        //     } else {
-        //         console.log('Submission failed:', response?.data?.message);
-        //     }
-        // } catch (error) {
-        //     console.error("Error:", error);
-        //     console.log("An error occurred while submitting the form");
-        // }
     };
 
     return (

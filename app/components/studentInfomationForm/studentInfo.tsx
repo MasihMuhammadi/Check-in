@@ -7,9 +7,14 @@ import * as Yup from 'yup';
 import axios from 'axios';
 import Link from 'next/link';
 import Buttons from '../buttons';
+import { useDispatch, useSelector } from 'react-redux';
+import { setPageWillShow, setShowFullModal } from '../../../redux/slices/studentSlice';
+import { setIsEditable } from '../../../redux/slices/classSlice';
 
 const StudentInfo = () => {
     const [isPassword, setIsPassword] = useState<boolean>(false);
+    const dispatch = useDispatch()
+    const singleTeacherData = useSelector((state: any) => state.teacherSlice.aTeacherData);
     const router = useRouter();
 
     const validationSchema = Yup.object({
@@ -44,14 +49,16 @@ const StudentInfo = () => {
 
     const baseUrl = "http://localhost:5000";
 
+    console.log(singleTeacherData?.data?.data?.teacher, '2222222222222222222222222')
+
     const onSubmit = async (values: any) => {
         // console.log('masih...................')
         const payload = {
             name: values.name,
             father_name: values.father_name,
-            course_name: "Mozamel",
+            course_name: singleTeacherData?.data?.data?.teacher?.course_name,
             class_name: values.class_name,
-            teacher_name: "Masihulllah",
+            teacher_name: singleTeacherData?.data?.data?.teacher?.teacher_name,
             phone: values.phone,
             email: values.email,
             address: values.address,
@@ -60,15 +67,16 @@ const StudentInfo = () => {
             verification_code: `${values.name}-${values.father_name}-Masihullah`
         };
 
-        console.log("Payload:", payload);
-
         try {
             const response = await axios.post(`${baseUrl}/api/students/add-student`, payload);
-            console.log("Response:", response);
 
-            if (response?.data?.success) {
-                console.log("Student added successfully");
-                router.push(`/teacher/${response.data?.data?.fullName}/classes`);
+
+            console.log("Student added successfully", response?.statusText);
+            if (response?.statusText == "Created") {
+                // dispatch(setPageWillShow("students"))
+                dispatch(setShowFullModal(false))
+                dispatch(setIsEditable(false))
+
             } else {
                 console.log('Submission failed:', response?.data?.message);
             }

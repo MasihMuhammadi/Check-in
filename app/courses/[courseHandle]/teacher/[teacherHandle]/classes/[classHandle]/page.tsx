@@ -14,29 +14,30 @@ import FullModal from '../../../../../../components/fullModal';
 import PopUp from '../../../../../../components/popUp';
 import { useRouter } from 'next/navigation';
 import BackButton from '../../../../../../../public/smallIcons/backButton';
+import { useDispatch, useSelector } from 'react-redux';
+import { setIsEditable, setPageWillShow, setShowFullModal, setSingleStudent } from '../../../../../../../redux/slices/studentSlice';
+import UpdateStudents from '../../../../../../auth/teacher/updateStudents';
 
 const SingleClass = ({ params }: { params: any }) => {
 
     const [students, setStudent] = useState<any>()
-    const [showAddStudentModal, setShowAddStudentModal] = useState<boolean>(false)
     const [clickedId, setClickedId] = useState<string>("")
-    const route = useRouter()
+    const [showPopUp, setShowPopUp] = useState<boolean>(false);
+    const dispatch = useDispatch()
+    const showFullModal = useSelector((state: any) => state.studentSlice.showFullModal)
+    const isEditable = useSelector((state: any) => state.studentSlice.isEditable)
+    const pageWillShow = useSelector((state: any) => state.studentSlice.pageWillShow)
+    const singleStudent = useSelector((state: any) => state.studentSlice.singleStudent)
 
-    // console.log(params?.classHandle, 'pppppppppparams')
+    const route = useRouter()
     useEffect(() => {
         const fetchStudents = async () => {
-
-            // console.log(params, 'vvvvvvvvvvvvvv')
-
-            // const desiredClasses = allClasses.filter((cls: any) => cls.teacher_name === singleTeacherData?.data?.data?.teacher?.teacher_name);
-
             const response: any = await axios.get(`http://localhost:5000/api/students/student`)
             const newStudent = response?.data?.filter((s: any) => s?.class_name === params?.classHandle?.split("-").join(" "))
             setStudent(newStudent)
         }
         fetchStudents()
     }, [])
-    console.log(students, 'sssssssss')
     const updateStudent = () => {
 
     }
@@ -44,41 +45,59 @@ const SingleClass = ({ params }: { params: any }) => {
 
     }
     const addStudent = () => {
-        setShowAddStudentModal(true)
+
+        dispatch(setShowFullModal(true))
+        setIsEditable(false)
     }
-    const [showPopUp, setShowPopUp] = useState<boolean>(false);
 
     const handleRowDoubleClick = (id: any) => {
         setShowPopUp(true)
         setClickedId(id)
     };
     const checkShowModal = (e: any) => {
-        console.log(e.target.value, '........')
     }
     const handleEdit = () => {
-        console.log(clickedId, 'ccccccccllllllllllicked')
+        dispatch(setShowFullModal(true))
+        dispatch(setPageWillShow("updateStudent"))
+        dispatch(setIsEditable(true))
+        const single = students?.filter((ss: any) => ss._id == clickedId)
+        dispatch(setSingleStudent(single[0]))
     }
     const handleDelete = async () => {
         const response = await axios.delete(`http://localhost:5000/api/students/student/${clickedId}`)
-        const filterDeleted = students.filter((stu) => stu?._id !== clickedId)
+        const filterDeleted = students.filter((stu: any) => stu?._id !== clickedId)
         setStudent(filterDeleted)
-        console.log(response, 'ccccccccllllllllllicked')
+
     }
     const goBack = () => {
         route.back()
-
+    }
+    const closePopUp = () => {
+        if (showPopUp == true) {
+            setShowPopUp(false)
+        }
+    }
+    const handleCloseModal = () => {
+        dispatch(setIsEditable(false))
+        dispatch(setPageWillShow("students"))
+        dispatch(setShowFullModal(false))
+        console.log("clicked")
     }
 
 
     return (
-        <div>
+        <div onClick={closePopUp} className='bg-gray-50 w-full h-full min-h-[calc(100vh-150px)]'>
             <div className="cursor-pointer" onClick={goBack}>
                 <BackButton />
             </div>
+
             {showPopUp && <PopUp data={students} showEditModal={handleRowDoubleClick} handleDelete={handleDelete} handleEdit={handleEdit} setShowPopUp={setShowPopUp} />}
-            {showAddStudentModal && <FullModal showModal={true} handleClose={() => { setShowAddStudentModal(false) }}>
-                <AddStudent />
-            </FullModal>}
+            {showFullModal &&
+                <FullModal showModal={true} handleClose={handleCloseModal}>
+                    {(isEditable && pageWillShow == "updateStudent") ? <UpdateStudents data={singleStudent} /> : <AddStudent />}
+                </FullModal>
+            }
+
             {students?.length ?
                 <div>
                     <div className='hidden md:block'>
@@ -86,7 +105,6 @@ const SingleClass = ({ params }: { params: any }) => {
                             isClass={false}
                             headers={["", "Name", "Father Name", "Phone", "Subject", "Delete"]}
                             teacherData={students}
-                            // onDoubleClick={() => alert(`table with should be edited`)}
                             onRowDoubleclick={handleRowDoubleClick}
                             bodyRows={students?.map((cls: any) => [
 
