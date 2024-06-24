@@ -66,6 +66,7 @@ const TeacherSignUpFormInputes = ({ role }: { role: any }) => {
         try {
             // const response = await axios.post(`${baseUrl}/api/teachers/teacher`, payload);
             const response: any = await dispatch(signUpTeacher(payload))
+            // const gethandle: any = await axios.get(`http://localhost:5000/api/courses/s-course/${values?.course_unique_code}`)
             console.log(response)
 
             if (response?.payload?.courseName) {

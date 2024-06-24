@@ -5,13 +5,15 @@ import classSlice from './slices/classSlice';
 import courseSlice from './slices/courseSlice';
 import authSlice from './slices/authSlice';
 import teacherSlice from './slices/teacherSlice';
+import studentSlice from './slices/studentSlice';
 
 const store = configureStore({
     reducer: {
         classSlice: classSlice,
         courseSlice: courseSlice,
         authSlice: authSlice,
-        teacherSlice: teacherSlice
+        teacherSlice: teacherSlice,
+        studentSlice: studentSlice
     },
 });
 

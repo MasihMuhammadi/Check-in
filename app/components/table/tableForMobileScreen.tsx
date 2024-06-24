@@ -7,7 +7,6 @@ import ThreeDotIcon from '../../../public/smallIcons/threeDotIcon';
 
 const TableForMobileScreen = ({ isStudent, data, updatedClass, handleShowPopUp }: { isStudent: boolean, data?: any, updatedClass?: any, handleShowPopUp?: any }) => {
     const [showPopUp, setShowPopUp] = useState<boolean>(false);
-    console.log(updatedClass, '...');
     const handlePopUpMenu = () => {
         setShowPopUp(!showPopUp);
     };
@@ -17,7 +16,7 @@ const TableForMobileScreen = ({ isStudent, data, updatedClass, handleShowPopUp }
             <div className='border border-primary flex flex-col my-5 text-center mx-10 rounded-xl shadow-md gap-y-5 py-6'>
                 {showPopUp && <PopUp data={data} showEditModal={handleShowPopUp} setShowPopUp={setShowPopUp} />}
                 <div className='flex flex-row justify-between px-10 items-center'>
-                    <div>{isStudent ? <span className="font-semibold text-lg">StudentID</span> : ""}</div>
+                    <div>{isStudent ? <span className="font-semibold text-lg">Name</span> : ""}</div>
                     <div onClick={handlePopUpMenu} className='cursor-pointer'>
                         <ThreeDotIcon className="" />
                     </div>
@@ -35,11 +34,11 @@ const TableForMobileScreen = ({ isStudent, data, updatedClass, handleShowPopUp }
                 <div className='flex flex-row justify-between px-10'>
                     <div className=''>
                         <p className="font-semibold">{isStudent ? "Phone" : "Time"}</p>
-                        <p className="font-light">{isStudent ? "+9381281928" : `${data?.started_time} - ${data?.finish_time}`}</p>
+                        <p className="font-light">{isStudent ? data?.phone : `${data?.started_time} - ${data?.finish_time}`}</p>
                     </div>
                     <div>
-                        <p className="font-semibold">{isStudent ? "End Time" : "Class"}</p>
-                        <p className="font-light">{isStudent ? "1:00 PM" : ""}</p>
+                        <p className="font-semibold">{isStudent ? "Class" : ""}</p>
+                        <p className="font-light">{isStudent ? data?.class_name : ""}</p>
                     </div>
                 </div>
                 <div className='flex flex-row justify-between px-10'>
@@ -54,7 +53,7 @@ const TableForMobileScreen = ({ isStudent, data, updatedClass, handleShowPopUp }
                 </div>
                 {isStudent && (
                     <div className='flex flex-row justify-between px-10'>
-                        <div className=''>
+                        <div className='' >
                             <p className="font-semibold"><PresentIcon /></p>
                         </div>
                         <div>
