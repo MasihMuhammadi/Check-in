@@ -86,7 +86,7 @@ const TeacherLoginForm = ({ role, setRole }: { role: any, setRole: any }) => {
                 if (teacherData?.data?.data?.course_unique_code) {
 
                     const gethandle: any = await axios.get(`http://localhost:5000/api/courses/s-course/${teacherData?.data?.data?.course_unique_code}`)
-                    console.log(gethandle?.data?.handle, 'hhh')
+
                     route.push(`/courses/${gethandle?.data?.handle}/teacher/${response?.payload?.data?.handle}`)
                 }
 

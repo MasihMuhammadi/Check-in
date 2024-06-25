@@ -1,66 +1,87 @@
+import axios from 'axios';
+import LocationIcon from '../../../public/smallIcons/location';
+import SubjectIcon from '../../../public/smallIcons/subject';
+import StudentsIcon from '../../../public/smallIcons/students';
+import Buttons from '../../components/buttons';
+import Footer from '../../components/footer/footer';
+import NotFound from '../../not-found';
+import Image from 'next/image';
+import ShareButtons from '../../components/shareButton';
+import CopyUrlButton from '../../components/copyUrl';
+import TeacherIcon from '../../../public/smallIcons/teacherIcon';
+import Link from 'next/link';
 
-import React from 'react'
-import NotFound from '../../not-found'
-import Image from 'next/image'
-// import masihImage from '../../../public/images/Masih.jpg'
-import LocationIcon from '../../../public/smallIcons/location'
-import SubjectIcon from '../../../public/smallIcons/subject'
-import StudentsIcon from '../../../public/smallIcons/students'
-import Buttons from '../../components/buttons'
-import Footer from '../../components/footer/footer'
+async function getSingleCourseData(courseHandle: string) {
+    try {
+        const response = await axios.get(`http://localhost:5000/api/public-courses/p-courses/${courseHandle}`);
+        const courseData = response?.data;
+        const base64Image = Buffer.from(courseData.Images, 'binary').toString('base64');
+        const image = `data:image/jpeg;base64,${base64Image}`;
+        return { courseData, image };
+    } catch (error) {
 
+        return { courseData: null, image: null };
+    }
+}
 
-export default function Page({ params }: { params: any }) {
+export default async function Page({ params }: { params: { courseHandle: string } }) {
+    const { courseData, image } = await getSingleCourseData(params.courseHandle);
 
-    const courseId = "course_123abc"
+    if (!courseData) {
+        return <NotFound />;
+    }
 
-    return <>
-        {params.courseId === courseId ? <>
+    return (
+        <>
             <div>
                 <div>
-                    <div className="flex flex-col lg:flex-row gap-y-5 p-10 items-start gap-x-5 justify-between ">
-                        {/* <Image src={masihImage} width={500} height={500} className="text-center content-center " alt="" /> */}
+                    <div className="flex flex-col lg:flex-row gap-y-5 p-10 items-start gap-x-5 justify-between">
+                        {image && <img src={image} alt="Course Image" width={500} height={400} className="rounded-md" />}
                         <div>
-                            <p className='text-[32px] text-medium'>Description:</p>
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure vitae enim obcaecati repellendus quisquam quas rem laboriosam, facere molestiae esse aperiam eius fugit numquam perferendis laborum expedita tenetur maxime. Numquam.</p>
-                            <div className='flex  flex justify-end mt-32'>
-
-                                <div className='bg-gray-100 shadow-2xl w-[475px] h-[475px] rounded-xl px-10 flex flex-end'>
-                                    <div className='mt-10  flex flex-col gap-y-5'>
-                                        <h1 className='font-semibold text-[32px] mt-5'>Mozamel Educational Center</h1>
-                                        <div className='flex gap-x-2 '>
+                            <p className="text-[32px] text-medium">Description:</p>
+                            <p>{courseData.description}</p>
+                            <div className="flex justify-end mt-10">
+                                <div className="bg-gray-100 shadow-2xl w-[475px] h-[475px] rounded-xl px-10 flex flex-end">
+                                    <div className="mt-10 flex flex-col gap-y-5">
+                                        <h1 className="font-semibold text-[32px] mt-5">Mozamel Educational Center</h1>
+                                        <div className="flex gap-x-2">
                                             <LocationIcon />
-                                            <p>Kabul, Panjsad Family</p>
+                                            <p>{courseData.location}</p>
                                         </div>
                                         <div className="flex gap-x-2">
                                             <SubjectIcon />
-                                            <p>Mathematics, English</p>
+                                            <p>{courseData.studyFields}</p>
                                         </div>
                                         <div className="flex gap-x-2">
                                             <StudentsIcon />
-                                            <p>500 Students</p>
+                                            <p>{courseData.studentsCount} Students</p>
+                                        </div>
+                                        <div className="flex gap-x-2 mb-4">
+                                            <TeacherIcon />
+                                            <p>{courseData.teacherCount} Teachers</p>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                    <div className='flex justify-between items-center justify-center w-full margin-auto'>
-                        <div className=" -mt-40 mx-20 px-10 ">
-                            <p>are you interested to be student in this instutations? </p>
-                            <div className='mt-5'>
-                                <Buttons primary={true} style={"px-5 my-2 py-3"}>Register To This Course</Buttons>
-                                <Buttons secondary={true} style={"px-5 py-3"}>See Other Courses</Buttons>
+                            <div className='mt-4 flex justify-between'>
+                                <ShareButtons url={"masih"} title={"something"} />
+                                <CopyUrlButton url="https://msihmuhmmadi.vercel.app" />
                             </div>
                         </div>
-
+                    </div>
+                    <div className=" w-full ">
+                        <div className="-mt-10 mx-20 px-10">
+                            <p>Are you interested to be a student in this institution?</p>
+                            <div className="mt-5">
+                                <Buttons secondary={true} style="px-5 py-3">
+                                    <Link href="/courses">See Other Courses</Link>
+                                </Buttons>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div >
-        </> :
-            <><NotFound /></>
-        }
-        <Footer />
-    </>
-
+            </div>
+            <Footer />
+        </>
+    );
 }

@@ -33,7 +33,6 @@ const UpdateStudent = ({ data }: { data?: any }) => {
         setIsPassword(!isPassword);
     };
 
-    console.log(data, 'daaaaaaaaaaaaaaaaaaata')
     const initialValues = {
         name: data?.name || "",
         father_name: data?.father_name || "",
@@ -68,11 +67,8 @@ const UpdateStudent = ({ data }: { data?: any }) => {
 
         try {
             const response = await axios.put(`${baseUrl}/api/students/student/${data?._id}`, payload);
-            console.log("Response:", response);
 
             if (response?.data?.success) {
-                console.log("Student added successfully");
-                // dispatch(setPageWillShow(""))
                 dispatch(setShowFullModal(false))
                 dispatch(setIsEditable(false))
             } else {
