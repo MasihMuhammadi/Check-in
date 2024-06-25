@@ -5,7 +5,7 @@ import NavMenu from './navMenu';
 const BurgerLines = ({ crossBurger, setCrossBurger }: { crossBurger: any, setCrossBurger: any }) => {
     const openMenu = () => {
         setCrossBurger(!crossBurger)
-        console.log(crossBurger, '....')
+
     }
 
     return (

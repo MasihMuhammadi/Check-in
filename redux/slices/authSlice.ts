@@ -48,7 +48,6 @@ export const loginManager: any = createAsyncThunk(
     async (payload: any) => {
         try {
             const response = await loginAsManager(payload)
-            console.log(response, 'rrrrrrrrr')
             return response
         } catch (error) {
             throw error

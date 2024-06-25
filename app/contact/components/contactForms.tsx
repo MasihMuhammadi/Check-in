@@ -7,6 +7,7 @@ import Link from "next/link";
 import AccountIcon from '../../../public/smallIcons/accountIcon';
 import Buttons from '../../components/buttons';
 import ContactMockup from '../../../public/mockups/contactMockup';
+import axios from 'axios';
 
 
 
@@ -37,10 +38,23 @@ const ContactForm = () => {
   let baseUrl = "http://localhost:5000"
 
 
-  const onSubmit = async (values: any, { setSubmitting }: { setSubmitting: any }) => {
+  const onSubmit = async (values: any,) => {
 
-    console.log(values, 'vvvvvvvvvvvvvvvv')
-    setSubmitting(false);
+    const payload = {
+      "to": "masihmuhammadi202@gmail.com",
+      "subject": "Test Email",
+      "text": "This is a test email.",
+      "html": "<b>This is a test email.</b>"
+    }
+
+    try {
+
+      const response = await axios.post("http://localhost:5000/api/send-email", payload)
+    }
+    catch (e) {
+      console.log(e)
+    }
+    // setSubmitting(false);
   };
 
   return (
@@ -112,7 +126,7 @@ const ContactForm = () => {
                   <ErrorMessage name="message" component="div" className=" text-xs text-red-500" />
                 </div>
 
-                <Buttons primary={true} type="submit" style='px-10' >
+                <Buttons primary={true} type="submit" style='px-10' clickHandler={() => onSubmit(values)}>
                   Send Message
                 </Buttons>
               </div>
