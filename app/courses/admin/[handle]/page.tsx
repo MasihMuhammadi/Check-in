@@ -86,7 +86,7 @@ const CourseAdmin = ({ params }: { params: any }) => {
             case "Teachers":
                 return <div><CourseTeacher data={relatedData?.teachers} /></div>
             case "Account":
-                return <div><AdminAccount /></div>;
+                return <div><AdminAccount data={currentCourse} /></div>;
             default:
                 return <div>Dashboard Content</div>;
         }

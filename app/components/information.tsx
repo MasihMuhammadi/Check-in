@@ -20,24 +20,29 @@ import { useRouter } from "next/navigation";
 import axios from "axios";
 import SonAndFather from "../../public/mockups/sonAndFather";
 
+import { Buffer } from "buffer"
+
 const Information = () => {
   const [courseData, setCourseData] = useState<any>()
   const [isLoading, setIsLoading] = useState<boolean>(true)
-  const courseId = "course_123abc"
   const baseUrl = "http://localhost:5000";
+  const [image, setImage] = useState<any>()
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`${baseUrl}/api/users/`);
-        setCourseData(response?.data)
-        if (response?.data?.length) {
-          setIsLoading(false)
-        }
+        const response = await axios.get('http://localhost:5000/api/public-courses/p-courses');
 
+        const coursesWithBase64Images = response.data.map((course: any) => {
+          const base64Image = Buffer.from(course.Images.data, 'binary').toString('base64');
+          return { ...course, base64Image };
+        });
 
+        setCourseData(coursesWithBase64Images);
+        setIsLoading(false);
       } catch (error) {
-        console.error("Error:", error);
+        console.error('Error:', error);
+        setIsLoading(false);
       }
     };
 
@@ -47,6 +52,7 @@ const Information = () => {
 
   return (
     <div>
+      <img src={image} />
       <div className="grid grid-cols-1 gap-x-5 sm:gap-x-1 sm:grid-cols-2 md:grid-cols-3 md:gap-x-6 lg:grid-cols-4 xl:grid-cols-4 items-center content-center justify-center gap-4">
         {isLoading ? (
           Array.from({ length: 8 }).map((_, id) => (
@@ -59,16 +65,21 @@ const Information = () => {
         ) : (
           <>
             {courseData?.map((course: any, index: number) => (
+
               <div key={index} className="flex justify-center items-center">
                 <div className="border border-black w-[300px] h-80 rounded-xl text-blue-500">
                   <div className="flex items-center justify-center">
-                    <Image src={masihImage} width={150} height={60} className="text-center content-center" alt="" />
+                    <img
+                      src={`data:image/png;base64,${course.base64Image}`}
+                      alt={course.courseName}
+                      className="mt-0.5 object-center"
+                      style={{ width: '295px', borderRadius: "10px", height: '200px' }}
+                    />
                   </div>
                   <div className="px-4">
-                    <p className="text-black">{course?.courseName}</p>
-
-                    <Buttons secondary={true} style="px-5 text-black">
-                      <Link href={`/courses/${courseId}`}>
+                    <p className="text-black text-center font-medium text-xl">{course?.courseName}</p>
+                    <Buttons secondary={true} style="px-5 text-black mt-4 ">
+                      <Link href={`/courses/${course?.handle}`}>
                         view course
                       </Link>
                     </Buttons>
@@ -76,12 +87,13 @@ const Information = () => {
                 </div>
               </div>
             ))}
-            <Link href="/courses">
-              <Buttons primary={true} style="px-10">See More</Buttons>
-            </Link>
+
           </>
         )}
       </div>
+      <Link href="/courses">
+        <Buttons primary={true} style="px-10 mt-5">See More</Buttons>
+      </Link>
 
 
       <h1 className="text-2xl mt-10 font-bold mx-4">Why Should We Use Edu Echo?</h1>

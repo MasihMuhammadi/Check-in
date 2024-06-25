@@ -17,8 +17,6 @@ import Buttons from '../../components/buttons';
 import UniqueCodeIcon from '../../../public/smallIcons/uniqueCodeIcon';
 import { useDispatch } from 'react-redux';
 import { signUpTeacher } from '../../../redux/slices/courseSlice';
-// import { createTeacher } from '../../../api/api';
-
 
 
 const TeacherSignUpFormInputes = ({ role }: { role: any }) => {
@@ -64,14 +62,10 @@ const TeacherSignUpFormInputes = ({ role }: { role: any }) => {
             role: role
         }
         try {
-            // const response = await axios.post(`${baseUrl}/api/teachers/teacher`, payload);
             const response: any = await dispatch(signUpTeacher(payload))
-            // const gethandle: any = await axios.get(`http://localhost:5000/api/courses/s-course/${values?.course_unique_code}`)
-            console.log(response)
 
             if (response?.payload?.courseName) {
                 route.push("/login")
-                console.log('Teacher created:');
             }
             else {
                 console.log('teacher cant created');

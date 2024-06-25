@@ -49,10 +49,9 @@ const StudentInfo = () => {
 
     const baseUrl = "http://localhost:5000";
 
-    console.log(singleTeacherData?.data?.data?.teacher, '2222222222222222222222222')
 
     const onSubmit = async (values: any) => {
-        // console.log('masih...................')
+
         const payload = {
             name: values.name,
             father_name: values.father_name,

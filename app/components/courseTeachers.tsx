@@ -2,7 +2,7 @@
 import React from 'react';
 
 const CourseTeacher = ({ data }: { data: any }) => {
-    console.log(data, 'ddddddddd')
+
     return (
         <>
             {data?.map((teach: any) => {

@@ -81,7 +81,34 @@ const SingleClass = ({ params }: { params: any }) => {
         dispatch(setIsEditable(false))
         dispatch(setPageWillShow("students"))
         dispatch(setShowFullModal(false))
-        console.log("clicked")
+    }
+    const notifyPresentToParent = async (data: any, status: string) => {
+        const date = new Date()
+        const formattedDate = `${date.getFullYear()} - ${date.getMonth()} - ${date?.getDay()}`
+        const payload = {
+            // "to": `${data?.email}`,
+            "to": "masihmuhammadi202@gmail.com",
+            "subject": ` Attendance Notification for ${data?.name}- ${formattedDate}`,
+            "text": "",
+            "html":
+                `<p>Dear <b> ${data?.father_name} </b>,<br />We hope this message finds you well.<br />
+                 We are writing to inform you that your child, <b>${data?.name}</b>,was <span style="color:${status == "present" ? "green" : "red"}"> ${status === "present" ? "Present" : "Absent"} </span> in today's <b> ${data?.class_name} </b> class.If you have any questions or concerns regarding your child's attendance or anything else related to their education, <br />please feel free to reach out to usThank you for your continued support <br />
+            Best regards <b>${data?.teacher_name}</b>
+            Your Son Teacher
+             </p>`
+
+
+        }
+
+
+        try {
+
+            const response = await axios.post("http://localhost:5000/api/send-email", payload)
+        }
+        catch (e) {
+            console.log(e)
+        }
+        // setSubmitting(false);
     }
 
 
@@ -116,10 +143,10 @@ const SingleClass = ({ params }: { params: any }) => {
                                 cls.class_name,
                                 <>
                                     <div className="flex gap-x-4 items-center justify-center">
-                                        <div className='cursor-pointer' onClick={() => alert("email should sent which your son is present")}>
+                                        <div className='cursor-pointer' onClick={() => notifyPresentToParent(cls, "present")}>
                                             <PresentIcon />
                                         </div>
-                                        <div className='cursor-pointer' onClick={() => alert("email sent which your son is absent")}>
+                                        <div className='cursor-pointer' onClick={() => notifyPresentToParent(cls, "absent")}>
                                             <AbsentIcon />
                                         </div>
                                     </div>

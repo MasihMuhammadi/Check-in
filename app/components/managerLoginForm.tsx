@@ -67,7 +67,6 @@ const ManagerLoginForm = ({ role, setRole }: { role: any, setRole: any }) => {
             }
 
             else {
-                console.log(response, 'rrr')
                 setNotification({
                     success: false,
                     isShow: true,
