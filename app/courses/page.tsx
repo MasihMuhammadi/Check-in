@@ -13,7 +13,6 @@ import Buttons from "../components/buttons";
 import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
 // import MasihImage from "../../public/images/Masih.jpg"
-import Image from 'next/image';
 import masihImage from "../../public/images/Masih.jpg"
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -23,6 +22,7 @@ import SonAndFather from "../../public/mockups/sonAndFather";
 import { Buffer } from "buffer"
 import Footer from "../components/footer/footer";
 import SearchInput from "../components/SearchInput";
+import Image from 'next/image'
 
 const Courses = () => {
     const [courseData, setCourseData] = useState<any>()
@@ -55,7 +55,7 @@ const Courses = () => {
     return (
         <div>
             <SearchInput />
-            <img src={image} />
+            {/* <img src={image} /> */}
             <div className="grid grid-cols-1 gap-x-5 sm:gap-x-1 sm:grid-cols-2 md:grid-cols-3 md:gap-x-6 lg:grid-cols-4 xl:grid-cols-4 items-center content-center justify-center gap-4">
                 {isLoading ? (
                     Array.from({ length: 8 }).map((_, id) => (
@@ -72,7 +72,7 @@ const Courses = () => {
                             <div key={index} className="flex justify-center items-center">
                                 <div className="border border-black w-[300px] h-80 rounded-xl text-blue-500">
                                     <div className="flex items-center justify-center">
-                                        <img
+                                        <Image
                                             src={`data:image/png;base64,${course.base64Image}`}
                                             alt={course.courseName}
                                             className="mt-0.5 object-center"

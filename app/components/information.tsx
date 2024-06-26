@@ -102,8 +102,12 @@ const Information = () => {
           <SonAndFather className={"w-[400px] md:w-[400px] lg:w-[500px]"} />
         </div>
         <div className="flex flex-col mx-4">
-          <p className="mb-6">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ut libero et hic numquam sed aut veritatis minima, dignissimos tenetur molestias, laboriosam alias nostrum officiis fuga nobis repellendus maxime qui ipsum. Consequuntur aut porro asperiores nemo? Vitae repudiandae voluptatem aliquam quis?</p>
-          <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ut libero et hic numquam sed aut veritatis minima, dignissimos tenetur molestias, laboriosam alias nostrum officiis fuga nobis repellendus maxime qui ipsum. Consequuntur aut porro asperiores nemo? Vitae repudiandae voluptatem aliquam quis?</p>
+          <p className="mb-6">Edu Echo simplifies attendance management for managers, teachers, and parents. Managers can easily create courses, while teachers can set up accounts, create classes, and add students effortlessly. Our system automates attendance tracking, ensuring accurate records and instant notifications to parents about their child's presence or absence, enhancing communication and engagement.
+          </p>
+          <p>Our user-friendly interface and powerful features eliminate the hassle of manual attendance tracking, saving time and reducing errors. Real-time updates and comprehensive reports allow educators to focus more on teaching. Parents appreciate timely notifications, giving them peace of mind. Choose Edu Echo for an efficient, connected approach to attendance management.
+
+
+          </p>
         </div>
       </div>
     </div>

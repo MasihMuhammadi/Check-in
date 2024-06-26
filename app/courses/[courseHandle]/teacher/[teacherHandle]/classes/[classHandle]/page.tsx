@@ -37,7 +37,7 @@ const SingleClass = ({ params }: { params: any }) => {
             setStudent(newStudent)
         }
         fetchStudents()
-    }, [])
+    }, [dispatch])
     const updateStudent = () => {
 
     }
@@ -92,7 +92,7 @@ const SingleClass = ({ params }: { params: any }) => {
             "text": "",
             "html":
                 `<p>Dear <b> ${data?.father_name} </b>,<br />We hope this message finds you well.<br />
-                 We are writing to inform you that your child, <b>${data?.name}</b>,was <span style="color:${status == "present" ? "green" : "red"}"> ${status === "present" ? "Present" : "Absent"} </span> in today's <b> ${data?.class_name} </b> class.If you have any questions or concerns regarding your child's attendance or anything else related to their education, <br />please feel free to reach out to usThank you for your continued support <br />
+                 We are writing to inform you that your child, <b>${data?.name}</b>,was <span style="color:${status == "present" ? "green" : "red"}"> ${status === "present" ? "Present" : "Absent"} </span> in todays <b> ${data?.class_name} </b> class.If you have any questions or concerns regarding your child attendance or anything else related to their education, <br />please feel free to reach out to usThank you for your continued support <br />
             Best regards <b>${data?.teacher_name}</b>
             Your Son Teacher
              </p>`
