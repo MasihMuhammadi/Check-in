@@ -38,7 +38,7 @@ export const loginTeacher: any = createAsyncThunk(
             const response = await loginAsTeacher(payload)
             return response
         } catch (error) {
-            throw error
+            return error
         }
     }
 )

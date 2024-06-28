@@ -35,15 +35,15 @@ export default async function Page({ params }: { params: { courseHandle: string 
         <>
             <div>
                 <div>
-                    <div className="flex flex-col lg:flex-row gap-y-5 p-10 items-start gap-x-5 justify-between">
-                        {image && <img src={image} alt="Course Image" width={500} height={400} className="rounded-md" />}
+                    <div className="flex flex-col md:flex-row gap-y-5 p-10 items-start gap-x-5 justify-between">
+                        {<Image src={`${image}`} alt="Course Image" width={500} height={400} className="rounded-md" />}
                         <div>
                             <p className="text-[32px] text-medium">Description:</p>
                             <p>{courseData.description}</p>
-                            <div className="flex justify-end mt-10">
-                                <div className="bg-gray-100 shadow-2xl w-[475px] h-[475px] rounded-xl px-10 flex flex-end">
+                            <div className="flex justify-end mt-10  min-w-[350px] sm:min-w-[400px]">
+                                <div className=" shadow-2xl w-full h-[475px] rounded-xl px-10 flex flex-end">
                                     <div className="mt-10 flex flex-col gap-y-5">
-                                        <h1 className="font-semibold text-[32px] mt-5">Mozamel Educational Center</h1>
+                                        <h1 className="font-semibold text-[32px] mt-5">{courseData?.courseName}</h1>
                                         <div className="flex gap-x-2">
                                             <LocationIcon />
                                             <p>{courseData.location}</p>
@@ -69,16 +69,10 @@ export default async function Page({ params }: { params: { courseHandle: string 
                             </div>
                         </div>
                     </div>
-                    <div className=" w-full ">
-                        <div className="-mt-10 mx-20 px-10">
-                            <p>Are you interested to be a student in this institution?</p>
-                            <div className="mt-5">
-                                <Buttons secondary={true} style="px-5 py-3">
-                                    <Link href="/courses">See Other Courses</Link>
-                                </Buttons>
-                            </div>
-                        </div>
-                    </div>
+
+                    <Buttons secondary={true} style=" px-4 py-2 mx-10">
+                        <Link href="/courses">See Other Courses</Link>
+                    </Buttons>
                 </div>
             </div>
             <Footer />

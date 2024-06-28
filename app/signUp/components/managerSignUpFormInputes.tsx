@@ -17,14 +17,15 @@ import Buttons from '../../components/buttons';
 import Notification from '../../components/notification';
 import { useDispatch } from 'react-redux';
 import { signUpManager } from '../../../redux/slices/courseSlice';
+import Spinner from '../../components/spinner';
 
 
 
 const ManagerSignUpFormInputes = ({ role }: { role: any }) => {
 
   const [isPassword, setIsPassword] = useState<boolean>(false)
+  const [isLoading, setisLoading] = useState<boolean>(false)
   const dispatch = useDispatch()
-  const [password, setPassword] = useState<any>()
   const [notification, setNotification] = useState({
     success: false,
     isShow: false,
@@ -53,24 +54,8 @@ const ManagerSignUpFormInputes = ({ role }: { role: any }) => {
     role: role
   };
 
-  //   {
-  //     "fullName":"Masih Muhammadi",
-  //     "email":"masihmuhammadi303@gmail.com",
-  //     "courseName":"thunder",
-  //     "phone":"+987654321",
-  //     "password":"masih123",
-  //     "role":"manager"
-  // }
-  let baseUrl = "http://localhost:5000"
-
-
   const onSubmit = async (values: any, { setSubmitting }: { setSubmitting: any }) => {
-
-    setNotification({
-      success: true,
-      content: "success is only things you need",
-      isShow: true
-    })
+    setisLoading(true);
 
     const payload = {
       fullName: values.fullName,
@@ -80,31 +65,39 @@ const ManagerSignUpFormInputes = ({ role }: { role: any }) => {
       phone: values.phone,
       password: values.password,
       role: role
-    }
+    };
+
     try {
-      const response: any = await dispatch(signUpManager({ data: payload }))
-      if (response?.payload?.success) {
+      // const response: any = await dispatch(signUpManager({ data: payload }))
+      const response: any = await axios.post("http://localhost:5000/api/courses/course", payload);
+      // console.log(response, 'rrrrrrrrrrrrrrr')
+      if (response?.data?.success) {
+        setisLoading(false);
         setNotification({
           success: true,
           isShow: true,
-          content: "account created successfully"
-        })
-      }
-      else {
+          content: "Account created successfully"
+        });
+        setTimeout(() => {
+          route.push("/login")
+        }, 3000)
+      } else {
+        setisLoading(false);
+        console.log(response, 'ffailedddddddddddddd');
         setNotification({
           success: false,
           isShow: true,
-          content: response?.error?.message,
-        })
+          content: response?.data?.error?.message || "An error occurred",
+        });
       }
     } catch (err: any) {
+      console.log(err, 'rerrrrrrrrrr');
+      setisLoading(false);
       setNotification({
         success: false,
         isShow: true,
-        content: err,
-      })
-      console.log('Error creating user: maybe user is alreaady exist');
-
+        content: err?.response?.data?.message || err.message || "An error occurred",
+      });
     }
     setSubmitting(false);
   };
@@ -137,9 +130,7 @@ const ManagerSignUpFormInputes = ({ role }: { role: any }) => {
       >
         {({ values, handleChange, handleSubmit, isSubmitting }) => (
           <Form >
-            {/* <div className='bg-red-500'>
-              masihullah
-            </div> */}
+
             <div className="flex flex-col gap-6  place-items-center ">
               <div className="relative ">
                 <i className="absolute top-5 left-4">
@@ -231,7 +222,6 @@ const ManagerSignUpFormInputes = ({ role }: { role: any }) => {
                   value={values.password}
                   onChange={(e: any) => {
                     handleChange(e);
-                    setPassword(e.target.value);
                   }}
 
                   placeholder="Password"
@@ -243,8 +233,8 @@ const ManagerSignUpFormInputes = ({ role }: { role: any }) => {
             </div>
 
             <div className=" flex  flex-col text-center items-center mt-5 px-10">
-              <Buttons primary={true} type="submit" style="px-10">
-                Register
+              <Buttons primary={isLoading ? false : true} disabled={isLoading ? true : false} type="submit" style="px-10">
+                {isLoading ? <Spinner className={"w-5 h-5"} /> : "Register"}
               </Buttons>
               <p className="mt-4">
                 You dont have an account?{" "}

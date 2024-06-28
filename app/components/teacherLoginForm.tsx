@@ -19,6 +19,7 @@ import { useDispatch, useSelector } from 'react-redux';
 // import { loginAsManager, loginAsTeacher } from '../../api/api';
 import { loginTeacher } from '../../redux/slices/authSlice'
 import MaleOrFemale from './maleOrFemale';
+import Spinner from './spinner';
 
 
 
@@ -28,6 +29,7 @@ const TeacherLoginForm = ({ role, setRole }: { role: any, setRole: any }) => {
 
     const teacherData = useSelector((state: any) => state.authSlice.teacherData)
 
+    const [isLoading, setIsLoading] = useState<boolean>(false)
     const [isPassword, setIsPassword] = useState<boolean>(false)
     const [password, setPassword] = useState<any>()
     const [notification, setNotification] = useState({
@@ -53,15 +55,6 @@ const TeacherLoginForm = ({ role, setRole }: { role: any, setRole: any }) => {
         password: '',
         role: role
     };
-
-    //   {
-    //     "fullName":"Masih Muhammadi",
-    //     "email":"masihmuhammadi303@gmail.com",
-    //     "courseName":"thunder",
-    //     "phone":"+987654321",
-    //     "password":"masih123",
-    //     "role":"manager"
-    // }
     let baseUrl = "http://localhost:5000"
 
 
@@ -71,40 +64,39 @@ const TeacherLoginForm = ({ role, setRole }: { role: any, setRole: any }) => {
             password: values.password,
             role: role
         }
+        setIsLoading(true)
+        console.log(teacherData?.data?.data, '.#######################.')
 
         try {
             const response: any = await dispatch(loginTeacher(payload))
-            // const gethandle: any = await axios.get(`http://localhost:5000/api/courses/s-course/${}`)
+            const gethandle: any = await axios.get(`http://localhost:5000/api/courses/unique-course/${teacherData?.data?.data?.course_unique_code}`)
             if (response?.payload?.success) {
+                if (teacherData?.data?.data?.course_unique_code) {
+                    route.push(`/courses/${gethandle?.data?.handle}/teacher/${response?.payload?.data?.handle}`)
+                }
                 setNotification({
                     success: true,
                     isShow: true,
-                    content: "You logged SuccessFully!!!"
+                    content: "You logged SuccessFully!"
                 })
-
-                // console.log(teacherData?.data?.data?.course_unique_code, 'rrr')
-                if (teacherData?.data?.data?.course_unique_code) {
-
-                    const gethandle: any = await axios.get(`http://localhost:5000/api/courses/s-course/${teacherData?.data?.data?.course_unique_code}`)
-
-                    route.push(`/courses/${gethandle?.data?.handle}/teacher/${response?.payload?.data?.handle}`)
-                }
-
+                setIsLoading(false)
             }
-
             else {
+                setIsLoading(false)
                 setNotification({
                     success: false,
                     isShow: true,
-                    content: response?.error?.message
+                    content: response?.payload?.response?.data?.message
                 })
             }
 
         } catch (error: any) {
+            setIsLoading(false)
+
             setNotification({
                 success: false,
                 isShow: true,
-                content: "An error occured"
+                content: error?.response.data.message
             })
             console.log("Error:", error?.message);
         }
@@ -181,10 +173,13 @@ const TeacherLoginForm = ({ role, setRole }: { role: any, setRole: any }) => {
                                 </div>
                             </div>
                             <div className=" flex  flex-col text-center items-center mt-5">
-                                <Buttons primary={true} type="submit" style="px-12 py-2"
+                                <Buttons
+                                    primary={isLoading ? false : true}
+                                    disabled={isLoading ? true : false}
+                                    type="submit" style="px-12 py-2"
                                     clickHandler={() => onSubmit(values)}
                                 >
-                                    Login as Teacher
+                                    {isLoading ? <Spinner className="w-5 h-5" /> : "Login as Teacher"}
                                 </Buttons>
                                 <p className="mt-4">
                                     You dont have not account?{" "}
