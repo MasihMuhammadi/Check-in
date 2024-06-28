@@ -36,7 +36,7 @@ export default async function Page({ params }: { params: { courseHandle: string 
             <div>
                 <div>
                     <div className="flex flex-col lg:flex-row gap-y-5 p-10 items-start gap-x-5 justify-between">
-                        {image && <Image src={image} alt="Course Image" width={500} height={400} className="rounded-md" />}
+                        {image && <Image src={`data:image/png;base64,${image}`} alt="Course Image" width={500} height={400} className="rounded-md" />}
                         <div>
                             <p className="text-[32px] text-medium">Description:</p>
                             <p>{courseData.description}</p>

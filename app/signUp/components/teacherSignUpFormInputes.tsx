@@ -17,13 +17,21 @@ import Buttons from '../../components/buttons';
 import UniqueCodeIcon from '../../../public/smallIcons/uniqueCodeIcon';
 import { useDispatch } from 'react-redux';
 import { signUpTeacher } from '../../../redux/slices/courseSlice';
+import Notification from '../../components/notification';
+import Spinner from '../../components/spinner';
 
 
 const TeacherSignUpFormInputes = ({ role }: { role: any }) => {
 
     const dispatch = useDispatch()
     const [isPassword, setIsPassword] = useState<boolean>(false)
+    const [isLoading, setIsLoading] = useState<boolean>(false)
     const [password, setPassword] = useState<any>()
+    const [notification, setNotification] = useState({
+        success: false,
+        isShow: false,
+        content: ""
+    })
 
     const phoneValidation = new RegExp(/^(?:\+|00)?(?:[0-9] ?){6,14}[0-9]$/i)
     const validationSchema = Yup.object({
@@ -52,6 +60,7 @@ const TeacherSignUpFormInputes = ({ role }: { role: any }) => {
 
 
     const onSubmit = async (values: any) => {
+        setIsLoading(true)
         const payload = {
             courseName: values.courseName,
             course_unique_code: values.course_unique_code,
@@ -62,24 +71,47 @@ const TeacherSignUpFormInputes = ({ role }: { role: any }) => {
             role: role
         }
         try {
-            const response: any = await dispatch(signUpTeacher(payload))
-
-            if (response?.payload?.courseName) {
+            // const response: any = await dispatch(signUpTeacher(payload))
+            const response: any = await axios.post("http://localhost:5000/api/teachers/teacher", payload)
+            setIsLoading(false)
+            if (response?.data?.courseName) {
                 route.push("/login")
             }
             else {
                 console.log('teacher cant created');
             }
         } catch (err: any) {
-
-            console.log(err?.message);
+            setIsLoading(false)
+            setNotification({
+                success: false,
+                isShow: true,
+                content: err.response.data.message
+            })
+            console.log(err?.response?.data?.message);
 
         }
     };
 
+    useEffect(() => {
+
+        const notif = setTimeout(() => {
+            setIsLoading(false)
+            setNotification({
+                success: true,
+                isShow: false,
+                content: ""
+            })
+            return () => clearTimeout(notif);
+
+        }, 10000)
+    }, [notification])
+
 
     return (
         <div className="">
+            {notification.isShow && <Notification success={notification.success} isShow={notification.isShow} >
+                {notification.content}
+            </Notification>}
             <Formik
                 initialValues={initialValues}
                 validationSchema={validationSchema}
@@ -196,8 +228,11 @@ const TeacherSignUpFormInputes = ({ role }: { role: any }) => {
                         </div>
 
                         <div className=" flex  flex-col text-center items-center mt-5 px-10">
-                            <Buttons primary={true} type="submit" clickHandler={() => onSubmit(values)} style="px-10">
-                                Register
+                            <Buttons
+                                primary={isLoading ? false : true}
+                                disabled={isLoading ? true : false}
+                                type="submit" clickHandler={() => onSubmit(values)} style="px-10">
+                                {isLoading ? <Spinner className="w-5 h-5" /> : "Register"}
                             </Buttons>
                             <p className="mt-4">
                                 You dont have an account?{" "}

@@ -59,7 +59,7 @@ export const loginAsManager = async (payload: any) => {
 };
 export const getSingleTeacherData = async (handle: any) => {
     try {
-        const response = await axios.get(`${baseUrl}/api/teachers/teacher/${handle}`);
+        const response = await axios.get(`${baseUrl}/api/teachers/h-teacher/${handle}`);
         return response.data;
     } catch (error) {
         throw error;

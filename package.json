@@ -22,6 +22,9 @@
     "buffer": "^6.0.3",
     "formik": "^2.4.5",
     "framer-motion": "^11.2.12",
+    "js-cookie": "^3.0.5",
+    "js-cookies": "^1.0.4",
+    "jwt-decode": "^4.0.0",
     "lodash": "^4.17.21",
     "next": "14.1.4",
     "nodemailer": "^6.9.14",
@@ -36,6 +39,7 @@
     "yup": "^1.4.0"
   },
   "devDependencies": {
+    "@types/js-cookie": "^3.0.6",
     "@types/node": "^20",
     "@types/react": "^18.3.3",
     "@types/react-copy-to-clipboard": "^5.0.7",
