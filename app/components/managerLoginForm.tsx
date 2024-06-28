@@ -168,7 +168,7 @@ const ManagerLoginForm = ({ role, setRole }: { role: any, setRole: any }) => {
 
                                     type="submit" style="px-12 py-2"
                                 >
-                                    {isLoading ? <Spinner className="w-5 h-5" /> : "Login"}
+                                    {isLoading ? <Spinner className={"w-5 h-5"} /> : "Loginn"}
                                 </Buttons>
                                 <p className="mt-4">
                                     You dont have not account?{" "}

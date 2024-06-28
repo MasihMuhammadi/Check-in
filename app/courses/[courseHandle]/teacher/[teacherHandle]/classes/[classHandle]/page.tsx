@@ -37,7 +37,7 @@ const SingleClass = ({ params }: { params: any }) => {
             setStudent(newStudent)
         }
         fetchStudents()
-    }, [dispatch])
+    }, [dispatch, params?.classHandle])
     const updateStudent = () => {
 
     }

@@ -52,7 +52,6 @@ const Information = () => {
 
   return (
     <div>
-      <img src={image} />
       <div className="grid grid-cols-1 gap-x-5 sm:gap-x-1 sm:grid-cols-2 md:grid-cols-3 md:gap-x-6 lg:grid-cols-4 xl:grid-cols-4 items-center content-center justify-center gap-4">
         {isLoading ? (
           Array.from({ length: 8 }).map((_, id) => (
@@ -102,7 +101,7 @@ const Information = () => {
           <SonAndFather className={"w-[400px] md:w-[400px] lg:w-[500px]"} />
         </div>
         <div className="flex flex-col mx-4">
-          <p className="mb-6">Edu Echo simplifies attendance management for managers, teachers, and parents. Managers can easily create courses, while teachers can set up accounts, create classes, and add students effortlessly. Our system automates attendance tracking, ensuring accurate records and instant notifications to parents about their child's presence or absence, enhancing communication and engagement.
+          <p className="mb-6">Edu Echo simplifies attendance management for managers, teachers, and parents. Managers can easily create courses, while teachers can set up accounts, create classes, and add students effortlessly. Our system automates attendance tracking, ensuring accurate records and instant notifications to parents about their childs presence or absence, enhancing communication and engagement.
           </p>
           <p>Our user-friendly interface and powerful features eliminate the hassle of manual attendance tracking, saving time and reducing errors. Real-time updates and comprehensive reports allow educators to focus more on teaching. Parents appreciate timely notifications, giving them peace of mind. Choose Edu Echo for an efficient, connected approach to attendance management.
 
