@@ -28,7 +28,6 @@ const ManagerDashboard = (
 
     const textRef = useRef<any>()
 
-
     return (
 
         <>
@@ -69,7 +68,7 @@ const ManagerDashboard = (
                                 <Spinner />
                             </div>
                             :
-                            <p className='text-[100px]  font-bold  text-center'>{data?.allRelatedClasses?.length}</p>
+                            <p className='text-[100px]  font-bold  text-center'>{data?.allRelatedClasses?.length || 0}</p>
                         }
                     </div>
                     <div className='bg-yellow-500 p-4 rounded-md text-white'>
@@ -80,7 +79,7 @@ const ManagerDashboard = (
                                 <Spinner />
                             </div>
                             :
-                            <p className='text-[100px]  font-bold text-center'>{data?.allRelatedStudents?.length}</p>
+                            <p className='text-[100px]  font-bold text-center'>{data?.allRelatedStudents?.length || 0}</p>
                         }
                     </div>
                     <div className='bg-[#E93858] p-4 rounded-md text-white'>
@@ -91,7 +90,7 @@ const ManagerDashboard = (
                                 <Spinner />
                             </div>
                             :
-                            <p className='text-[100px]  font-bold text-center'>{data?.allRelatedTeachers?.length}</p>
+                            <p className='text-[100px]  font-bold text-center'>{data?.allRelatedTeachers?.length || 0}</p>
                         }
                     </div>
                 </div>

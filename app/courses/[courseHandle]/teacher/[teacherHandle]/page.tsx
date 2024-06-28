@@ -18,6 +18,7 @@ const TeacherPage = ({ params }: { params: any }) => {
         dispatch(getTeacherData(params?.teacherHandle));
     }, [dispatch, params?.teacherHandle]);
 
+    console.log(singleTeacherData, 'ssssssiiiiiiiiiinnnnnnnnnngggggggggllllllllllllllleeeeeeeeeeeeeeeeeee')
 
 
     return (

@@ -5,7 +5,7 @@ const Footer = () => {
     <>
       <div className="flex  bg-gray-50 mt-5">
         <div className=" w-full h-auto z-[1000]">
-          <div className="w-full h-full pt-10 bg-gradientPrimary  flex flex-col sm:flex-row justify-between  px-10 ">
+          <div className="w-full h-full pt-10 bg-gradientPrimary  flex flex-col sm:flex-row justify-between  sm:px-10 ">
             <div className="mx-5 ">
               <h1 className="text-white text-3xl underline ">Pages</h1>
               <ul className="text-white">
@@ -29,13 +29,13 @@ const Footer = () => {
             <div className="mx-5  pt-28">
               <h1 className="text-white text-3xl underline ">Contact Us</h1>
               <ul className="text-white">
-                <li className="mt-2">Email: masihmuhammadi202@gmail.com</li>
-                <li className="mt-2">Phone: +93749102015</li>
-                <li className="mt-2">Facebook: Masihullah Muhammadi</li>
-                <li className="mt-2">Instagram: im.masih_muhammadi</li>
+                <li className="mt-2 text-[14px]">Email: masihmuhammadi202@gmail.com</li>
+                <li className="mt-2 text-[14px]">Phone: +93749102015</li>
+                <li className="mt-2 text-[14px]">Facebook: Masihullah Muhammadi</li>
+                <li className="mt-2 text-[14px]">Instagram: im.masih_muhammadi</li>
 
-                <li className="mt-2">
-                  github: https://www.github.com/MasihMuhammadi
+                <li className="mt-2 text-[14px]">
+                  Github: <a href="https://www.github.com/MasihMuhammadi">Github</a>
                 </li>
               </ul>
             </div>

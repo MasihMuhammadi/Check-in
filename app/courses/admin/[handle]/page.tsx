@@ -34,15 +34,15 @@ const CourseAdmin = ({ params }: { params: any }) => {
 
     useEffect(() => {
         const getAllClasses = async () => {
-            const response = await axios.get(`http://localhost:5000/api/courses/course/${params.handle}`);
+            const response = await axios.get(`http://localhost:5000/api/courses/h-course/${params.handle}`);
+
             setCurrentCourse(response?.data);
             try {
                 if (response?.statusText === "OK") {
-                    const getTeachers = await axios.get(`http://localhost:5000/api/teachers/teacher/${response?.data?.courseName}`);
-                    const getClasses = await axios.get(`http://localhost:5000/api/classes/class`);
-                    const students = await axios.get(`http://localhost:5000/api/students/course-student/${response?.data?.courseName}`);
-
                     try {
+                        const getTeachers = await axios.get(`http://localhost:5000/api/teachers/teacher/${response?.data?.courseName}`);
+                        const getClasses = await axios.get(`http://localhost:5000/api/classes/class`);
+                        const students = await axios.get(`http://localhost:5000/api/students/course-student/${response?.data?.courseName}`);
                         const classes = getClasses?.data?.data?.filter((cls: any) => cls?.course_name === response?.data?.courseName);
                         setRelatedData({
                             classes: classes,
@@ -51,9 +51,11 @@ const CourseAdmin = ({ params }: { params: any }) => {
                         });
                         setIsLoading(false);
                     }
-                    catch (error) {
-                        console.log(error);
+                    catch (err) {
+                        console.log(err)
+                        setIsLoading(false)
                     }
+
                 }
             }
             catch (err: any) {

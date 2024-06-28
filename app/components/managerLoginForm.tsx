@@ -18,6 +18,7 @@ import { loginAsManager } from '../../api/api';
 import MaleOrFemale from './maleOrFemale';
 import { loginManager } from '../../redux/slices/authSlice';
 import Notification from './notification';
+import Spinner from './spinner';
 
 
 
@@ -32,6 +33,7 @@ const ManagerLoginForm = ({ role, setRole }: { role: any, setRole: any }) => {
 
     const [isPassword, setIsPassword] = useState<boolean>(false);
     const [password, setPassword] = useState<any>();
+    const [isLoading, setIsLoading] = useState<boolean>(false)
     const router = useRouter(); // Move useRouter here, outside of any function
 
     const validationSchema = Yup.object({
@@ -48,42 +50,48 @@ const ManagerLoginForm = ({ role, setRole }: { role: any, setRole: any }) => {
         password: '',
     };
     const onSubmit = async (values: any) => {
+        setIsLoading(true);
+
         const payload = {
             email: values.email,
+
             password: values.password,
             role: role
-        }
+        };
 
         try {
-            const response: any = await dispatch(loginManager(payload))
-            if (response?.payload?.success) {
+            // const response: any = await dispatch(signUpManager({ data: payload }))
+            const response: any = await axios.post("http://localhost:5000/api/auth/login", payload);
+            console.log(response?.data?.data, 'rrrrrrrrrrrrrrr')
+            if (response?.data?.success) {
+                setIsLoading(false);
                 setNotification({
                     success: true,
                     isShow: true,
-                    content: "You logged SuccessFully!!!"
-                })
-
-                router.push(`/courses/admin/${response?.payload?.data?.handle}`)
-            }
-
-            else {
+                    content: "Your logged successfully"
+                });
+                setTimeout(() => {
+                    router.push(`/courses/admin/${response?.data?.data?.handle}`)
+                }, 3000)
+            } else {
+                setIsLoading(false);
+                console.log(response, 'ffailedddddddddddddd');
                 setNotification({
                     success: false,
                     isShow: true,
-                    content: response?.error?.message
-                })
+                    content: response?.data?.error?.message || "An error occurred",
+                });
             }
-
-        } catch (error: any) {
+        } catch (err: any) {
+            console.log(err, 'rerrrrrrrrrr');
+            setIsLoading(false);
             setNotification({
                 success: false,
                 isShow: true,
-                content: "An error occured"
-            })
-            console.log("Error:", error?.message);
+                content: err?.response?.data?.message || err.message || "An error occurred",
+            });
         }
     };
-
     useEffect(() => {
 
         const notif = setTimeout(() => {
@@ -154,9 +162,13 @@ const ManagerLoginForm = ({ role, setRole }: { role: any, setRole: any }) => {
                                 </div>
                             </div>
                             <div className=" flex  flex-col text-center items-center mt-5">
-                                <Buttons primary={true} type="submit" style="px-12 py-2"
+                                <Buttons
+                                    primary={isLoading ? false : true}
+                                    disabled={isLoading ? true : false}
+
+                                    type="submit" style="px-12 py-2"
                                 >
-                                    Loginnn
+                                    {isLoading ? <Spinner className={"w-5 h-5"} /> : "Loginn"}
                                 </Buttons>
                                 <p className="mt-4">
                                     You dont have not account?{" "}
