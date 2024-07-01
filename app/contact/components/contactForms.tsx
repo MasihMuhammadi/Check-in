@@ -49,7 +49,7 @@ const ContactForm = () => {
 
     try {
 
-      const response = await axios.post("http://localhost:5000/api/send-email", payload)
+      const response = await axios.post("http://localhost:5000/api/send-email", payload, { withCredentials: true })
     }
     catch (e) {
       console.log(e)

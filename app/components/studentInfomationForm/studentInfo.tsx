@@ -67,7 +67,7 @@ const StudentInfo = () => {
         };
 
         try {
-            const response = await axios.post(`${baseUrl}/api/students/add-student`, payload);
+            const response = await axios.post(`${baseUrl}/api/students/add-student`, payload, { withCredentials: true });
 
 
             console.log("Student added successfully", response?.statusText);

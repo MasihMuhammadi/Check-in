@@ -40,7 +40,7 @@ const AdminAccount = ({ data }: { data?: any }) => {
     useEffect(() => {
         const getSingleCourse = async () => {
             try {
-                const res = await axios.get(`http://localhost:5000/api/public-courses/p-courses/${data?.courseName}`);
+                const res = await axios.get(`http://localhost:5000/api/public-courses/p-courses/${data?.handle}`, { withCredentials: true });
                 const fetchedData = res.data;
                 setIsDataExist(fetchedData);
                 const base64Image: any = Buffer.from(fetchedData.Images, 'binary').toString('base64');
@@ -80,18 +80,20 @@ const AdminAccount = ({ data }: { data?: any }) => {
         formData.append('image', values.image);
         formData.append('handle', data?.handle);
         formData.append('studentsCount', values.studentsCount);
-        formData.append('teachersCount', values.teachersCount);
+        formData.append('teacherCount', values.teachersCount);
         formData.append('studyFields', values.studyFields);
 
         try {
             if (!isDataExist?.location) {
                 await axios.post('http://localhost:5000/api/public-courses/p-courses', formData, {
+                    withCredentials: true,
                     headers: {
-                        'Content-Type': 'multipart/form-data'
+                        'Content-Type': 'multipart/form-data',
                     }
+
                 });
             } else {
-                await axios.put(`http://localhost:5000/api/public-courses/p-courses/${isDataExist._id}`, formData);
+                await axios.put(`http://localhost:5000/api/public-courses/p-courses/${isDataExist._id}`, formData, { withCredentials: true });
             }
 
             setNotification({

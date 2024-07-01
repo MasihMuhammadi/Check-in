@@ -61,6 +61,9 @@ const authSlice = createSlice({
     reducers: {
         increment: (state) => {
             state.number = state.number + 1
+        },
+        setIsLogedIn: (state, action) => {
+            state.isLoggedIn = action.payload
         }
     },
     extraReducers: (builder) => {
@@ -102,5 +105,5 @@ const authSlice = createSlice({
     }
 })
 
-export const { increment } = authSlice.actions
+export const { increment, setIsLogedIn } = authSlice.actions
 export default authSlice.reducer

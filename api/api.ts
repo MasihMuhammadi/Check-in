@@ -35,7 +35,7 @@ export const createTeacher = async (payload: any) => {
 };
 export const addClass = async (payload: any) => {
     try {
-        const response = await axios.post(`${baseUrl}/api/classes/class`, payload);
+        const response = await axios.post(`${baseUrl}/api/classes/class`, payload, { withCredentials: true });
         return response.data;
     } catch (error) {
         throw error;
@@ -43,7 +43,7 @@ export const addClass = async (payload: any) => {
 };
 export const loginAsTeacher = async (payload: any) => {
     try {
-        const response = await axios.post(`${baseUrl}/api/auth/login`, payload);
+        const response = await axios.post(`${baseUrl}/api/auth/login`, payload, { withCredentials: true });
         return response.data;
     } catch (error) {
         throw error;
@@ -59,7 +59,7 @@ export const loginAsManager = async (payload: any) => {
 };
 export const getSingleTeacherData = async (handle: any) => {
     try {
-        const response = await axios.get(`${baseUrl}/api/teachers/h-teacher/${handle}`);
+        const response = await axios.get(`${baseUrl}/api/teachers/handle-teacher/${handle}`, { withCredentials: true });
         return response.data;
     } catch (error) {
         throw error;

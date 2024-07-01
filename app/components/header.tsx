@@ -7,9 +7,23 @@ import Navbar from "./navbar";
 import BurgerLines from "./animatedMenu/burgerLines";
 import NavMenu from "./animatedMenu/navMenu";
 import EduEchoLogo from "../../public/smallIcons/eduEcho";
+import { useSelector } from "react-redux";
+import { setIsLogedIn } from "../../redux/slices/authSlice";
+
+
 
 const Header = () => {
   const [crossBurger, setCrossBurger] = useState(false)
+
+  const isLogedIn = useSelector((state: any) => state.authSlice.isLoggedIn)
+
+  // console.log(cookie, 'XXXXXXXXXXXXXA')
+  // if (Cookies.get("Cookie")) {
+  //   setIsLogedIn(true)
+  // }
+  // else {
+  //   setIsLogedIn(false)
+  // }
 
   return (
     <>
@@ -23,7 +37,9 @@ const Header = () => {
           </Link>
         </div>
         <div className="hidden sm:hidden md:flex lg:flex">
-          <ToggleButton />
+          {isLogedIn ? "sinout" :
+            <ToggleButton />
+          }
         </div>
         <div className="flex sm:flex relative md:hidden lg:hidden w-8 h-8 z-[1000] ">
           <div className="absolute top-0">

@@ -102,7 +102,7 @@ const SingleClass = ({ params }: { params: any }) => {
 
 
         try {
-            await axios.post("http://localhost:5000/api/send-email", payload)
+            await axios.post("http://localhost:5000/api/send-email", payload, { withCredentials: true })
         }
         catch (e) {
             console.log(e)

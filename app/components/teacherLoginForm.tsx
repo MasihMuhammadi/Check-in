@@ -65,11 +65,11 @@ const TeacherLoginForm = ({ role, setRole }: { role: any, setRole: any }) => {
             role: role
         }
         setIsLoading(true)
-        console.log(teacherData?.data?.data, '.#######################.')
+        console.log(teacherData, '.#######################.')
 
         try {
             const response: any = await dispatch(loginTeacher(payload))
-            const gethandle: any = await axios.get(`http://localhost:5000/api/courses/unique-course/${teacherData?.data?.data?.course_unique_code}`)
+            const gethandle: any = await axios.get(`http://localhost:5000/api/courses/unique-course/${teacherData?.data?.data?.course_unique_code}`, { withCredentials: true })
             if (response?.payload?.success) {
                 if (teacherData?.data?.data?.course_unique_code) {
                     route.push(`/courses/${gethandle?.data?.handle}/teacher/${response?.payload?.data?.handle}`)
