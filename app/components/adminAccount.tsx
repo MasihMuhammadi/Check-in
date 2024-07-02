@@ -45,7 +45,7 @@ const AdminAccount = ({ data }: { data?: any }) => {
                 setIsDataExist(fetchedData);
                 const base64Image: any = Buffer.from(fetchedData.Images, 'binary').toString('base64');
                 setImage(base64Image);
-                console.log(fetchData.Images, fetchedData, '..............')
+
 
                 setInitialValues({
                     isVisable: fetchedData.isVisable || true,
@@ -59,7 +59,7 @@ const AdminAccount = ({ data }: { data?: any }) => {
 
                 setIsLoading(false);
             } catch (e) {
-                console.log(e, '...');
+
                 setIsLoading(false); // Stop loading if there's an error
             }
         };

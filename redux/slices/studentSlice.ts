@@ -59,7 +59,6 @@ const studentSlice = createSlice({
                 state.classData.data = action.payload
 
                 state.classData.error = ""
-                // console.log(action.payload, '.........................')
             })
             .addCase(fetchData.rejected, (state, action) => {
                 state.classData.loading = true

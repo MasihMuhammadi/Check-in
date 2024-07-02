@@ -18,41 +18,11 @@ const TeacherPage = ({ params }: { params: any }) => {
         dispatch(getTeacherData(params?.teacherHandle));
     }, [dispatch, params?.teacherHandle]);
 
-    console.log(singleTeacherData, 'ssssssiiiiiiiiiinnnnnnnnnngggggggggllllllllllllllleeeeeeeeeeeeeeeeeee')
 
 
     return (
         <>
             <AllClassesTab data={singleTeacherData?.data?.data} params={params} />
-            {/* single Teacher Page */}
-            {/* <nav className='flex items-center justify-center'>
-                <ul className='flex gap-x-5'>
-                    <li>
-                        <span onClick={() => setTab("account")}>
-                            <Link href={`/courses/masih/teacher/${singleTeacherData?.data?.data?.teacher?.handle}?tab=account`}>Account</Link>
-                        </span>
-                    </li>
-                    <li>
-                        <span onClick={() => setTab("password")}>
-                            <Link href={`/courses/masih/teacher/${singleTeacherData?.data?.data?.teacher?.handle}?tab=password`}>Password</Link>
-                        </span>
-                    </li>
-                    <li>
-                        <span onClick={() => setTab("classes")}>
-                            <Link href={`/courses/masih/teacher/${singleTeacherData?.data?.data?.teacher?.handle}?tab=classes`}>Classes</Link>
-                        </span>
-                    </li>
-                </ul>
-            </nav>
-            {tab === 'account' ? (
-                <AccountTab />
-            ) : tab === 'password' ? (
-                <div>Password Component</div> // Replace with actual component if it exists
-            ) : tab === 'classes' ? (
-                <AllClassesTab data={singleTeacherData?.data?.data} />
-            ) : (
-                <div>Not Found</div>
-            )} */}
         </>
     );
 };

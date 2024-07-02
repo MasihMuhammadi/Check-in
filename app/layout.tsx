@@ -3,8 +3,6 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import Providers from '../redux/Provider'
 import Header from "./components/header";
-import { cookies } from "next/headers";
-import { setIsLogedIn } from "../redux/slices/authSlice";
 
 
 const inter = Inter({ subsets: ["latin"] });
@@ -19,14 +17,6 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  // if (cookies().get("Cookie")) {
-  //   console.log("it is exist")
-  //   setIsLogedIn(true)
-  // }
-  // else {
-  //   setIsLogedIn(false)
-  //   console.log("it is not exist....")
-  // }
   return (
     <html lang="en" className="overflow-x-hidden">
       <body className={inter.className}>

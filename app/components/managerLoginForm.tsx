@@ -15,7 +15,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setLoggedIn } from '../../redux/slices/courseSlice';
 import { loginAsManager } from '../../api/api';
 import MaleOrFemale from './maleOrFemale';
-import { loginManager, setIsLogedIn } from '../../redux/slices/authSlice';
+import { loginManager, setIsLoggedIn } from '../../redux/slices/authSlice';
 import Notification from './notification';
 import Spinner from './spinner';
 import { cookies } from 'next/headers'
@@ -64,7 +64,7 @@ const ManagerLoginForm = ({ role, setRole }: { role: any, setRole: any }) => {
         try {
 
             const response: any = await axios.post("http://localhost:5000/api/auth/login", payload, { withCredentials: true });
-            console.log(response?.data?.data, 'rrrrrrrrrrrrrrr')
+
             if (response?.data?.success) {
                 // Cookies.set('user_access', response?.data?.data._id)
                 // setIsLogedIn(true)
@@ -85,7 +85,7 @@ const ManagerLoginForm = ({ role, setRole }: { role: any, setRole: any }) => {
                 }, 3000)
             } else {
                 setIsLoading(false);
-                console.log(response, 'ffailedddddddddddddd');
+
                 setNotification({
                     success: false,
                     isShow: true,
@@ -93,7 +93,7 @@ const ManagerLoginForm = ({ role, setRole }: { role: any, setRole: any }) => {
                 });
             }
         } catch (err: any) {
-            console.log(err, 'rerrrrrrrrrr');
+
             setIsLoading(false);
             setNotification({
                 success: false,
@@ -101,8 +101,7 @@ const ManagerLoginForm = ({ role, setRole }: { role: any, setRole: any }) => {
                 content: err?.response?.data?.message || err.message || "An error occurred",
             });
         }
-        // const getSession = await axios.get("http://localhost:5000/api/auth/session")
-        // console.log(getSession, 'ggggggggget sesiiiiiiiiiion')
+
     };
     useEffect(() => {
 

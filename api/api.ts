@@ -51,7 +51,7 @@ export const loginAsTeacher = async (payload: any) => {
 };
 export const loginAsManager = async (payload: any) => {
     try {
-        const response = await axios.post(`${baseUrl}/api/auth/login`, payload);
+        const response = await axios.post(`${baseUrl}/api/auth/login`, payload, { withCredentials: true });
         return response.data;
     } catch (error) {
         throw error;

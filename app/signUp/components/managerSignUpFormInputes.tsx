@@ -68,9 +68,8 @@ const ManagerSignUpFormInputes = ({ role }: { role: any }) => {
     };
 
     try {
-      // const response: any = await dispatch(signUpManager({ data: payload }))
       const response: any = await axios.post("http://localhost:5000/api/courses/course", payload);
-      // console.log(response, 'rrrrrrrrrrrrrrr')
+
       if (response?.data?.success) {
         setisLoading(false);
         setNotification({
@@ -83,7 +82,7 @@ const ManagerSignUpFormInputes = ({ role }: { role: any }) => {
         }, 3000)
       } else {
         setisLoading(false);
-        console.log(response, 'ffailedddddddddddddd');
+
         setNotification({
           success: false,
           isShow: true,
@@ -91,7 +90,7 @@ const ManagerSignUpFormInputes = ({ role }: { role: any }) => {
         });
       }
     } catch (err: any) {
-      console.log(err, 'rerrrrrrrrrr');
+
       setisLoading(false);
       setNotification({
         success: false,

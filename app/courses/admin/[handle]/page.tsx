@@ -34,7 +34,9 @@ const CourseAdmin = ({ params }: { params: any }) => {
 
     useEffect(() => {
         const getAllClasses = async () => {
-            const response = await axios.get(`http://localhost:5000/api/courses/h-course/${params.handle}`, { withCredentials: true });
+            const response = await axios.get(`http://localhost:5000/api/courses/h-course/${params.handle}`, {
+                withCredentials: true
+            });
 
             setCurrentCourse(response?.data);
             try {
