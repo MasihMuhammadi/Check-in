@@ -17,6 +17,7 @@ import BackButton from '../../../../../../../public/smallIcons/backButton';
 import { useDispatch, useSelector } from 'react-redux';
 import { setIsEditable, setPageWillShow, setShowFullModal, setSingleStudent } from '../../../../../../../redux/slices/studentSlice';
 import UpdateStudents from '../../../../../../auth/teacher/updateStudents';
+import ThreeDotIcon from '../../../../../../../public/smallIcons/threeDotIcon';
 
 const SingleClass = ({ params }: { params: any }) => {
 
@@ -64,7 +65,7 @@ const SingleClass = ({ params }: { params: any }) => {
         dispatch(setSingleStudent(single[0]))
     }
     const handleDelete = async () => {
-        const response = await axios.delete(`http://localhost:5000/api/students/student/${clickedId}`)
+        const response = await axios.delete(`http://localhost:5000/api/students/student/${clickedId}`, { withCredentials: true })
         const filterDeleted = students.filter((stu: any) => stu?._id !== clickedId)
         setStudent(filterDeleted)
 
@@ -102,7 +103,7 @@ const SingleClass = ({ params }: { params: any }) => {
 
 
         try {
-            await axios.post("http://localhost:5000/api/send-email", payload)
+            await axios.post("http://localhost:5000/api/send-email", payload, { withCredentials: true })
         }
         catch (e) {
             console.log(e)
@@ -112,7 +113,7 @@ const SingleClass = ({ params }: { params: any }) => {
 
 
     return (
-        <div onClick={closePopUp} className='bg-gray-50 w-full h-full min-h-[calc(100vh-150px)]'>
+        <div onClick={closePopUp} className='bg-gray-50 w-full h-full min-h-[calc(100vh-150px)] relative'>
             <div className="cursor-pointer" onClick={goBack}>
                 <BackButton />
             </div>
@@ -132,10 +133,12 @@ const SingleClass = ({ params }: { params: any }) => {
                             headers={["", "Name", "Father Name", "Phone", "Subject", "Delete"]}
                             teacherData={students}
                             onRowDoubleclick={handleRowDoubleClick}
-                            bodyRows={students?.map((cls: any) => [
+                            bodyRows={students?.map((cls: any, index: number) => [
 
-                                <input type="checkbox" className='bg-blue-500' onChange={(e: any) => checkShowModal(e)} key={`checkbox-${cls.id}`} />,
-
+                                // <input type="checkbox" className='bg-blue-500' onChange={(e: any) => checkShowModal(e)} key={`checkbox-${cls.id}`} />,
+                                <div onClick={() => handleRowDoubleClick(cls._id)} key={index}>
+                                    <ThreeDotIcon key={`icon-${cls._id}`} className={"w-5 h-5"} />
+                                </div>,
                                 cls.name,
                                 cls.father_name,
                                 cls.phone,
@@ -163,7 +166,7 @@ const SingleClass = ({ params }: { params: any }) => {
                         })}
                     </div>
                 </div>
-                : <span className='flex justify-center items-cener text-center'>NO Course Found</span>
+                : <span className='flex justify-center items-cener text-center'>No Student Found</span>
             }
 
             <Buttons secondary={true} style=" px-4 py-2" type="button" clickHandler={addStudent}>

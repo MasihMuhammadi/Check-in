@@ -8,7 +8,7 @@ const FullModal = ({ children, handleClose, showModal, setShowModal }: { childre
         <>
             {showModal &&
 
-                <div className='w-auto max-w-full  h-auto m-auto left-0 sm:left-10 md:left-20 z-[1000] absolute bg-gray-200 border border-primary shadow-2xl rounded-[40px] px-0 py-6 md:p-10'>
+                <div className='w-auto h-auto  left-2 sm:left-20 lg:left-[20%] absolute top-0  m-auto  z-[1000]  bg-gray-200 border border-primary shadow-2xl rounded-[40px] px-0 py-6 md:p-10'>
                     <span className="bg-white  p-2 rounded-xl ml-10 cursor-pointer" onClick={handleClose}>Cancel</span>
                     <div>
                         {children}

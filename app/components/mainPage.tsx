@@ -11,15 +11,7 @@ const MainPage = () => {
 
   const isLoggedIn = useSelector((state: any) => state.courseSlice.isLoggedIn);
   const router = useRouter();
-  // useEffect(() => {
-  //   const currentRoute = window.location.href.includes("teacher")
-  //   console.log(currentRoute, 'cccccccc', isLoggedIn)
 
-  //   // Redirect to sign-in page if the user is not logged in and the current route starts with '/teacher'
-  //   if (!isLoggedIn && currentRoute) {
-  //     router.push('/login');
-  //   }
-  // }, [isLoggedIn]);
   return (
     <>
       <div className="flex flex-col justify-between md:flex-row overflow-hidden  ">

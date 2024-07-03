@@ -1,21 +1,53 @@
-import { NextResponse } from 'next/server'
-import type { NextRequest } from 'next/server'
+import { NextResponse } from 'next/server';
+import type { NextRequest } from 'next/server';
 
-// This function can be marked `async` if using `await` inside
 export function middleware(request: NextRequest) {
-    // Get the 'loggedIn' cookie
-    const loggedIn = request.cookies.get('loggedIn');
+    const managerCookie = request.cookies.get('manager_access');
+    const teacherCookie = request.cookies.get('teacher_access');
 
-    // Check the condition and redirect based on it
-    if (false) {
-        return NextResponse.redirect(new URL('/login', request.url));
+    const url = request.nextUrl.clone();
+
+
+    if (!teacherCookie) {
+        if (!managerCookie) {
+
+            if (url.pathname.includes("teacher")) {
+                url.pathname = "/login";
+                return NextResponse.redirect(url);
+            }
+
+        }
     }
 
-    // If the user is logged in, allow the request to proceed
-    return NextResponse.next();
-}
+    if (!teacherCookie) {
+        if (managerCookie) {
+            if (url.pathname.includes("teacher")) {
+                url.pathname = "/";
 
-// See "Matching Paths" below to learn more
-export const config = {
-    matcher: ['/courses/admin/:path*', '/courses/path/teacher/:path*'],
+                return NextResponse.redirect(url);
+            }
+        }
+    }
+
+
+    if (!managerCookie) {
+        if (!teacherCookie) {
+            if (url.pathname.includes("admin")) {
+                url.pathname = "/login";
+
+                return NextResponse.redirect(url);
+            }
+        }
+    }
+    if (!managerCookie) {
+        if (teacherCookie) {
+            if (url.pathname.includes("admin")) {
+                url.pathname = "/";
+                return NextResponse.redirect(url);
+            }
+        }
+    }
+
+
+    return NextResponse.next();
 }
