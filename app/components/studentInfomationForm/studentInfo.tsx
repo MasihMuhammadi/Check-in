@@ -11,10 +11,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setPageWillShow, setShowFullModal } from '../../../redux/slices/studentSlice';
 import { setIsEditable } from '../../../redux/slices/classSlice';
 
-const StudentInfo = () => {
+const StudentInfo = ({ data }: { data: any }) => {
     const [isPassword, setIsPassword] = useState<boolean>(false);
     const dispatch = useDispatch()
     const singleTeacherData = useSelector((state: any) => state.teacherSlice.aTeacherData);
+    const teacherData = useSelector((state: any) => state.authSlice.teacherData)
     const router = useRouter();
 
     const validationSchema = Yup.object({
@@ -37,7 +38,7 @@ const StudentInfo = () => {
         name: "",
         father_name: "",
         course_name: "",
-        class_name: "",
+        class_name: data?.class_name,
         teacher_name: "",
         phone: "",
         email: "",
@@ -49,6 +50,7 @@ const StudentInfo = () => {
 
     const baseUrl = "http://localhost:5000";
 
+    console.log(data, '................................')
 
     const onSubmit = async (values: any) => {
 
@@ -56,7 +58,7 @@ const StudentInfo = () => {
             name: values.name,
             father_name: values.father_name,
             course_name: singleTeacherData?.data?.data?.teacher?.course_name,
-            class_name: values.class_name,
+            class_name: data.class_name,
             teacher_name: singleTeacherData?.data?.data?.teacher?.teacher_name,
             phone: values.phone,
             email: values.email,
@@ -135,6 +137,8 @@ const StudentInfo = () => {
                                     name="class_name"
                                     type="text"
                                     onChange={handleChange}
+                                    readOnly={true}
+                                    disabled={true}
                                     value={values.class_name}
                                     className="border bordre-2 border-gray-700  w-[320px] max-w-full p-2 px-14 h-14 rounded-md focus:outline-none focus:border-[#1e1e1e] focus:ring-1 focus:ring-[#1e1e1e]"
 

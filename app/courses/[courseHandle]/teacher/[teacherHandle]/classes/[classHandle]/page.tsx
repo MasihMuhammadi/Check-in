@@ -18,6 +18,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setIsEditable, setPageWillShow, setShowFullModal, setSingleStudent } from '../../../../../../../redux/slices/studentSlice';
 import UpdateStudents from '../../../../../../auth/teacher/updateStudents';
 import ThreeDotIcon from '../../../../../../../public/smallIcons/threeDotIcon';
+import TeacherInfo from '../../../../../../components/teacherInformationForm/teacherInfo';
 
 const SingleClass = ({ params }: { params: any }) => {
 
@@ -110,10 +111,11 @@ const SingleClass = ({ params }: { params: any }) => {
         }
         // setSubmitting(false);
     }
+    console.log(singleStudent, 'sssssssssccc.')
 
 
     return (
-        <div onClick={closePopUp} className='bg-gray-50 w-full h-full min-h-[calc(100vh-150px)] relative'>
+        <div onClick={closePopUp} className='px-2 sm:px-10 bg-gray-50 w-full h-full min-h-[calc(100vh-150px)] relative'>
             <div className="cursor-pointer" onClick={goBack}>
                 <BackButton />
             </div>
@@ -121,7 +123,7 @@ const SingleClass = ({ params }: { params: any }) => {
             {showPopUp && <PopUp data={students} showEditModal={handleRowDoubleClick} handleDelete={handleDelete} handleEdit={handleEdit} setShowPopUp={setShowPopUp} />}
             {showFullModal &&
                 <FullModal showModal={true} handleClose={handleCloseModal}>
-                    {(isEditable && pageWillShow == "updateStudent") ? <UpdateStudents data={singleStudent} /> : <AddStudent />}
+                    {(isEditable && pageWillShow == "updateStudent") ? <UpdateStudents data={singleStudent} /> : <StudentInfo data={singleStudent} />}
                 </FullModal>
             }
 
@@ -130,13 +132,13 @@ const SingleClass = ({ params }: { params: any }) => {
                     <div className='hidden md:block'>
                         <Table
                             isClass={false}
-                            headers={["", "Name", "Father Name", "Phone", "Subject", "Delete"]}
+                            headers={["Action", "Name", "Father Name", "Phone", "Subject", "Status"]}
                             teacherData={students}
                             onRowDoubleclick={handleRowDoubleClick}
                             bodyRows={students?.map((cls: any, index: number) => [
 
                                 // <input type="checkbox" className='bg-blue-500' onChange={(e: any) => checkShowModal(e)} key={`checkbox-${cls.id}`} />,
-                                <div onClick={() => handleRowDoubleClick(cls._id)} key={index}>
+                                <div onClick={() => handleRowDoubleClick(cls._id)} key={index} className='flex items-center justify-center'>
                                     <ThreeDotIcon key={`icon-${cls._id}`} className={"w-5 h-5"} />
                                 </div>,
                                 cls.name,
@@ -169,7 +171,7 @@ const SingleClass = ({ params }: { params: any }) => {
                 : <span className='flex justify-center items-cener text-center'>No Student Found</span>
             }
 
-            <Buttons secondary={true} style=" px-4 py-2" type="button" clickHandler={addStudent}>
+            <Buttons secondary={true} style=" px-4 py-2 mx-10 mt-5" type="button" clickHandler={addStudent}>
                 + Add Student
             </Buttons>
 

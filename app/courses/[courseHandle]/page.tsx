@@ -12,8 +12,9 @@ import TeacherIcon from '../../../public/smallIcons/teacherIcon';
 import Link from 'next/link';
 
 async function getSingleCourseData(courseHandle: string) {
+
     try {
-        const response = await axios.get(`http://localhost:5000/api/public-courses/p-courses/${courseHandle}`);
+        const response = await axios.get(`http://localhost:5000/api/public-courses/p-courses/${courseHandle}`, { withCredentials: true });
         const courseData = response?.data;
         const base64Image = Buffer.from(courseData.Images, 'binary').toString('base64');
         const image = `data:image/jpeg;base64,${base64Image}`;

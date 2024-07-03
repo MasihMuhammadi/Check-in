@@ -34,7 +34,7 @@ const Courses = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get('http://localhost:5000/api/public-courses/p-courses');
+                const response = await axios.get('http://localhost:5000/api/public-courses/p-courses', { withCredentials: true });
 
                 const coursesWithBase64Images = response.data.map((course: any) => {
                     const base64Image = Buffer.from(course.Images.data, 'binary').toString('base64');
@@ -67,7 +67,7 @@ const Courses = () => {
                         </div>
                     ))
                 ) : (
-                    <div className="relative w-full">
+                    <div className="relative w-full flex gap-x-4">
                         {courseData?.length > 0 ? courseData?.map((course: any, index: number) => (
 
                             <div key={index} className="flex justify-center items-center">

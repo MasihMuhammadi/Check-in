@@ -42,9 +42,9 @@ const CourseAdmin = ({ params }: { params: any }) => {
             try {
                 if (response?.statusText === "OK") {
                     try {
-                        const getTeachers = await axios.get(`http://localhost:5000/api/teachers/teacher/${response?.data?.courseName}`);
-                        const getClasses = await axios.get(`http://localhost:5000/api/classes/class`);
-                        const students = await axios.get(`http://localhost:5000/api/students/course-student/${response?.data?.courseName}`);
+                        const getTeachers = await axios.get(`http://localhost:5000/api/teachers/teacher/${response?.data?.courseName}`, { withCredentials: true });
+                        const getClasses = await axios.get(`http://localhost:5000/api/classes/class`, { withCredentials: true });
+                        const students = await axios.get(`http://localhost:5000/api/students/course-student/${response?.data?.courseName}`, { withCredentials: true });
                         const classes = getClasses?.data?.data?.filter((cls: any) => cls?.course_name === response?.data?.courseName);
                         setRelatedData({
                             classes: classes,

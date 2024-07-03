@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import Providers from '../redux/Provider'
+import Providers from '../redux/Provider';
 import Header from "./components/header";
-
+import ClientWrapper from "./components/clientWrapper"; // Adjust the path as necessary
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -21,10 +21,12 @@ export default function RootLayout({
     <html lang="en" className="overflow-x-hidden">
       <body className={inter.className}>
         <Providers>
-          <div>
-            <Header />
-            {children}
-          </div>
+          <ClientWrapper>
+            <div>
+              <Header />
+              {children}
+            </div>
+          </ClientWrapper>
         </Providers>
       </body>
     </html>

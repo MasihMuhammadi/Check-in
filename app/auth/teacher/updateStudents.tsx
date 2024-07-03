@@ -131,6 +131,8 @@ const UpdateStudent = ({ data }: { data?: any }) => {
                                     name="class_name"
                                     type="text"
                                     onChange={handleChange}
+                                    readOnly={true}
+                                    disabled={true}
                                     value={values.class_name}
                                     className="border bordre-2 border-gray-700  w-[320px] max-w-full p-2 px-14 h-14 rounded-md focus:outline-none focus:border-[#1e1e1e] focus:ring-1 focus:ring-[#1e1e1e]"
 

@@ -15,7 +15,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setLoggedIn } from '../../redux/slices/courseSlice';
 import { loginAsManager } from '../../api/api';
 import MaleOrFemale from './maleOrFemale';
-import { loginManager, setIsLoggedIn } from '../../redux/slices/authSlice';
+import { loginManager, setIsLoggedIn, setWhoIsLoggedIn } from '../../redux/slices/authSlice';
 import Notification from './notification';
 import Spinner from './spinner';
 import { cookies } from 'next/headers'
@@ -66,20 +66,27 @@ const ManagerLoginForm = ({ role, setRole }: { role: any, setRole: any }) => {
             const response: any = await axios.post("http://localhost:5000/api/auth/login", payload, { withCredentials: true });
 
             if (response?.data?.success) {
-                // Cookies.set('user_access', response?.data?.data._id)
-                // setIsLogedIn(true)
-                // cookies().set({
-                //     name: 'name',
-                //     value: 'lee',
-                //     httpOnly: true,
-                //     path: '/',
-                // })
+
                 setIsLoading(false);
                 setNotification({
                     success: true,
                     isShow: true,
                     content: "Your logged successfully"
                 });
+                try {
+                    const response = await axios.get("http://localhost:5000/api/get-session", { withCredentials: true })
+                    if (Object.keys(response?.data?.data)[0] === "manager_access") {
+                        dispatch(setWhoIsLoggedIn("manager"))
+                        console.log("manager is logged in")
+                    }
+                    else {
+                        console.log("teacher is logged in")
+                        dispatch(setWhoIsLoggedIn("teacher"))
+                    }
+
+                } catch (error) {
+                    console.error('Error making request:', error);
+                }
                 setTimeout(() => {
                     router.push(`/courses/admin/${response?.data?.data?.handle}`)
                 }, 3000)

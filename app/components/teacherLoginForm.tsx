@@ -17,7 +17,7 @@ import Buttons from './buttons';
 import Notification from './notification';
 import { useDispatch, useSelector } from 'react-redux';
 // import { loginAsManager, loginAsTeacher } from '../../api/api';
-import { loginTeacher, setIsLoggedIn } from '../../redux/slices/authSlice'
+import { loginTeacher, setIsLoggedIn, setWhoIsLoggedIn } from '../../redux/slices/authSlice'
 import MaleOrFemale from './maleOrFemale';
 import Spinner from './spinner';
 
@@ -68,22 +68,13 @@ const TeacherLoginForm = ({ role, setRole }: { role: any, setRole: any }) => {
         setIsLoading(true);
 
         try {
-            // Dispatch the login action
+
             const response: any = await dispatch(loginTeacher(payload));
-
-            // Check if login was successful
             if (response?.payload?.success) {
-                // Get the teacher data from the response
                 const teacherData = response.payload.data;
-
-                // Check if the teacher has a unique course code
                 if (teacherData?.course_unique_code) {
-                    // Send a request to get the course handle
                     const courseResponse = await axios.get(`http://localhost:5000/api/courses/unique-course/${teacherData.course_unique_code}`, { withCredentials: true });
-
-                    // Check if the request was successful
                     if (courseResponse?.data?.handle) {
-                        // Redirect the user to the appropriate route
                         route.push(`/courses/${courseResponse.data.handle}/teacher/${teacherData.handle}`);
                     } else {
                         setNotification({
@@ -100,6 +91,20 @@ const TeacherLoginForm = ({ role, setRole }: { role: any, setRole: any }) => {
                     });
                 }
                 dispatch(setIsLoggedIn(true))
+                try {
+                    const response = await axios.get("http://localhost:5000/api/get-session", { withCredentials: true })
+                    if (Object.keys(response?.data?.data)[0] === "manager_access") {
+                        dispatch(setWhoIsLoggedIn("manager"))
+                        console.log("manager is logged in")
+                    }
+                    else {
+                        console.log("teacher is logged in")
+                        dispatch(setWhoIsLoggedIn("teacher"))
+                    }
+
+                } catch (error) {
+                    console.error('Error making request:', error);
+                }
 
                 setNotification({
                     success: true,
