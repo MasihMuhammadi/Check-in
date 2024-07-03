@@ -208,14 +208,15 @@ const TeacherInfo = ({ data }: { data: any }) => {
                         </div>
 
                         <div className="mt-4 flex flex-col text-center items-center mt-5">
-                            <Buttons primary={true} type="submit" style="px-12 py-2" disabled={isSubmitting} clickHandler={() => onSubmit(values)}>
+                            <Buttons primary={true} type="submit" style="px-12 py-2" disabled={isSubmitting} >
                                 Submit
                             </Buttons>
                         </div>
                     </div>
                 </Form>
-            )}
-        </Formik>
+            )
+            }
+        </Formik >
     );
 };
 

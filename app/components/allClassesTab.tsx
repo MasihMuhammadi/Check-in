@@ -33,12 +33,6 @@ const AllClassesTab = ({ data, params }: { data: any, params: any }) => {
     const [proceedWithDelete, setProceedWithDelete] = useState<boolean>(true);
     const [showFullModal, setShowFullModal] = useState<boolean>(false)
 
-    // useEffect(() => {
-    //     console.log(params, 'vvvvvvvvvvvvvv')
-    //     const response = axios.get(`http://localhost:5000/api/students/c-student/${params?.courseHandle}/${params?.classHandle}/${params?.teacherHandle}`)
-    //     console.log(response, 'ressssssssssssponse')
-    // }, [])
-
 
     useEffect(() => {
         const getClasses = async () => {
@@ -95,9 +89,9 @@ const AllClassesTab = ({ data, params }: { data: any, params: any }) => {
     const deleteClassById = async (id: any) => {
         if (id) {
             try {
-                await axios.delete(`http://localhost:5000/api/classes/class/${id}`);
+                await axios.delete(`http://localhost:5000/api/classes/class/${id}`, { withCredentials: true });
                 setFilteredClasses((prevClasses) => prevClasses.filter((cls: any) => cls._id !== id));
-                console.log('Class deleted successfully');
+
             } catch (error) {
                 console.log('Error deleting class:', error);
             }
@@ -116,7 +110,7 @@ const AllClassesTab = ({ data, params }: { data: any, params: any }) => {
     }
     const handleFullModal = () => {
         dispatch(setPageWillShow("addaClass"))
-        // console.log(pageToShow)
+
         setShowFullModal(true)
     }
 
@@ -134,7 +128,7 @@ const AllClassesTab = ({ data, params }: { data: any, params: any }) => {
 
             {(showFullModal || isEditable) && pageToShow === "addaClass" &&
                 <FullModal handleClose={handleCloseModal} showModal={showFullModal} setShowModal={setShowFullModal}>
-                    <div className="">
+                    <div className="flex ">
                         {isEditable ? <UpdateClass data={updatedClass} /> :
                             <AddClass data={data} />
                         }
@@ -164,7 +158,7 @@ const AllClassesTab = ({ data, params }: { data: any, params: any }) => {
                                 <Table
                                     // onRowDoubleclick={}
                                     isClass={true}
-                                    headers={["Subject", "Course", "Days", "Time", "Finish Time", "Delete"]}
+                                    headers={["Subject", "Course", "Days", "Time", "Finish Time", "Action"]}
                                     teacherData={singleTeacherData}
                                     bodyRows={filteredClasses.map((cls: any) => [
                                         cls.class_name,
@@ -194,7 +188,7 @@ const AllClassesTab = ({ data, params }: { data: any, params: any }) => {
                             </div>
                         </>
                     ) : (
-                        <span className='flex items-center justify-center'>You have no classes yet</span>
+                        <span className='flex items-center justify-center'>No Class Found</span>
                     )
                 )}
                 <Buttons type="button" secondary={true} clickHandler={handleFullModal} style='px-5 mt-10'>

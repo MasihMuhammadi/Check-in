@@ -69,7 +69,7 @@ const UpdateClass = ({ data }: { data: any }) => {
 
 
         try {
-            const res: any = await axios.put(`http://localhost:5000/api/classes/class/${data[0]?._id}`, payload)
+            const res: any = await axios.put(`http://localhost:5000/api/classes/class/${data[0]?._id}`, payload, { withCredentials: true })
 
             if (res?.data?.success) {
                 dispatch(setPageWillShow("classes"))

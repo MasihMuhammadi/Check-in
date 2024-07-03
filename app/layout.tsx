@@ -4,6 +4,7 @@ import "./globals.css";
 import Providers from '../redux/Provider'
 import Header from "./components/header";
 
+
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {

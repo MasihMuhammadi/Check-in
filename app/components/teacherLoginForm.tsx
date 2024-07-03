@@ -17,7 +17,7 @@ import Buttons from './buttons';
 import Notification from './notification';
 import { useDispatch, useSelector } from 'react-redux';
 // import { loginAsManager, loginAsTeacher } from '../../api/api';
-import { loginTeacher } from '../../redux/slices/authSlice'
+import { loginTeacher, setIsLoggedIn } from '../../redux/slices/authSlice'
 import MaleOrFemale from './maleOrFemale';
 import Spinner from './spinner';
 
@@ -28,6 +28,7 @@ const TeacherLoginForm = ({ role, setRole }: { role: any, setRole: any }) => {
     const dispatch = useDispatch()
 
     const teacherData = useSelector((state: any) => state.authSlice.teacherData)
+    const isLogedIn = useSelector((state: any) => state.authSlice.isLoggedIn)
 
     const [isLoading, setIsLoading] = useState<boolean>(false)
     const [isPassword, setIsPassword] = useState<boolean>(false)
@@ -64,43 +65,67 @@ const TeacherLoginForm = ({ role, setRole }: { role: any, setRole: any }) => {
             password: values.password,
             role: role
         }
-        setIsLoading(true)
-        console.log(teacherData?.data?.data, '.#######################.')
+        setIsLoading(true);
 
         try {
-            const response: any = await dispatch(loginTeacher(payload))
-            const gethandle: any = await axios.get(`http://localhost:5000/api/courses/unique-course/${teacherData?.data?.data?.course_unique_code}`)
+            // Dispatch the login action
+            const response: any = await dispatch(loginTeacher(payload));
+
+            // Check if login was successful
             if (response?.payload?.success) {
-                if (teacherData?.data?.data?.course_unique_code) {
-                    route.push(`/courses/${gethandle?.data?.handle}/teacher/${response?.payload?.data?.handle}`)
+                // Get the teacher data from the response
+                const teacherData = response.payload.data;
+
+                // Check if the teacher has a unique course code
+                if (teacherData?.course_unique_code) {
+                    // Send a request to get the course handle
+                    const courseResponse = await axios.get(`http://localhost:5000/api/courses/unique-course/${teacherData.course_unique_code}`, { withCredentials: true });
+
+                    // Check if the request was successful
+                    if (courseResponse?.data?.handle) {
+                        // Redirect the user to the appropriate route
+                        route.push(`/courses/${courseResponse.data.handle}/teacher/${teacherData.handle}`);
+                    } else {
+                        setNotification({
+                            success: false,
+                            isShow: true,
+                            content: "Failed to retrieve course handle"
+                        });
+                    }
+                } else {
+                    setNotification({
+                        success: false,
+                        isShow: true,
+                        content: "No unique course code found for the teacher"
+                    });
                 }
+                dispatch(setIsLoggedIn(true))
+
                 setNotification({
                     success: true,
                     isShow: true,
-                    content: "You logged SuccessFully!"
-                })
-                setIsLoading(false)
-            }
-            else {
-                setIsLoading(false)
+                    content: "You logged in successfully!"
+                });
+            } else {
                 setNotification({
                     success: false,
                     isShow: true,
                     content: response?.payload?.response?.data?.message
-                })
+                });
             }
 
+            setIsLoading(false);
         } catch (error: any) {
-            setIsLoading(false)
-
+            setIsLoading(false);
             setNotification({
                 success: false,
                 isShow: true,
-                content: error?.response.data.message
-            })
+                content: error?.response?.data?.message || "An error occurred"
+            });
             console.log("Error:", error?.message);
         }
     };
+
 
 
     useEffect(() => {

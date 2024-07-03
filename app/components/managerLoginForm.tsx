@@ -1,5 +1,4 @@
-"use client";
-
+"use client"
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
@@ -16,9 +15,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setLoggedIn } from '../../redux/slices/courseSlice';
 import { loginAsManager } from '../../api/api';
 import MaleOrFemale from './maleOrFemale';
-import { loginManager } from '../../redux/slices/authSlice';
+import { loginManager, setIsLoggedIn } from '../../redux/slices/authSlice';
 import Notification from './notification';
 import Spinner from './spinner';
+import { cookies } from 'next/headers'
+import Cookies from 'js-cookie';
 
 
 
@@ -50,6 +51,7 @@ const ManagerLoginForm = ({ role, setRole }: { role: any, setRole: any }) => {
         password: '',
     };
     const onSubmit = async (values: any) => {
+        // "use server"
         setIsLoading(true);
 
         const payload = {
@@ -60,10 +62,18 @@ const ManagerLoginForm = ({ role, setRole }: { role: any, setRole: any }) => {
         };
 
         try {
-            // const response: any = await dispatch(signUpManager({ data: payload }))
-            const response: any = await axios.post("http://localhost:5000/api/auth/login", payload);
-            console.log(response?.data?.data, 'rrrrrrrrrrrrrrr')
+
+            const response: any = await axios.post("http://localhost:5000/api/auth/login", payload, { withCredentials: true });
+
             if (response?.data?.success) {
+                // Cookies.set('user_access', response?.data?.data._id)
+                // setIsLogedIn(true)
+                // cookies().set({
+                //     name: 'name',
+                //     value: 'lee',
+                //     httpOnly: true,
+                //     path: '/',
+                // })
                 setIsLoading(false);
                 setNotification({
                     success: true,
@@ -75,7 +85,7 @@ const ManagerLoginForm = ({ role, setRole }: { role: any, setRole: any }) => {
                 }, 3000)
             } else {
                 setIsLoading(false);
-                console.log(response, 'ffailedddddddddddddd');
+
                 setNotification({
                     success: false,
                     isShow: true,
@@ -83,7 +93,7 @@ const ManagerLoginForm = ({ role, setRole }: { role: any, setRole: any }) => {
                 });
             }
         } catch (err: any) {
-            console.log(err, 'rerrrrrrrrrr');
+
             setIsLoading(false);
             setNotification({
                 success: false,
@@ -91,6 +101,7 @@ const ManagerLoginForm = ({ role, setRole }: { role: any, setRole: any }) => {
                 content: err?.response?.data?.message || err.message || "An error occurred",
             });
         }
+
     };
     useEffect(() => {
 

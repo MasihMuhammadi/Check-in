@@ -71,8 +71,8 @@ const TeacherSignUpFormInputes = ({ role }: { role: any }) => {
             role: role
         }
         try {
-            // const response: any = await dispatch(signUpTeacher(payload))
-            const response: any = await axios.post("http://localhost:5000/api/teachers/teacher", payload)
+
+            const response: any = await axios.post("http://localhost:5000/api/teachers/teacher", payload, { withCredentials: true })
             setIsLoading(false)
             if (response?.data?.courseName) {
                 route.push("/login")

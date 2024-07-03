@@ -61,6 +61,9 @@ const authSlice = createSlice({
     reducers: {
         increment: (state) => {
             state.number = state.number + 1
+        },
+        setIsLoggedIn: (state, action) => {
+            state.isLoggedIn = action.payload
         }
     },
     extraReducers: (builder) => {
@@ -68,24 +71,23 @@ const authSlice = createSlice({
             .addCase(loginTeacher.pending, (state) => {
                 state.teacherData.loading = true
                 state.teacherData.error = null
-                state.isLoggedIn = false
             })
             .addCase(loginTeacher.fulfilled, (state, action: PayloadAction<any>) => {
                 state.teacherData.loading = false
                 state.teacherData.data = action.payload
                 state.teacherData.error = null
-                state.isLoggedIn = true
+
             })
             .addCase(loginTeacher.rejected, (state, action) => {
                 state.teacherData.loading = false
                 state.teacherData.error = action.error
-                state.isLoggedIn = false
+
             })
             .addCase(loginManager.pending, (state) => {
                 state.managerData.loading = true
                 state.managerData.error = null
                 state.managerData.data = {}
-                state.isLoggedIn = false
+
             })
             .addCase(loginManager.fulfilled, (state, action: PayloadAction<any>) => {
                 state.managerData.loading = true
@@ -102,5 +104,5 @@ const authSlice = createSlice({
     }
 })
 
-export const { increment } = authSlice.actions
+export const { increment, setIsLoggedIn } = authSlice.actions
 export default authSlice.reducer
