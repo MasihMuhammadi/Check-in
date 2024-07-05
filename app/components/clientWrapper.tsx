@@ -11,15 +11,15 @@ export default function ClientWrapper({ children }: { children: any }) {
 
     useEffect(() => {
         const sendRequest = async () => {
-            console.log(whoIsLoggedIn, '............')
+
             try {
                 const response = await axios.get("http://localhost:5000/api/get-session", { withCredentials: true })
                 if (Object.keys(response?.data?.data)[0] === "manager_access") {
                     dispatch(setWhoIsLoggedIn("manager"))
-                    console.log("manager is logged in")
+
                 }
                 else {
-                    console.log("teacher is logged in")
+
                     dispatch(setWhoIsLoggedIn("teacher"))
                 }
 

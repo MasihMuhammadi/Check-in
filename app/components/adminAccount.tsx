@@ -159,7 +159,7 @@ const AdminAccount = ({ data }: { data?: any }) => {
                                         type="text"
                                         onChange={handleChange}
                                         value={values.location}
-                                        className="border-2 border-gray-700 w-[320px] max-w-full p-2 px-14 h-14 rounded-md focus:outline-none focus:border-[#1e1e1e] focus:ring-1 focus:ring-[#1e1e1e]"
+                                        className="border-2 border-gray-700 w-[320px] max-w-full p-2 px-4 h-14 rounded-md focus:outline-none focus:border-[#1e1e1e] focus:ring-1 focus:ring-[#1e1e1e]"
                                     />
                                     <ErrorMessage name="location" component="div" className="text-xs text-red-500" />
                                 </div>
@@ -172,7 +172,7 @@ const AdminAccount = ({ data }: { data?: any }) => {
                                         type="text"
                                         onChange={handleChange}
                                         value={values.description}
-                                        className="border border-2 border-gray-700 w-[320px] max-w-full p-2 px-14 h-14 rounded-md focus:outline-none focus:border-[#1e1e1e] focus:ring-1 focus:ring-[#1e1e1e]"
+                                        className="border border-2 border-gray-700 w-[320px] max-w-full p-2 px-4 h-14 rounded-md focus:outline-none focus:border-[#1e1e1e] focus:ring-1 focus:ring-[#1e1e1e]"
                                     />
                                     <ErrorMessage name="description" component="div" className="text-xs text-red-500" />
                                 </div>
@@ -189,7 +189,7 @@ const AdminAccount = ({ data }: { data?: any }) => {
                                         inputmode="numeric"
                                         onChange={handleChange}
                                         value={values.teachersCount}
-                                        className=" border-2 border-gray-700 w-[320px] max-w-full p-2 px-14 h-14 rounded-md focus:outline-none focus:border-[#1e1e1e] focus:ring-1 focus:ring-[#1e1e1e]"
+                                        className=" border-2 border-gray-700 w-[320px] max-w-full p-2 px-4 h-14 rounded-md focus:outline-none focus:border-[#1e1e1e] focus:ring-1 focus:ring-[#1e1e1e]"
                                     />
                                     <ErrorMessage name="teachersCount" component="div" className="text-xs text-red-500" />
                                 </div>
@@ -203,7 +203,7 @@ const AdminAccount = ({ data }: { data?: any }) => {
                                         inputmode="numeric"
                                         onChange={handleChange}
                                         value={values.studentsCount}
-                                        className=" border-2 border-gray-700 w-[320px] max-w-full p-2 px-14 h-14 rounded-md focus:outline-none focus:border-[#1e1e1e] focus:ring-1 focus:ring-[#1e1e1e]"
+                                        className=" border-2 border-gray-700 w-[320px] max-w-full p-2 px-4 h-14 rounded-md focus:outline-none focus:border-[#1e1e1e] focus:ring-1 focus:ring-[#1e1e1e]"
                                     />
                                     <ErrorMessage name="studentsCount" component="div" className="text-xs text-red-500" />
                                 </div>
@@ -219,7 +219,7 @@ const AdminAccount = ({ data }: { data?: any }) => {
                                         type="text"
                                         onChange={handleChange}
                                         value={values.studyFields}
-                                        className=" border-2 border-gray-700 w-[320px] max-w-full p-2 px-14 h-14 rounded-md focus:outline-none focus:border-[#1e1e1e] focus:ring-1 focus:ring-[#1e1e1e]"
+                                        className=" border-2 border-gray-700 w-[320px] max-w-full p-2 px-4 h-14 rounded-md focus:outline-none focus:border-[#1e1e1e] focus:ring-1 focus:ring-[#1e1e1e]"
                                     />
                                     <ErrorMessage name="studyFields" component="div" className="text-xs text-red-500" />
                                 </div>
@@ -236,7 +236,7 @@ const AdminAccount = ({ data }: { data?: any }) => {
                                                 setFieldValue('image', event.currentTarget.files[0]);
                                             }
                                         }}
-                                        className="border  border-gray-700 w-[320px] max-w-full p-2 px-14 h-14 rounded-md focus:outline-none focus:border-[#1e1e1e] focus:ring-1 focus:ring-[#1e1e1e]"
+                                        className="border  border-gray-700 w-[320px] max-w-full p-2 px-4 h-14 rounded-md focus:outline-none focus:border-[#1e1e1e] focus:ring-1 focus:ring-[#1e1e1e]"
                                     />
                                     <ErrorMessage name="image" component="div" className="text-xs text-red-500" />
                                 </div>

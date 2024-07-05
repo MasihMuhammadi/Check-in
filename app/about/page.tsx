@@ -6,6 +6,8 @@ import Header from "../components/header";
 import Footer from "../components/footer/footer";
 import SonAndFather from "../../public/mockups/sonAndFather";
 import TeamWorkMockup from "../../public/mockups/teamWorkMockup";
+import AllTeacherMockup from "../../public/mockups/allTeachersMockup";
+import GrowYourBussiness from "../../public/mockups/growYourBussiness";
 
 const About = () => {
   const [expandCard1, setExpandCard1] = useState(false);
@@ -13,7 +15,7 @@ const About = () => {
 
   return (
     <>
-      <div className="">
+      <div className="w-full h-full">
 
         <div className="flex flex-col items-start justify-start">
           <motion.div
@@ -23,12 +25,13 @@ const About = () => {
             transition={{ type: "tween", stiffness: 50, duration: 1 }}
             className="gap-x-10 mt-10 "
           >
-            <div className="flex items-center flex-col md:flex-row ">
+            <div className="flex items-center  flex-col md:flex-row ">
               <div className="w-full">
-                <TeamWorkMockup width={400} height={400} className="w-full h-full" />
+                <TeamWorkMockup width={400} height={400} className="w-full h-full max-w-[400px]" />
               </div>
+              <h1 className="text-start text-xl font-semibold">Our Mission</h1>
               <p className={`px-4 py-3 transition-all duration-[2000ms] w-full ${expandCard1 ? "opacity-0 hidden" : "opacity-1"}`}>
-                Monitor your child's attendance effortlessly with Your Edu Echo. As a parent, stay informed about your child's school attendance status. Log in, enter the verification code provided by the school, and access real-time updates on their attendance record. Stay actively involved in your child's education with ease and confidence. Join us now and stay connected effortlessly.
+                Our mission is to empower educational institutions with the tools they need to enhance their administrative efficiency, improve communication, and foster a better learning environment. We believe in the power of technology to transform education, and we are committed to making that transformation as seamless as possible for our clients.
               </p>
             </div>
           </motion.div>
@@ -43,17 +46,23 @@ const About = () => {
             className="gap-x-10 mt-10 m-auto overflow-hidden"
           >
             <div className="flex items-center flex-col-reverse md:flex-row ">
+              <h1 className="text-start text-xl font-semibold">What we Offer</h1>
+
               <p className={`px-4 py-3 transition-all duration-[2000ms] w-full ${expandCard2 ? "opacity-0 hidden" : "opacity-1"}`}>
-                Monitor your child's attendance effortlessly with Your Edu Echo. As a parent, stay informed about your child's school attendance status. Log in, enter the verification code provided by the school, and access real-time updates on their attendance record. Stay actively involved in your child's education with ease and confidence. Join us now and stay connected effortlessly.
+                Create, manage, and schedule courses with ease.
+                Keep track of student information, attendance, and performance.
+                Manage faculty schedules, assignments, and communication.
+                Enhance communication between students, faculty, and administration.
+                Reporting and Analytics: Generate detailed reports to track performance and identify areas for improvement.
               </p>
               <div className="w-full">
-                <TeamWorkMockup width={400} height={400} className="w-full h-full" />
+                <AllTeacherMockup width={400} height={400} className="w-full h-full max-w-[400px]" />
               </div>
             </div>
           </motion.div>
         </div>
 
-        <div>
+        <div className="mb-40">
           <motion.div
             initial={{ x: '50vw', opacity: 0 }}
             whileInView={{ x: 0, opacity: 1 }}
@@ -63,10 +72,13 @@ const About = () => {
           >
             <div className="flex items-center flex-col md:flex-row ">
               <div className="w-full">
-                <TeamWorkMockup width={400} height={400} className="w-full h-full" />
+                <GrowYourBussiness width={400} height={400} className="w-full h-full max-w-[400px]" />
               </div>
+              <h1 className="text-start text-xl font-semibold">Grow your business</h1>
+
               <p className={`px-4 py-3 transition-all duration-[2000ms] w-full ${expandCard2 ? "opacity-0 hidden" : "opacity-1"}`}>
-                Monitor your child's attendance effortlessly with Your Edu Echo. As a parent, stay informed about your child's school attendance status. Log in, enter the verification code provided by the school, and access real-time updates on their attendance record. Stay actively involved in your child's education with ease and confidence. Join us now and stay connected effortlessly.
+
+                Team Collaboration: Our system fosters teamwork by providing collaborative tools that enable faculty and students to work together more effectively, share resources, and communicate seamlessly, which ultimately contributes to the growth and success of your educational business.
               </p>
             </div>
           </motion.div>

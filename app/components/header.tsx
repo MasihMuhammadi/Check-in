@@ -39,7 +39,7 @@ const Header = () => {
       console.log(err)
     }
   }
-  console.log(teacherData?.data?.data?.teacher, courseData, 'wwhooo')
+
   return (
     <>
       <div className="flex flex-row justify-between items-center z-[1000] ">
@@ -52,6 +52,7 @@ const Header = () => {
           </Link>
         </div>
         <div className="hidden sm:hidden md:flex lg:flex">
+
           {whoIsLoggedIn == "manager" || whoIsLoggedIn == "teacher" ?
             <>
               <div className="flex gap-x-4 mx-5">

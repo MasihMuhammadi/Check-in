@@ -51,6 +51,7 @@ const CourseAdmin = ({ params }: { params: any }) => {
                             students: students?.data,
                             teachers: getTeachers?.data
                         });
+                        console.log(relatedData, 'RRRRRRRRRRRRRR')
                         setIsLoading(false);
                     }
                     catch (err) {
@@ -67,23 +68,15 @@ const CourseAdmin = ({ params }: { params: any }) => {
         getAllClasses();
     }, [params.handle]);
 
-    const copyCode = () => {
-        if (textRef.current) {
-            const textToCopy = textRef.current.innerText;
-            navigator.clipboard.writeText(textToCopy).then(() => {
-                setIsCopy(true);
-            }).catch(err => {
-                console.error('Failed to copy text: ', err);
-            });
-        }
-    };
+
+
 
     const renderContent = () => {
 
 
         switch (tab) {
             case "Dashboard":
-                return <ManagerDashboard data={data} isCopy={isCopy} copyCode={copyCode} isLoading={isLoading} />;
+                return <ManagerDashboard data={data} isLoading={isLoading} />;
 
             case "Classes":
                 return <div><CourseClases data={relatedData?.classes} /> </div>;

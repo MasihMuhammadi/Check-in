@@ -18,10 +18,12 @@ const MainPage = () => {
         <div className=" ">
           <LandingPageText />
           <div className=" hidden md:flex sm:flex-col md:flex-row mt-5 ">
-            <Buttons primary={true} style={"py-3 mx-2 mt-2 px-4"}>
-              Get Started
+            <Buttons primary={true} style={"py-3 mx-2 mt-2 px-4 sm:px-2 sm:mx-1 md:px-4"}>
+              <Link href="/signUp">
+                Get Started
+              </Link>
             </Buttons>
-            <Buttons secondary={true} style="py-2 mx-2 mt-2 px-5"> <Link href="/about"> How It Work</Link></Buttons>
+            <Buttons secondary={true} style="py-3 mx-2 mt-2 px-5 sm:px-2 md:px-5 sm:mx-1"> <Link href="/about"> How It Work</Link></Buttons>
           </div>
         </div>
         <div className="flex lg:flex mt-3">
@@ -32,7 +34,9 @@ const MainPage = () => {
         <Buttons primary={true} style={"py-3 mx-2 mt-2 px-5"}>
           Get Started
         </Buttons>
-        <Buttons secondary={true} style="py-2 mx-2 mt-2 px-5">How It Work</Buttons>
+        <Buttons secondary={true} style="py-2 mx-2 mt-2 px-5">
+          <Link href={"/about"}>How It Work</Link>
+        </Buttons>
       </div>
     </>
   );

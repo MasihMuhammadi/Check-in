@@ -12,7 +12,7 @@ export default function NotFound() {
                 <p className="mt-5 text-2xl mb-5">
                     Oops, it seems like you lost your way
                 </p>
-                <Buttons secondary={true}>
+                <Buttons secondary={true} style="px-4 py-2.5">
                     <Link href="/">Return to Home</Link>
                 </Buttons>
             </div>

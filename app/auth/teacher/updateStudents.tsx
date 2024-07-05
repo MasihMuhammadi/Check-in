@@ -102,7 +102,7 @@ const UpdateStudent = ({ data }: { data?: any }) => {
                                     type="text"
                                     onChange={handleChange}
                                     value={values.name}
-                                    className="border bordre-2 border-gray-700  w-[320px] max-w-full p-2 px-14 h-14 rounded-md focus:outline-none focus:border-[#1e1e1e] focus:ring-1 focus:ring-[#1e1e1e]"
+                                    className="border bordre-2 border-gray-700  w-[320px] max-w-full p-2 px-4 h-14 rounded-md focus:outline-none focus:border-[#1e1e1e] focus:ring-1 focus:ring-[#1e1e1e]"
 
                                 />
                                 <ErrorMessage name="name" component="div" className=" text-xs text-red-500" />
@@ -116,7 +116,7 @@ const UpdateStudent = ({ data }: { data?: any }) => {
                                     type="text"
                                     onChange={handleChange}
                                     value={values.father_name}
-                                    className="border bordre-2 border-gray-700  w-[320px] max-w-full p-2 px-14 h-14 rounded-md focus:outline-none focus:border-[#1e1e1e] focus:ring-1 focus:ring-[#1e1e1e]"
+                                    className="border bordre-2 border-gray-700  w-[320px] max-w-full p-2 px-4 h-14 rounded-md focus:outline-none focus:border-[#1e1e1e] focus:ring-1 focus:ring-[#1e1e1e]"
 
                                 />
                                 <ErrorMessage name="father_name" component="div" className=" text-xs text-red-500" />
@@ -134,7 +134,7 @@ const UpdateStudent = ({ data }: { data?: any }) => {
                                     readOnly={true}
                                     disabled={true}
                                     value={values.class_name}
-                                    className="border bordre-2 border-gray-700  w-[320px] max-w-full p-2 px-14 h-14 rounded-md focus:outline-none focus:border-[#1e1e1e] focus:ring-1 focus:ring-[#1e1e1e]"
+                                    className="border bordre-2 border-gray-700  w-[320px] max-w-full p-2 px-4 h-14 rounded-md focus:outline-none focus:border-[#1e1e1e] focus:ring-1 focus:ring-[#1e1e1e]"
 
                                 />
                                 <ErrorMessage name="class_name" component="div" className=" text-xs text-red-500" />
@@ -148,7 +148,7 @@ const UpdateStudent = ({ data }: { data?: any }) => {
                                     type="text"
                                     onChange={handleChange}
                                     value={values.email}
-                                    className="border bordre-2 border-gray-700  w-[320px] max-w-full p-2 px-14 h-14 rounded-md focus:outline-none focus:border-[#1e1e1e] focus:ring-1 focus:ring-[#1e1e1e]"
+                                    className="border bordre-2 border-gray-700  w-[320px] max-w-full p-2 px-4 h-14 rounded-md focus:outline-none focus:border-[#1e1e1e] focus:ring-1 focus:ring-[#1e1e1e]"
 
                                 />
                                 <ErrorMessage name="email" component="div" className=" text-xs text-red-500" />
@@ -164,7 +164,7 @@ const UpdateStudent = ({ data }: { data?: any }) => {
                                     type="text"
                                     onChange={handleChange}
                                     value={values.phone}
-                                    className="border bordre-2 border-gray-700  w-[320px] max-w-full p-2 px-14 h-14 rounded-md focus:outline-none focus:border-[#1e1e1e] focus:ring-1 focus:ring-[#1e1e1e]"
+                                    className="border bordre-2 border-gray-700  w-[320px] max-w-full p-2 px-4 h-14 rounded-md focus:outline-none focus:border-[#1e1e1e] focus:ring-1 focus:ring-[#1e1e1e]"
 
                                 />
                                 <ErrorMessage name="phone" component="div" className=" text-xs text-red-500" />
@@ -178,7 +178,7 @@ const UpdateStudent = ({ data }: { data?: any }) => {
                                     type="text"
                                     onChange={handleChange}
                                     value={values.address}
-                                    className="border bordre-2 border-gray-700  w-[320px] max-w-full p-2 px-14 h-14 rounded-md focus:outline-none focus:border-[#1e1e1e] focus:ring-1 focus:ring-[#1e1e1e]"
+                                    className="border bordre-2 border-gray-700  w-[320px] max-w-full p-2 px-4 h-14 rounded-md focus:outline-none focus:border-[#1e1e1e] focus:ring-1 focus:ring-[#1e1e1e]"
 
                                 />
                                 <ErrorMessage name="address" component="div" className=" text-xs text-red-500" />
@@ -194,7 +194,7 @@ const UpdateStudent = ({ data }: { data?: any }) => {
                                     type="time"
                                     onChange={handleChange}
                                     value={values.started_time}
-                                    className="border bordre-2 border-gray-700  w-[320px] max-w-full p-2 px-14 h-14 rounded-md focus:outline-none focus:border-[#1e1e1e] focus:ring-1 focus:ring-[#1e1e1e]"
+                                    className="border bordre-2 border-gray-700  w-[320px] max-w-full p-2 px-4 h-14 rounded-md focus:outline-none focus:border-[#1e1e1e] focus:ring-1 focus:ring-[#1e1e1e]"
 
                                 />
                                 <ErrorMessage name="started_time" component="div" className=" text-xs text-red-500" />
@@ -208,7 +208,7 @@ const UpdateStudent = ({ data }: { data?: any }) => {
                                     type="time"
                                     onChange={handleChange}
                                     value={values.finish_time}
-                                    className="border bordre-2 border-gray-700  w-[320px] max-w-full p-2 px-14 h-14 rounded-md focus:outline-none focus:border-[#1e1e1e] focus:ring-1 focus:ring-[#1e1e1e]"
+                                    className="border bordre-2 border-gray-700  w-[320px] max-w-full p-2 px-4 h-14 rounded-md focus:outline-none focus:border-[#1e1e1e] focus:ring-1 focus:ring-[#1e1e1e]"
 
                                 />
                                 <ErrorMessage name="finish_time" component="div" className=" text-xs text-red-500" />

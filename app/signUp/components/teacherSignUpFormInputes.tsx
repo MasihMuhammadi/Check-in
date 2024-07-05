@@ -33,12 +33,13 @@ const TeacherSignUpFormInputes = ({ role }: { role: any }) => {
         content: ""
     })
 
-    const phoneValidation = new RegExp(/^(?:\+|00)?(?:[0-9] ?){6,14}[0-9]$/i)
+    // const phoneValidation = new RegExp(/^(?:\+|00)?(?:[0-9] ?){6,14}[0-9]$/i)
     const validationSchema = Yup.object({
-        teacher_name: Yup.string().required('Invalid teacher_name address').required('teacher_name is required'),
+        // course_name: Yup.string().required('Invalid teacher_name address').required('teacher_name is required'),
         course_unique_code: Yup.string().required('unique code  is required'),
         teacher_email: Yup.string().email('Invalid teacher_email address').required('teacher_email is required'),
-        course: Yup.string().required('Course or School Name is required'),
+        courseName: Yup.string().required('Course or School Name is required'),
+        teacher_name: Yup.string().required('Teacher Name is required'),
         phone: Yup.string().required('Phone is required'),
         password: Yup.string().required('Password is required').min(6, 'password should be at least 6 chracte'),
     });
@@ -89,6 +90,7 @@ const TeacherSignUpFormInputes = ({ role }: { role: any }) => {
             })
             console.log(err?.response?.data?.message);
 
+            // setSubmitting(false)
         }
     };
 
@@ -103,7 +105,7 @@ const TeacherSignUpFormInputes = ({ role }: { role: any }) => {
             })
             return () => clearTimeout(notif);
 
-        }, 10000)
+        }, 5000)
     }, [notification])
 
 
@@ -165,12 +167,12 @@ const TeacherSignUpFormInputes = ({ role }: { role: any }) => {
 
                                 </i>
                                 <label className={`absolute -top-3.5 right-6 transition-position duration-[5000ms] bg-gradientPrimary p-1 px-2 text-xs text-white rounded-lg`}>
-                                    teacher_email
+                                    Teacher email
                                 </label>
                                 <Field
                                     name="teacher_email"
                                     type="teacher_email"
-                                    placeholder="teacher_email"
+                                    placeholder="Teacher_email"
                                     onChange={handleChange}
                                     value={values.teacher_email}
                                     className="border bordre-2 border-gray-700 w-auto sm:w-[380px] min-w-[320px] p-2 px-14 h-14 rounded-md focus:outline-none focus:border-[#1e1e1e] focus:ring-1 focus:ring-[#1e1e1e]"
@@ -190,7 +192,7 @@ const TeacherSignUpFormInputes = ({ role }: { role: any }) => {
                                 <Field
                                     name="teacher_name"
                                     type="teacher_name"
-                                    placeholder="teacher_name"
+                                    placeholder="teacher name"
                                     onChange={handleChange}
                                     value={values.teacher_name}
                                     className="border bordre-2 border-gray-700 w-auto sm:w-[380px] min-w-[320px]  p-2 px-14 h-14 rounded-md focus:outline-none focus:border-[#1e1e1e] focus:ring-1 focus:ring-[#1e1e1e]"
@@ -216,7 +218,7 @@ const TeacherSignUpFormInputes = ({ role }: { role: any }) => {
                                     value={values.password}
                                     onChange={(e: any) => {
                                         handleChange(e);
-                                        setPassword(e.target.value);
+                                        setPassword(e.tar`get`.value);
                                     }}
 
                                     placeholder="Password"
@@ -224,6 +226,7 @@ const TeacherSignUpFormInputes = ({ role }: { role: any }) => {
 
                                 />
 
+                                <ErrorMessage name="password" id="teacher_name" component="div" className=" text-xs text-red-500" />
                             </div>
                         </div>
 
@@ -231,7 +234,9 @@ const TeacherSignUpFormInputes = ({ role }: { role: any }) => {
                             <Buttons
                                 primary={isLoading ? false : true}
                                 disabled={isLoading ? true : false}
-                                type="submit" clickHandler={() => onSubmit(values)} style="px-10">
+                                type="submit"
+                                // clickHandler={() => onSubmit(values)} 
+                                style="px-10">
                                 {isLoading ? <Spinner className="w-5 h-5" /> : "Register"}
                             </Buttons>
                             <p className="mt-4">

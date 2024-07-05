@@ -7,7 +7,7 @@ import Cookies from "js-cookie";
 import { useSelector } from "react-redux";
 
 export default function Home() {
-  console.log("masih", '//////////////////////////')
+
   return (
     <div className="no-scrollbar overflow-hidden sm:px-mobileScreen md:tabletScreen lg:laptopScreen">
       <LandingPage />

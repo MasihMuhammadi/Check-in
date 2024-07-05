@@ -40,10 +40,7 @@ const TeacherLoginForm = ({ role, setRole }: { role: any, setRole: any }) => {
     })
 
     const validationSchema = Yup.object({
-        fullName: Yup.string().required('Invalid fullName address').required('fullName is required'),
         email: Yup.string().email('Invalid email address').required('Email is required'),
-        course: Yup.string().required('Course or School Name is required'),
-        phone: Yup.string().required('Phone is required'),
         password: Yup.string().required('Password is required').min(6, 'password should be at least 6 chracte'),
     });
 
@@ -67,6 +64,7 @@ const TeacherLoginForm = ({ role, setRole }: { role: any, setRole: any }) => {
         }
         setIsLoading(true);
 
+        // if (values)
         try {
 
             const response: any = await dispatch(loginTeacher(payload));
@@ -95,10 +93,9 @@ const TeacherLoginForm = ({ role, setRole }: { role: any, setRole: any }) => {
                     const response = await axios.get("http://localhost:5000/api/get-session", { withCredentials: true })
                     if (Object.keys(response?.data?.data)[0] === "manager_access") {
                         dispatch(setWhoIsLoggedIn("manager"))
-                        console.log("manager is logged in")
                     }
                     else {
-                        console.log("teacher is logged in")
+
                         dispatch(setWhoIsLoggedIn("teacher"))
                     }
 
@@ -131,8 +128,6 @@ const TeacherLoginForm = ({ role, setRole }: { role: any, setRole: any }) => {
         }
     };
 
-
-
     useEffect(() => {
         const notif = setTimeout(() => {
             setNotification({
@@ -156,7 +151,7 @@ const TeacherLoginForm = ({ role, setRole }: { role: any, setRole: any }) => {
                 initialValues={initialValues}
                 validationSchema={validationSchema}
                 onSubmit={onSubmit}
-                validateOnChange={false} // To prevent instant validation on password change
+                validateOnChange={false}// To prevent instant validation on password change
             >
                 {({ values, handleChange, handleSubmit, isSubmitting }) => (
                     <Form className='flex flex-row justify-center items-center bg-white'>
@@ -200,6 +195,8 @@ const TeacherLoginForm = ({ role, setRole }: { role: any, setRole: any }) => {
                                         placeholder="Password"
                                         className="border bordre-2 border-gray-700 w-auto sm:w-[380px] min-w-[320px] p-2 px-14 h-14 rounded-md focus:outline-none focus:border-[#1e1e1e] focus:ring-1 focus:ring-[#1e1e1e]"
                                     />
+                                    <ErrorMessage name="password" component="div" className=" text-xs text-red-500" />
+
                                 </div>
                             </div>
                             <div className=" flex  flex-col text-center items-center mt-5">
@@ -207,7 +204,7 @@ const TeacherLoginForm = ({ role, setRole }: { role: any, setRole: any }) => {
                                     primary={isLoading ? false : true}
                                     disabled={isLoading ? true : false}
                                     type="submit" style="px-12 py-2"
-                                    clickHandler={() => onSubmit(values)}
+                                // clickHandler={() => onSubmit(values)}
                                 >
                                     {isLoading ? <Spinner className="w-5 h-5" /> : "Login as Teacher"}
                                 </Buttons>
