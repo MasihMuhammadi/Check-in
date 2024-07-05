@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, } from 'react';
+import React, { useEffect, useState, } from 'react';
 import { useRouter } from 'next/navigation';
 
 import { Formik, Form, Field, ErrorMessage } from 'formik';
@@ -94,6 +94,18 @@ const UpdateClass = ({ data }: { data: any }) => {
             console.error(err)
         }
     };
+    useEffect(() => {
+
+        const notif = setTimeout(() => {
+            setNotification({
+                success: true,
+                isShow: false,
+                content: ""
+            })
+            return () => clearTimeout(notif);
+
+        }, 5000)
+    }, [notification])
 
     return (
         <Formik
@@ -120,7 +132,7 @@ const UpdateClass = ({ data }: { data: any }) => {
                                     type="text"
                                     onChange={handleChange}
                                     value={values.subject}
-                                    className="border bordre-2 border-gray-700 w-[320px] max-w-full p-2 px-14 h-14 rounded-md focus:outline-none focus:border-[#1e1e1e] focus:ring-1 focus:ring-[#1e1e1e]"
+                                    className="border bordre-2 border-gray-700 w-[320px] max-w-full p-2 px-4 h-14 rounded-md focus:outline-none focus:border-[#1e1e1e] focus:ring-1 focus:ring-[#1e1e1e]"
                                 />
                                 <ErrorMessage name="subject" component="div" className=" text-xs text-red-500" />
                             </div>
@@ -133,7 +145,7 @@ const UpdateClass = ({ data }: { data: any }) => {
                                     type="text"
                                     onChange={handleChange}
                                     value={values.duration}
-                                    className="border bordre-2 border-gray-700  w-[320px] max-w-full p-2 px-14 h-14 rounded-md focus:outline-none focus:border-[#1e1e1e] focus:ring-1 focus:ring-[#1e1e1e]"
+                                    className="border bordre-2 border-gray-700  w-[320px] max-w-full p-2 px-4 h-14 rounded-md focus:outline-none focus:border-[#1e1e1e] focus:ring-1 focus:ring-[#1e1e1e]"
                                 />
                                 <ErrorMessage name="duration" component="div" className=" text-xs text-red-500" />
                             </div>
@@ -151,7 +163,7 @@ const UpdateClass = ({ data }: { data: any }) => {
                                     option
                                     onChange={handleChange}
                                     value={values.start_day}
-                                    className="border bordre-2 border-gray-700  w-[320px] min-w-full p-2 px-14 h-14 rounded-md focus:outline-none focus:border-[#1e1e1e] focus:ring-1 focus:ring-[#1e1e1e]"
+                                    className="border bordre-2 border-gray-700  w-[320px] min-w-full p-2 px-4 h-14 rounded-md focus:outline-none focus:border-[#1e1e1e] focus:ring-1 focus:ring-[#1e1e1e]"
                                 >
                                     <option value="Saturday">Saturday</option>
                                     <option value="Sunday">Sunday</option>
@@ -172,7 +184,7 @@ const UpdateClass = ({ data }: { data: any }) => {
                                     // type="date"
                                     onChange={handleChange}
                                     value={values.finish_day}
-                                    className="border bordre-2 border-gray-700  w-[320px] min-w-full p-2 px-14 h-14 rounded-md focus:outline-none focus:border-[#1e1e1e] focus:ring-1 focus:ring-[#1e1e1e]"
+                                    className="border bordre-2 border-gray-700  w-[320px] min-w-full p-2 px-4 h-14 rounded-md focus:outline-none focus:border-[#1e1e1e] focus:ring-1 focus:ring-[#1e1e1e]"
                                 >
                                     <option value="Saturday">Saturday</option>
                                     <option value="Sunday">Sunday</option>
@@ -195,7 +207,7 @@ const UpdateClass = ({ data }: { data: any }) => {
                                     type="time"
                                     onChange={handleChange}
                                     value={values.started_time}
-                                    className="border bordre-2 border-gray-700  w-[320px] max-w-full p-2 px-14 h-14 rounded-md focus:outline-none focus:border-[#1e1e1e] focus:ring-1 focus:ring-[#1e1e1e]"
+                                    className="border bordre-2 border-gray-700  w-[320px] max-w-full p-2 px-4 h-14 rounded-md focus:outline-none focus:border-[#1e1e1e] focus:ring-1 focus:ring-[#1e1e1e]"
                                 />
                                 <ErrorMessage name="started_time" component="div" className=" text-xs text-red-500" />
                             </div>
@@ -208,7 +220,7 @@ const UpdateClass = ({ data }: { data: any }) => {
                                     type="time"
                                     onChange={handleChange}
                                     value={values.finish_time}
-                                    className="border bordre-2 border-gray-700  w-[320px] max-w-full p-2 px-14 h-14 rounded-md focus:outline-none focus:border-[#1e1e1e] focus:ring-1 focus:ring-[#1e1e1e]"
+                                    className="border bordre-2 border-gray-700  w-[320px] max-w-full p-2 px-4 h-14 rounded-md focus:outline-none focus:border-[#1e1e1e] focus:ring-1 focus:ring-[#1e1e1e]"
                                 />
                                 <ErrorMessage name="finish_time" component="div" className=" text-xs text-red-500" />
                             </div>

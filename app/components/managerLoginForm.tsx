@@ -15,7 +15,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setLoggedIn } from '../../redux/slices/courseSlice';
 import { loginAsManager } from '../../api/api';
 import MaleOrFemale from './maleOrFemale';
-import { loginManager, setIsLoggedIn } from '../../redux/slices/authSlice';
+import { loginManager, setIsLoggedIn, setWhoIsLoggedIn } from '../../redux/slices/authSlice';
 import Notification from './notification';
 import Spinner from './spinner';
 import { cookies } from 'next/headers'
@@ -66,20 +66,26 @@ const ManagerLoginForm = ({ role, setRole }: { role: any, setRole: any }) => {
             const response: any = await axios.post("http://localhost:5000/api/auth/login", payload, { withCredentials: true });
 
             if (response?.data?.success) {
-                // Cookies.set('user_access', response?.data?.data._id)
-                // setIsLogedIn(true)
-                // cookies().set({
-                //     name: 'name',
-                //     value: 'lee',
-                //     httpOnly: true,
-                //     path: '/',
-                // })
+
                 setIsLoading(false);
                 setNotification({
                     success: true,
                     isShow: true,
                     content: "Your logged successfully"
                 });
+                try {
+                    const response = await axios.get("http://localhost:5000/api/get-session", { withCredentials: true })
+                    if (Object.keys(response?.data?.data)[0] === "manager_access") {
+                        dispatch(setWhoIsLoggedIn("manager"))
+                    }
+                    else {
+
+                        dispatch(setWhoIsLoggedIn("teacher"))
+                    }
+
+                } catch (error) {
+                    console.error('Error making request:', error);
+                }
                 setTimeout(() => {
                     router.push(`/courses/admin/${response?.data?.data?.handle}`)
                 }, 3000)
@@ -113,7 +119,7 @@ const ManagerLoginForm = ({ role, setRole }: { role: any, setRole: any }) => {
             })
             return () => clearTimeout(notif);
 
-        }, 10000)
+        }, 5000)
     }, [notification])
 
 
@@ -170,6 +176,8 @@ const ManagerLoginForm = ({ role, setRole }: { role: any, setRole: any }) => {
                                         placeholder="Password"
                                         className="border bordre-2 border-gray-700 w-auto sm:w-[380px] min-w-[320px] p-2 px-14 h-14 rounded-md focus:outline-none focus:border-[#1e1e1e] focus:ring-1 focus:ring-[#1e1e1e]"
                                     />
+                                    <ErrorMessage name="password" component="div" className=" text-xs text-red-500" />
+
                                 </div>
                             </div>
                             <div className=" flex  flex-col text-center items-center mt-5">
@@ -179,7 +187,7 @@ const ManagerLoginForm = ({ role, setRole }: { role: any, setRole: any }) => {
 
                                     type="submit" style="px-12 py-2"
                                 >
-                                    {isLoading ? <Spinner className={"w-5 h-5"} /> : "Loginn"}
+                                    {isLoading ? <Spinner className={"w-5 h-5"} /> : "Login"}
                                 </Buttons>
                                 <p className="mt-4">
                                     You dont have not account?{" "}

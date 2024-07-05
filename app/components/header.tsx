@@ -7,10 +7,11 @@ import Navbar from "./navbar";
 import BurgerLines from "./animatedMenu/burgerLines";
 import NavMenu from "./animatedMenu/navMenu";
 import EduEchoLogo from "../../public/smallIcons/eduEcho";
+import ProfileIcon from "../../public/smallIcons/profileIcon";
 import LogoutIcon from "../../public/smallIcons/logoutIcon";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
-import { setIsLoggedIn } from "../../redux/slices/authSlice";
+import { setIsLoggedIn, setWhoIsLoggedIn } from "../../redux/slices/authSlice";
 import { useRouter } from "next/navigation";
 
 
@@ -21,14 +22,18 @@ const Header = () => {
   const [crossBurger, setCrossBurger] = useState(false)
   const dispatch = useDispatch()
 
+  const teacherData = useSelector((state: any) => state.teacherSlice.aTeacherData)
+  const courseData = useSelector((state: any) => state.courseSlice.teacherSignUpData)
   const isLogedIn = useSelector((state: any) => state.authSlice.isLoggedIn)
+  const whoIsLoggedIn = useSelector((state: any) => state.authSlice.whoLoggedIn)
 
   const router = useRouter()
   const logoutUser = async () => {
     try {
-      const response = await axios.post("http://localhost:5000/api/logout", "", { withCredentials: true })
+      await axios.post("http://localhost:5000/api/logout", "", { withCredentials: true })
       router.push("/login")
       dispatch(setIsLoggedIn(false))
+      dispatch(setWhoIsLoggedIn(""))
     }
     catch (err) {
       console.log(err)
@@ -47,9 +52,17 @@ const Header = () => {
           </Link>
         </div>
         <div className="hidden sm:hidden md:flex lg:flex">
-          {isLogedIn ? <div className="cursor-pointer" onClick={logoutUser}>
-            <LogoutIcon />
-          </div> :
+
+          {whoIsLoggedIn == "manager" || whoIsLoggedIn == "teacher" ?
+            <>
+              <div className="flex gap-x-4 mx-5">
+                <div className="cursor-pointer" onClick={logoutUser}>
+                  <LogoutIcon />
+                </div>
+                <Link href={`${whoIsLoggedIn == "manager" ? "/" : "/courses"}`}><ProfileIcon width={28} height={28} /></Link>
+              </div>
+            </>
+            :
             <ToggleButton />
           }
 

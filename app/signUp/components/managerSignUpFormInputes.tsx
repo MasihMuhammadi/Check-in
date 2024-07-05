@@ -227,8 +227,10 @@ const ManagerSignUpFormInputes = ({ role }: { role: any }) => {
                   className="border bordre-2 border-gray-700 w-auto sm:w-[380px] min-w-[320px] p-2 px-14 h-14 rounded-md focus:outline-none focus:border-[#1e1e1e] focus:ring-1 focus:ring-[#1e1e1e]"
 
                 />
+                <ErrorMessage name="password" component="div" className="text-red-500   text-xs" />
 
               </div>
+
             </div>
 
             <div className=" flex  flex-col text-center items-center mt-5 px-10">

@@ -10,7 +10,7 @@ const LandingPageText = () => {
   useEffect(() => {
     const timeout = setInterval(() => {
       setIsVisible(!isVisible);
-    }, 5000);
+    }, 6000);
 
 
   }, [isVisible]);
@@ -24,7 +24,7 @@ const LandingPageText = () => {
         <div className="  inline-flex pt-3 top-4 lef-2  flex-col justify-end items-center w-40 h-12  overflow-hidden relative">
           <span
             className={`  text-4xl duration-[3000ms] transition-all font-semibold left-0  ${isVisible
-              ? "absolute top-0 -translate-y-0"
+              ? "absolute top-0 -translate-y-0 delay-[1100ms]"
               : "translate-y-10 absolute top-1 "
               }`}
           >
