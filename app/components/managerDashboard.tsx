@@ -15,18 +15,31 @@ const ManagerDashboard = (
     {
         data,
         isLoading,
-        isCopy,
-        copyCode
+        // isCopy,
+        // copyCode
     }:
         {
             data: any,
             isLoading: boolean,
-            isCopy: boolean,
-            copyCode: any
+            // isCopy: boolean,
+            // copyCode?: any
         }) => {
 
-
+    const [isCopy, setIsCopy] = useState<any>(false);
     const textRef = useRef<any>()
+
+    const copyCode = () => {
+        if (textRef.current) {
+            const textToCopy = textRef.current.innerText;
+            console.log('Text to copy:', textToCopy); // Check if the correct text is logged
+
+            navigator.clipboard.writeText(textToCopy).then(() => {
+                setIsCopy(true);
+            }).catch(err => {
+                console.error('Failed to copy text: ', err);
+            });
+        }
+    };
 
     return (
 
@@ -36,7 +49,7 @@ const ManagerDashboard = (
                     <div>
                         {isLoading ?
                             <Skeleton borderRadius={10} baseColor="#ccc" width={300} height={40} duration={2.5} /> :
-                            <h1 className='text-2xl'>Welcome to <b>{data?.currentCourse?.courseName}</b> Course</h1>
+                            <h1 className='text-2xl'>Welcome to <b className='capitalize'>{data?.currentCourse?.courseName}</b> Course</h1>
                         }
                     </div>
                     <div>
@@ -48,9 +61,10 @@ const ManagerDashboard = (
                         ) : (
                             <div className="flex gap-x-2">
                                 <AlertTip />
-                                <h1 className="text-md" ref={textRef}>
+                                <h1 className="text-md" ref={(ref: any) => textRef.current = ref}>
                                     {data?.currentCourse?.unique_code}
                                 </h1>
+
                                 <span className="relative group cursor-pointer" onClick={copyCode}>
                                     <FontAwesomeIcon icon={faCopy} />
                                     <Tooltip text={`${isCopy ? "Copied" : "Copy"}`} position="bottom" color="bg-gray-800" />
@@ -59,7 +73,7 @@ const ManagerDashboard = (
                         )}
                     </div>
                 </div>
-                <div className='grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 gap-x-4 mx-4'>
+                <div className='grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 gap-y-4 gap-x-4 mx-4'>
                     <div className='bg-green-600 p-4 text-white rounded-lg  '>
                         <span>Courses Number</span>
                         {isLoading ?

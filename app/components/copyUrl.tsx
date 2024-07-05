@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import { CopyToClipboard } from 'react-copy-to-clipboard'
 import Tooltip from './tooltip';
 
-const CopyUrlButton = ({ url }: { url: string }) => {
+const CopyUrlButton = ({ url }: { url: any }) => {
     const [copied, setCopied] = useState(false);
 
     const handleCopy = () => {

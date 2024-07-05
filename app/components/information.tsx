@@ -65,7 +65,7 @@ const Information = () => {
           <>
             {courseData?.map((course: any, index: number) => (
 
-              <div key={index} className="flex justify-center items-center">
+              <div key={index} className="flex justify-center items-center mb-5">
                 <div className="border border-black w-[300px] h-80 rounded-xl text-blue-500">
                   <div className="flex items-center justify-center">
                     <img
@@ -95,15 +95,15 @@ const Information = () => {
       </Link>
 
 
-      <h1 className="text-2xl mt-10 font-bold mx-4">Why Should We Use Edu Echo?</h1>
+      <h1 className="text-2xl mt-10 font-bold mx-4">Why Should We Use CIN (Check In Now)?</h1>
       <div className="flex flex-col sm:flex-row justify-center items-center">
         <div>
           <SonAndFather className={"w-[400px] md:w-[400px] lg:w-[500px]"} />
         </div>
         <div className="flex flex-col mx-4">
-          <p className="mb-6">Edu Echo simplifies attendance management for managers, teachers, and parents. Managers can easily create courses, while teachers can set up accounts, create classes, and add students effortlessly. Our system automates attendance tracking, ensuring accurate records and instant notifications to parents about their childs presence or absence, enhancing communication and engagement.
+          <p className="mb-6">CIN (Check In Now) simplifies attendance management for managers, teachers, and parents. Managers can easily create courses, while teachers can set up accounts, create classes, and add students effortlessly. Our system automates attendance tracking, ensuring accurate records and instant notifications to parents about their childs presence or absence, enhancing communication and engagement.
           </p>
-          <p>Our user-friendly interface and powerful features eliminate the hassle of manual attendance tracking, saving time and reducing errors. Real-time updates and comprehensive reports allow educators to focus more on teaching. Parents appreciate timely notifications, giving them peace of mind. Choose Edu Echo for an efficient, connected approach to attendance management.
+          <p>Our user-friendly interface and powerful features eliminate the hassle of manual attendance tracking, saving time and reducing errors. Real-time updates and comprehensive reports allow educators to focus more on teaching. Parents appreciate timely notifications, giving them peace of mind. Choose CIN (Check In Now) for an efficient, connected approach to attendance management.
 
 
           </p>

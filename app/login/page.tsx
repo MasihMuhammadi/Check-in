@@ -13,8 +13,8 @@ const Login = () => {
     <>
       <div className="px-10">
         <div className="flex gap-x-4 justify-between items-center ">
-          <div className='hidden md:block w-full bg-primary'>
-            <LoginMockup className="w-full h-full max-w-[500px] rounded-xl  border border-white m-10" />
+          <div className='hidden md:block bg-primary w-full max-w-[580px]'>
+            <LoginMockup className="h-full rounded-xl  border border-white m-10" />
           </div>
           <div className="w-full">
             <MaleOrFemale role={role} setRole={setRole} />

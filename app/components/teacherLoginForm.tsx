@@ -17,7 +17,7 @@ import Buttons from './buttons';
 import Notification from './notification';
 import { useDispatch, useSelector } from 'react-redux';
 // import { loginAsManager, loginAsTeacher } from '../../api/api';
-import { loginTeacher, setIsLoggedIn } from '../../redux/slices/authSlice'
+import { loginTeacher, setIsLoggedIn, setWhoIsLoggedIn } from '../../redux/slices/authSlice'
 import MaleOrFemale from './maleOrFemale';
 import Spinner from './spinner';
 
@@ -40,10 +40,7 @@ const TeacherLoginForm = ({ role, setRole }: { role: any, setRole: any }) => {
     })
 
     const validationSchema = Yup.object({
-        fullName: Yup.string().required('Invalid fullName address').required('fullName is required'),
         email: Yup.string().email('Invalid email address').required('Email is required'),
-        course: Yup.string().required('Course or School Name is required'),
-        phone: Yup.string().required('Phone is required'),
         password: Yup.string().required('Password is required').min(6, 'password should be at least 6 chracte'),
     });
 
@@ -67,23 +64,15 @@ const TeacherLoginForm = ({ role, setRole }: { role: any, setRole: any }) => {
         }
         setIsLoading(true);
 
+        // if (values)
         try {
-            // Dispatch the login action
+
             const response: any = await dispatch(loginTeacher(payload));
-
-            // Check if login was successful
             if (response?.payload?.success) {
-                // Get the teacher data from the response
                 const teacherData = response.payload.data;
-
-                // Check if the teacher has a unique course code
                 if (teacherData?.course_unique_code) {
-                    // Send a request to get the course handle
                     const courseResponse = await axios.get(`http://localhost:5000/api/courses/unique-course/${teacherData.course_unique_code}`, { withCredentials: true });
-
-                    // Check if the request was successful
                     if (courseResponse?.data?.handle) {
-                        // Redirect the user to the appropriate route
                         route.push(`/courses/${courseResponse.data.handle}/teacher/${teacherData.handle}`);
                     } else {
                         setNotification({
@@ -100,6 +89,19 @@ const TeacherLoginForm = ({ role, setRole }: { role: any, setRole: any }) => {
                     });
                 }
                 dispatch(setIsLoggedIn(true))
+                try {
+                    const response = await axios.get("http://localhost:5000/api/get-session", { withCredentials: true })
+                    if (Object.keys(response?.data?.data)[0] === "manager_access") {
+                        dispatch(setWhoIsLoggedIn("manager"))
+                    }
+                    else {
+
+                        dispatch(setWhoIsLoggedIn("teacher"))
+                    }
+
+                } catch (error) {
+                    console.error('Error making request:', error);
+                }
 
                 setNotification({
                     success: true,
@@ -126,8 +128,6 @@ const TeacherLoginForm = ({ role, setRole }: { role: any, setRole: any }) => {
         }
     };
 
-
-
     useEffect(() => {
         const notif = setTimeout(() => {
             setNotification({
@@ -151,7 +151,7 @@ const TeacherLoginForm = ({ role, setRole }: { role: any, setRole: any }) => {
                 initialValues={initialValues}
                 validationSchema={validationSchema}
                 onSubmit={onSubmit}
-                validateOnChange={false} // To prevent instant validation on password change
+                validateOnChange={false}// To prevent instant validation on password change
             >
                 {({ values, handleChange, handleSubmit, isSubmitting }) => (
                     <Form className='flex flex-row justify-center items-center bg-white'>
@@ -195,6 +195,8 @@ const TeacherLoginForm = ({ role, setRole }: { role: any, setRole: any }) => {
                                         placeholder="Password"
                                         className="border bordre-2 border-gray-700 w-auto sm:w-[380px] min-w-[320px] p-2 px-14 h-14 rounded-md focus:outline-none focus:border-[#1e1e1e] focus:ring-1 focus:ring-[#1e1e1e]"
                                     />
+                                    <ErrorMessage name="password" component="div" className=" text-xs text-red-500" />
+
                                 </div>
                             </div>
                             <div className=" flex  flex-col text-center items-center mt-5">
@@ -202,7 +204,7 @@ const TeacherLoginForm = ({ role, setRole }: { role: any, setRole: any }) => {
                                     primary={isLoading ? false : true}
                                     disabled={isLoading ? true : false}
                                     type="submit" style="px-12 py-2"
-                                    clickHandler={() => onSubmit(values)}
+                                // clickHandler={() => onSubmit(values)}
                                 >
                                     {isLoading ? <Spinner className="w-5 h-5" /> : "Login as Teacher"}
                                 </Buttons>

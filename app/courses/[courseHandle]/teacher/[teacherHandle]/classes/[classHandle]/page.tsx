@@ -18,17 +18,27 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setIsEditable, setPageWillShow, setShowFullModal, setSingleStudent } from '../../../../../../../redux/slices/studentSlice';
 import UpdateStudents from '../../../../../../auth/teacher/updateStudents';
 import ThreeDotIcon from '../../../../../../../public/smallIcons/threeDotIcon';
+import TeacherInfo from '../../../../../../components/teacherInformationForm/teacherInfo';
+import Notification from '../../../../../../components/notification';
 
 const SingleClass = ({ params }: { params: any }) => {
+
+    console.log(params, '........................')
 
     const [students, setStudent] = useState<any>()
     const [clickedId, setClickedId] = useState<string>("")
     const [showPopUp, setShowPopUp] = useState<boolean>(false);
+    const [notification, setNotification] = useState<any>({
+        content: "",
+        isShow: false,
+        success: true
+    })
     const dispatch = useDispatch()
     const showFullModal = useSelector((state: any) => state.studentSlice.showFullModal)
     const isEditable = useSelector((state: any) => state.studentSlice.isEditable)
     const pageWillShow = useSelector((state: any) => state.studentSlice.pageWillShow)
     const singleStudent = useSelector((state: any) => state.studentSlice.singleStudent)
+
 
     const route = useRouter()
     useEffect(() => {
@@ -65,7 +75,7 @@ const SingleClass = ({ params }: { params: any }) => {
         dispatch(setSingleStudent(single[0]))
     }
     const handleDelete = async () => {
-        const response = await axios.delete(`http://localhost:5000/api/students/student/${clickedId}`, { withCredentials: true })
+        await axios.delete(`http://localhost:5000/api/students/student/${clickedId}`, { withCredentials: true })
         const filterDeleted = students.filter((stu: any) => stu?._id !== clickedId)
         setStudent(filterDeleted)
 
@@ -83,12 +93,12 @@ const SingleClass = ({ params }: { params: any }) => {
         dispatch(setPageWillShow("students"))
         dispatch(setShowFullModal(false))
     }
+
     const notifyPresentToParent = async (data: any, status: string) => {
         const date = new Date()
         const formattedDate = `${date.getFullYear()} - ${date.getMonth()} - ${date?.getDay()}`
         const payload = {
-            // "to": `${data?.email}`,
-            "to": "masihmuhammadi202@gmail.com",
+            "to": data?.email,
             "subject": ` Attendance Notification for ${data?.name}- ${formattedDate}`,
             "text": "",
             "html":
@@ -98,22 +108,45 @@ const SingleClass = ({ params }: { params: any }) => {
                 Your Son Teacher
                 </p>`
 
-
         }
 
 
         try {
             await axios.post("http://localhost:5000/api/send-email", payload, { withCredentials: true })
+            setNotification({
+                content: "email sent successfully",
+                isShow: true,
+                success: true
+            })
         }
         catch (e) {
-            console.log(e)
+
+            setNotification({
+                content: e,
+                isShow: true,
+                success: false
+            })
         }
         // setSubmitting(false);
     }
+    useEffect(() => {
+        const notif = setTimeout(() => {
+            setNotification({
+                success: true,
+                isShow: false,
+                content: ""
+            });
+        }, 5000);
 
+        return () => clearTimeout(notif);
+    }, [notification]);
 
     return (
-        <div onClick={closePopUp} className='bg-gray-50 w-full h-full min-h-[calc(100vh-150px)] relative'>
+        <div onClick={closePopUp} className='px-2 sm:px-10 bg-gray-50 w-full h-full min-h-[calc(100vh-150px)] relative'>
+            <Notification isShow={notification.isShow} success={notification.success}>
+                {notification.content}
+            </Notification>
+
             <div className="cursor-pointer" onClick={goBack}>
                 <BackButton />
             </div>
@@ -121,7 +154,8 @@ const SingleClass = ({ params }: { params: any }) => {
             {showPopUp && <PopUp data={students} showEditModal={handleRowDoubleClick} handleDelete={handleDelete} handleEdit={handleEdit} setShowPopUp={setShowPopUp} />}
             {showFullModal &&
                 <FullModal showModal={true} handleClose={handleCloseModal}>
-                    {(isEditable && pageWillShow == "updateStudent") ? <UpdateStudents data={singleStudent} /> : <AddStudent />}
+                    {(isEditable && pageWillShow == "updateStudent") ?
+                        <UpdateStudents data={singleStudent} /> : <AddStudent data={singleStudent} />}
                 </FullModal>
             }
 
@@ -130,13 +164,13 @@ const SingleClass = ({ params }: { params: any }) => {
                     <div className='hidden md:block'>
                         <Table
                             isClass={false}
-                            headers={["", "Name", "Father Name", "Phone", "Subject", "Delete"]}
+                            headers={["Action", "Name", "Father Name", "Phone", "Subject", "Status"]}
                             teacherData={students}
                             onRowDoubleclick={handleRowDoubleClick}
                             bodyRows={students?.map((cls: any, index: number) => [
 
                                 // <input type="checkbox" className='bg-blue-500' onChange={(e: any) => checkShowModal(e)} key={`checkbox-${cls.id}`} />,
-                                <div onClick={() => handleRowDoubleClick(cls._id)} key={index}>
+                                <div onClick={() => handleRowDoubleClick(cls._id)} key={index} className='flex items-center justify-center'>
                                     <ThreeDotIcon key={`icon-${cls._id}`} className={"w-5 h-5"} />
                                 </div>,
                                 cls.name,
@@ -169,7 +203,7 @@ const SingleClass = ({ params }: { params: any }) => {
                 : <span className='flex justify-center items-cener text-center'>No Student Found</span>
             }
 
-            <Buttons secondary={true} style=" px-4 py-2" type="button" clickHandler={addStudent}>
+            <Buttons secondary={true} style=" px-4 py-2 mx-10 mt-5" type="button" clickHandler={addStudent}>
                 + Add Student
             </Buttons>
 

@@ -14,6 +14,7 @@ interface AuthState {
         data: any;
     };
     isLoggedIn: boolean;
+    whoLoggedIn: any;
 }
 
 const initialState: AuthState = {
@@ -28,7 +29,8 @@ const initialState: AuthState = {
         error: null,
         data: {}
     },
-    isLoggedIn: false
+    isLoggedIn: false,
+    whoLoggedIn: ""
 }
 
 export const loginTeacher: any = createAsyncThunk(
@@ -64,6 +66,9 @@ const authSlice = createSlice({
         },
         setIsLoggedIn: (state, action) => {
             state.isLoggedIn = action.payload
+        },
+        setWhoIsLoggedIn: (state, action) => {
+            state.whoLoggedIn = action.payload
         }
     },
     extraReducers: (builder) => {
@@ -104,5 +109,5 @@ const authSlice = createSlice({
     }
 })
 
-export const { increment, setIsLoggedIn } = authSlice.actions
+export const { increment, setIsLoggedIn, setWhoIsLoggedIn } = authSlice.actions
 export default authSlice.reducer
