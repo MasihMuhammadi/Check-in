@@ -139,7 +139,8 @@ const ContactForm = () => {
                   <ErrorMessage name="message" component="div" className=" text-xs text-red-500" />
                 </div>
 
-                <Buttons primary={isLoading ? false : true} disabled={isLoading ? true : false} type="submit" style='' clickHandler={() => onSubmit(values)}>
+                <Buttons primary={isLoading ? false : true} disabled={isLoading ? true : false} type="submit" style=''
+                >
                   {isLoading ? <Spinner className={"w-5 h-6"} /> : 'Send Message'}
                 </Buttons>
 
