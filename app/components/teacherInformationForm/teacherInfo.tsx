@@ -93,7 +93,7 @@ const TeacherInfo = ({ data }: { data: any }) => {
             onSubmit={onSubmit}
             validateOnChange={false} // To prevent instant validation on password change
         >
-            {({ values, handleChange, handleSubmit, isSubmitting }) => (
+            {({ values, handleChange, handleSubmit, isSubmitting }: { values: any, handleChange: any, handleSubmit: any, isSubmitting: any }) => (
                 <Form className='oveflow-x-hidden' onSubmit={handleSubmit} >
                     {notification?.isShow && <Notification isShow={notification.isShow} success={notification.success}>
                         {notification.content}
@@ -123,7 +123,7 @@ const TeacherInfo = ({ data }: { data: any }) => {
                                     name="courseName"
                                     type="text"
                                     onChange={handleChange}
-                                    value={values.courseName}
+                                    value={values?.courseName}
                                     className="border bordre-2 border-gray-700  w-[320px] max-w-full p-2 px-4 h-14 rounded-md focus:outline-none focus:border-[#1e1e1e] focus:ring-1 focus:ring-[#1e1e1e]"
                                 />
                                 <ErrorMessage name="courseName" component="div" className=" text-xs text-red-500" />

@@ -11,7 +11,7 @@ import { setShowConfirmationPrompt } from '../../redux/slices/headerSlice';
 const AdminAccount = ({ data }: { data: any }) => {
     const dispatch = useDispatch()
     const [disabledButton, setDisabledButton] = useState<boolean>(true);
-    const [showPrompt, setShowPrompt] = useState(false)
+    const [showPrompt, setShowPrompt] = useState<any>(false)
     const [privateId, setPrivateId] = useState("")
 
     const confirmDeletion = (e: React.ChangeEvent<HTMLInputElement>) => {
