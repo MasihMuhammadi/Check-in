@@ -17,7 +17,7 @@ import Buttons from './buttons';
 import Notification from './notification';
 import { useDispatch, useSelector } from 'react-redux';
 // import { loginAsManager, loginAsTeacher } from '../../api/api';
-import { loginTeacher, setIsLoggedIn, setWhoIsLoggedIn } from '../../redux/slices/authSlice'
+import { loginTeacher, setIsLoggedIn, setTeacherData, setWhoIsLoggedIn } from '../../redux/slices/authSlice'
 import MaleOrFemale from './maleOrFemale';
 import Spinner from './spinner';
 
@@ -73,6 +73,7 @@ const TeacherLoginForm = ({ role, setRole }: { role: any, setRole: any }) => {
                 if (teacherData?.course_unique_code) {
                     const courseResponse = await axios.get(`http://localhost:5000/api/courses/unique-course/${teacherData.course_unique_code}`, { withCredentials: true });
                     if (courseResponse?.data?.handle) {
+                        dispatch(setTeacherData({ courseData: courseResponse, teacherData: teacherData }))
                         route.push(`/courses/${courseResponse.data.handle}/teacher/${teacherData.handle}`);
                     } else {
                         setNotification({

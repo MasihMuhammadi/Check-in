@@ -4,6 +4,7 @@ import "./globals.css";
 import Providers from '../redux/Provider';
 import Header from "./components/header";
 import ClientWrapper from "./components/clientWrapper"; // Adjust the path as necessary
+import MainPage from "./components/mainPage";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -18,7 +19,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="overflow-x-hidden">
+    <html lang="en" className="overflow-x-hidden h-screen">
       <body className={inter.className}>
         <Providers>
           <ClientWrapper>

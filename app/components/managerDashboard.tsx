@@ -27,6 +27,7 @@ const ManagerDashboard = (
 
     const [isCopy, setIsCopy] = useState<any>(false);
     const textRef = useRef<any>()
+    // console.log(data, 'AAAAAAAAAAAAAAAllllllllllllllllll')
 
     const copyCode = () => {
         if (textRef.current) {
@@ -75,7 +76,7 @@ const ManagerDashboard = (
                 </div>
                 <div className='grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 gap-y-4 gap-x-4 mx-4'>
                     <div className='bg-green-600 p-4 text-white rounded-lg  '>
-                        <span>Courses Number</span>
+                        <span>Classess Number</span>
                         {isLoading ?
                             <div className='flex justify-center'>
                                 {/* <FontAwesomeIcon icon={faCircleNotch} size={'1x'} color="black" spin={true} /> */}
@@ -97,7 +98,7 @@ const ManagerDashboard = (
                         }
                     </div>
                     <div className='bg-[#E93858] p-4 rounded-md text-white'>
-                        <span>All Teacher Number</span>
+                        <span>All Teachers Number</span>
                         {isLoading ?
                             <div className='flex justify-center'>
                                 {/* <FontAwesomeIcon icon={faCircleNotch} size={'1x'} color="black" spin={true} /> */}

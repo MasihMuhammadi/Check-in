@@ -29,7 +29,7 @@ const About = () => {
               <div className="w-full">
                 <TeamWorkMockup width={400} height={400} className="w-full h-full max-w-[400px]" />
               </div>
-              <h1 className="text-start text-xl font-semibold">Our Mission</h1>
+              {/* <h1 className="text-start text-xl font-semibold">Our Mission</h1> */}
               <p className={`px-4 py-3 transition-all duration-[2000ms] w-full ${expandCard1 ? "opacity-0 hidden" : "opacity-1"}`}>
                 Our mission is to empower educational institutions with the tools they need to enhance their administrative efficiency, improve communication, and foster a better learning environment. We believe in the power of technology to transform education, and we are committed to making that transformation as seamless as possible for our clients.
               </p>
@@ -46,7 +46,7 @@ const About = () => {
             className="gap-x-10 mt-10 m-auto overflow-hidden"
           >
             <div className="flex items-center flex-col-reverse md:flex-row ">
-              <h1 className="text-start text-xl font-semibold">What we Offer</h1>
+              {/* <h1 className="text-start text-xl font-semibold">What we Offer</h1> */}
 
               <p className={`px-4 py-3 transition-all duration-[2000ms] w-full ${expandCard2 ? "opacity-0 hidden" : "opacity-1"}`}>
                 Create, manage, and schedule courses with ease.
@@ -74,7 +74,7 @@ const About = () => {
               <div className="w-full">
                 <GrowYourBussiness width={400} height={400} className="w-full h-full max-w-[400px]" />
               </div>
-              <h1 className="text-start text-xl font-semibold">Grow your business</h1>
+              {/* <h1 className="text-start text-xl font-semibold">Grow your business</h1> */}
 
               <p className={`px-4 py-3 transition-all duration-[2000ms] w-full ${expandCard2 ? "opacity-0 hidden" : "opacity-1"}`}>
 

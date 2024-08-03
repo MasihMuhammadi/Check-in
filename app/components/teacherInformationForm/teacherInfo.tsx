@@ -27,20 +27,17 @@ const TeacherInfo = ({ data }: { data: any }) => {
 
     const validationSchema = Yup.object({
         subject: Yup.string().required('Subject is required'),
-        duration: Yup.string().required('Class Duration is required'),
+        duration: Yup.string().required('Course Name is required'),
         start_day: Yup.string().required('Start Day is required'),
         finish_day: Yup.string().required('Finish Day is required'),
         started_time: Yup.string().required('Class started time is required'),
         finish_time: Yup.string().required('Class finish time is required'),
     });
 
-    const showPassword = () => {
-        setIsPassword(!isPassword);
-    };
-    const initialValues = {
 
+    const initialValues = {
         subject: "",
-        duration: "",
+        duration: data?.teacher?.courseName,
         start_day: "",
         finish_day: "",
         started_time: "",
@@ -48,11 +45,12 @@ const TeacherInfo = ({ data }: { data: any }) => {
     };
 
     const onSubmit = async (values: any) => {
+        console.log(values, '.................')
         const payload = {
             course_name: singleTeacherData?.data?.data?.teacher?.courseName,
             class_name: values.subject,
             teacher_name: singleTeacherData?.data?.data?.teacher?.teacher_name,
-            duration: values.duration,
+            duration: data?.teacher?.courseName,
             start_day: values.start_day,
             finish_day: values.finish_day,
             started_time: values.started_time,
@@ -119,16 +117,16 @@ const TeacherInfo = ({ data }: { data: any }) => {
                             </div>
                             <div className="relative">
                                 <label className="absolute -top-3.5 right-6 transition-position duration-[5000ms] bg-gradientPrimary p-1 px-2 text-xs text-white rounded-lg">
-                                    Duration
+                                    Course name
                                 </label>
                                 <Field
-                                    name="duration"
+                                    name="courseName"
                                     type="text"
                                     onChange={handleChange}
-                                    value={values.duration}
+                                    value={values.courseName}
                                     className="border bordre-2 border-gray-700  w-[320px] max-w-full p-2 px-4 h-14 rounded-md focus:outline-none focus:border-[#1e1e1e] focus:ring-1 focus:ring-[#1e1e1e]"
                                 />
-                                <ErrorMessage name="duration" component="div" className=" text-xs text-red-500" />
+                                <ErrorMessage name="courseName" component="div" className=" text-xs text-red-500" />
                             </div>
                         </div>
 
@@ -209,8 +207,8 @@ const TeacherInfo = ({ data }: { data: any }) => {
                             </div>
                         </div>
 
-                        <div className="mt-4 flex flex-col text-center items-center mt-5">
-                            <Buttons primary={true} type="submit" style="px-12 py-2" disabled={isSubmitting} >
+                        <div className="flex flex-col text-center items-center mt-5">
+                            <Buttons primary={true} type="submit" style="px-12 py-2" clickHandler={() => onSubmit(values)} disabled={isSubmitting} >
                                 Submit
                             </Buttons>
                         </div>
