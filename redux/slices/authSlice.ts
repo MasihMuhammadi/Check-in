@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit'
 import { loginAsManager, loginAsTeacher } from '../../api/api'
+import { Staatliches } from 'next/font/google';
 
 interface AuthState {
     number: number;
@@ -15,6 +16,8 @@ interface AuthState {
     };
     isLoggedIn: boolean;
     whoLoggedIn: any;
+    loggedTeacher: {
+    };
 }
 
 const initialState: AuthState = {
@@ -30,7 +33,8 @@ const initialState: AuthState = {
         data: {}
     },
     isLoggedIn: false,
-    whoLoggedIn: ""
+    whoLoggedIn: "",
+    loggedTeacher: {}
 }
 
 export const loginTeacher: any = createAsyncThunk(
@@ -61,6 +65,12 @@ const authSlice = createSlice({
     name: "authSlice",
     initialState,
     reducers: {
+        setManagerData: (state, action) => {
+            state.managerData = action.payload
+        },
+        setTeacherData: (state, action) => {
+            state.loggedTeacher = action.payload
+        },
         increment: (state) => {
             state.number = state.number + 1
         },
@@ -109,5 +119,5 @@ const authSlice = createSlice({
     }
 })
 
-export const { increment, setIsLoggedIn, setWhoIsLoggedIn } = authSlice.actions
+export const { increment, setIsLoggedIn, setWhoIsLoggedIn, setManagerData, setTeacherData } = authSlice.actions
 export default authSlice.reducer

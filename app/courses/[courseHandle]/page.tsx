@@ -38,7 +38,7 @@ export default async function Page({ params }: { params: { courseHandle: string 
     //     setFullUrl(window.location.href)
     // })
     const heads = headers()
-    const baseUrl = "http://localhostt:5000"
+    const baseUrl = "http://localhost:3000"
     const pathname = `${baseUrl}${heads.get('next-url')}`
     if (!courseData) {
         return <NotFound />;

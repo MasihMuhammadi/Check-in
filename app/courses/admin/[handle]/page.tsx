@@ -12,6 +12,7 @@ import AllTabs from '../../../components/allTabs';
 import CourseClases from '../../../components/courseClasses';
 import CourseTeacher from '../../../components/courseTeachers';
 import AdminAccount from '../../../components/adminAccount';
+import AdminDetails from '../../../components/adminDetails';
 
 const CourseAdmin = ({ params }: { params: any }) => {
     const [currentCourse, setCurrentCourse] = useState<any>();
@@ -44,14 +45,14 @@ const CourseAdmin = ({ params }: { params: any }) => {
                     try {
                         const getTeachers = await axios.get(`http://localhost:5000/api/teachers/teacher/${response?.data?.courseName}`, { withCredentials: true });
                         const getClasses = await axios.get(`http://localhost:5000/api/classes/class`, { withCredentials: true });
-                        const students = await axios.get(`http://localhost:5000/api/students/course-student/${response?.data?.courseName}`, { withCredentials: true });
+                        // const students = await axios.get(`http://localhost:5000/api/students/course-student/${response?.data?.courseName}`, { withCredentials: true });
+                        const students = await axios.get(`http://localhost:5000/api/students/student`, { withCredentials: true })
                         const classes = getClasses?.data?.data?.filter((cls: any) => cls?.course_name === response?.data?.courseName);
                         setRelatedData({
                             classes: classes,
                             students: students?.data,
                             teachers: getTeachers?.data
                         });
-                        console.log(relatedData, 'RRRRRRRRRRRRRR')
                         setIsLoading(false);
                     }
                     catch (err) {
@@ -70,8 +71,8 @@ const CourseAdmin = ({ params }: { params: any }) => {
 
 
 
-
     const renderContent = () => {
+
 
 
         switch (tab) {
@@ -79,9 +80,11 @@ const CourseAdmin = ({ params }: { params: any }) => {
                 return <ManagerDashboard data={data} isLoading={isLoading} />;
 
             case "Classes":
-                return <div><CourseClases data={relatedData?.classes} /> </div>;
+                return <div><CourseClases teachers={relatedData?.teachers} courseData={currentCourse} data={relatedData?.classes} /> </div>;
             case "Teachers":
                 return <div><CourseTeacher data={relatedData?.teachers} /></div>
+            case "Details":
+                return <div><AdminDetails data={currentCourse} /></div>;
             case "Account":
                 return <div><AdminAccount data={currentCourse} /></div>;
             default:
@@ -92,7 +95,7 @@ const CourseAdmin = ({ params }: { params: any }) => {
     return (
         <>
             <AllTabs
-                tabs={["Dashboard", "Classes", "Teachers", "Account"]}
+                tabs={["Dashboard", "Classes", "Teachers", "Details", "Account"]}
                 activeTab={tab}
                 setActiveTab={setTab}
             />

@@ -61,7 +61,7 @@ const Courses = () => {
                 <div className="flex items-center justify-center mb-5">
                     <Skeleton width={400} className="rounded-xl" height={50} />
                 </div>
-                : <SearchInput searchValue={searchValue} setSearchValue={setSearchValue} searchCourse={searchCourse} />
+                : <SearchInput placeholder="Search course name..." searchValue={searchValue} setSearchValue={setSearchValue} searchHandler={searchCourse} />
             }
 
             <div className="mb-6 grid grid-cols-1 gap-x-5 sm:gap-x-1 sm:grid-cols-2 md:grid-cols-3 md:gap-x-6 lg:grid-cols-4 xl:grid-cols-4 items-center content-center justify-center gap-4">

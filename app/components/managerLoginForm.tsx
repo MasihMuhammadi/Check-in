@@ -15,7 +15,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setLoggedIn } from '../../redux/slices/courseSlice';
 import { loginAsManager } from '../../api/api';
 import MaleOrFemale from './maleOrFemale';
-import { loginManager, setIsLoggedIn, setWhoIsLoggedIn } from '../../redux/slices/authSlice';
+import { loginManager, setIsLoggedIn, setManagerData, setWhoIsLoggedIn } from '../../redux/slices/authSlice';
 import Notification from './notification';
 import Spinner from './spinner';
 import { cookies } from 'next/headers'
@@ -68,6 +68,7 @@ const ManagerLoginForm = ({ role, setRole }: { role: any, setRole: any }) => {
             if (response?.data?.success) {
 
                 setIsLoading(false);
+                dispatch(setManagerData(response))
                 setNotification({
                     success: true,
                     isShow: true,

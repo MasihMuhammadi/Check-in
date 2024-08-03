@@ -36,11 +36,11 @@ const TeacherSignUpFormInputes = ({ role }: { role: any }) => {
     // const phoneValidation = new RegExp(/^(?:\+|00)?(?:[0-9] ?){6,14}[0-9]$/i)
     const validationSchema = Yup.object({
         // course_name: Yup.string().required('Invalid teacher_name address').required('teacher_name is required'),
+        courseName: Yup.string().required('Course or School Name is required'),
         course_unique_code: Yup.string().required('unique code  is required'),
         teacher_email: Yup.string().email('Invalid teacher_email address').required('teacher_email is required'),
-        courseName: Yup.string().required('Course or School Name is required'),
         teacher_name: Yup.string().required('Teacher Name is required'),
-        phone: Yup.string().required('Phone is required'),
+        // phone: Yup.string().required('Phone is required'),
         password: Yup.string().required('Password is required').min(6, 'password should be at least 6 chracte'),
     });
 

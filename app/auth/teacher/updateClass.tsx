@@ -43,7 +43,7 @@ const UpdateClass = ({ data }: { data: any }) => {
     const initialValues = {
         // subject:  || "",
         subject: data[0]?.class_name || "",
-        duration: data[0]?.duration || "",
+        duration: singleTeacherData.data.data.teacher.courseName || "",
         start_day: data[0]?.start_day || "",
         finish_day: data[0]?.finish_day || "",
         started_time: data[0]?.started_time || "",
@@ -59,7 +59,7 @@ const UpdateClass = ({ data }: { data: any }) => {
             class_name: values.subject,
             // teacher_name: data?.teacer?.teacher?.teacher_name,
             teacher_name: singleTeacherData?.data?.data?.teacher?.teacher_name,
-            duration: values.duration,
+            duration: singleTeacherData.data.data.teacher.courseName,
             start_day: values.start_day,
             finish_day: values.finish_day,
             started_time: values.started_time,
@@ -138,7 +138,7 @@ const UpdateClass = ({ data }: { data: any }) => {
                             </div>
                             <div className="relative">
                                 <label className="absolute -top-3.5 right-6 transition-position duration-[5000ms] bg-gradientPrimary p-1 px-2 text-xs text-white rounded-lg">
-                                    Duration
+                                    Course Name
                                 </label>
                                 <Field
                                     name="duration"

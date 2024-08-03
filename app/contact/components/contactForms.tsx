@@ -82,7 +82,7 @@ const ContactForm = () => {
       >
         {({ values, handleChange, handleSubmit, isSubmitting }) => (
           <Form >
-            <div className='w-auto flex flex-col sm:flex-row gap-x-14 justify-between '>
+            <div className='w-full flex flex-col sm:flex-row  sm:justify-between sm:gap-x-64'>
               <div className='w-full'>
                 <ContactMockup width={600} height={600} className={"w-full h-full"} />
               </div>
@@ -139,7 +139,7 @@ const ContactForm = () => {
                   <ErrorMessage name="message" component="div" className=" text-xs text-red-500" />
                 </div>
 
-                <Buttons primary={isLoading ? false : true} disabled={isLoading ? true : false} type="submit" style=''
+                <Buttons primary={isLoading ? false : true} disabled={isLoading ? true : false} type="submit" style='w-[75%]'
                 >
                   {isLoading ? <Spinner className={"w-5 h-6"} /> : 'Send Message'}
                 </Buttons>

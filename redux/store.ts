@@ -6,6 +6,7 @@ import courseSlice from './slices/courseSlice';
 import authSlice from './slices/authSlice';
 import teacherSlice from './slices/teacherSlice';
 import studentSlice from './slices/studentSlice';
+import headerSlice from './slices/headerSlice';
 
 const store = configureStore({
     reducer: {
@@ -13,7 +14,8 @@ const store = configureStore({
         courseSlice: courseSlice,
         authSlice: authSlice,
         teacherSlice: teacherSlice,
-        studentSlice: studentSlice
+        studentSlice: studentSlice,
+        headerSlice: headerSlice
     },
 });
 

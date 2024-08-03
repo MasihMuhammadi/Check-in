@@ -37,7 +37,7 @@ const ManagerSignUpFormInputes = ({ role }: { role: any }) => {
     fullName: Yup.string().required('Invalid fullName address').required('fullName is required'),
     email: Yup.string().email('Invalid email address').required('Email is required'),
     course: Yup.string().required('Course or School Name is required'),
-    phone: Yup.string().required('Phone is required'),
+    phone: Yup.string().required('Phone is required').min(10, "phone number can't be less than 10").max(12, "phone number can't be more than 12").matches(phoneValidation, "invalid phone number"),
     password: Yup.string().required('Password is required').min(6, 'password should be at least 6 chracte'),
   });
 
@@ -58,6 +58,12 @@ const ManagerSignUpFormInputes = ({ role }: { role: any }) => {
     setisLoading(true);
 
     const payload = {
+      studentsCount: "",
+      teacherCount: "",
+      studyFields: "",
+      location: "",
+      description: "",
+      images: "",
       fullName: values.fullName,
       email: values.email,
       courseName: values.course,

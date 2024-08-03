@@ -13,6 +13,7 @@ import FullModal from './fullModal';
 import Buttons from './buttons';
 import { setIsEditable, setPageWillShow } from '../../redux/slices/classSlice'
 import UpdateClass from '../auth/teacher/updateClass';
+import SearchInput from './SearchInput';
 
 const AllClassesTab = ({ data, params }: { data: any, params: any }) => {
 
@@ -32,6 +33,10 @@ const AllClassesTab = ({ data, params }: { data: any, params: any }) => {
     const [classIdToDelete, setClassIdToDelete] = useState<string | null>(null);
     const [proceedWithDelete, setProceedWithDelete] = useState<boolean>(true);
     const [showFullModal, setShowFullModal] = useState<boolean>(false)
+    const [searchValue, setSearchValue] = useState('');
+    const [searchedClass, setSearchedClass] = useState([]);
+    const [isSearched, setIsSearched] = useState(false);
+
 
 
     useEffect(() => {
@@ -121,7 +126,20 @@ const AllClassesTab = ({ data, params }: { data: any, params: any }) => {
         dispatch(setPageWillShow("addaClass"))
         setShowFullModal(true)
     }
+    const handleSearch = () => {
+        setIsSearched(true)
+        const result = filteredClasses.filter((course: any) => course.class_name.toLowerCase().includes(searchValue.toLowerCase()));
+        setSearchedClass(result)
 
+    }
+    useEffect(() => {
+        if (searchValue === '') {
+            setSearchedClass([]);
+            setIsSearched(false);
+        }
+    }, [searchValue]);
+
+    const classToDisplay = searchedClass.length > 0 ? searchedClass : filteredClasses;
 
     return (
         <div className='relative'>
@@ -152,51 +170,55 @@ const AllClassesTab = ({ data, params }: { data: any, params: any }) => {
                         <Skeleton count={5} />
                     </div>
                 ) : (
-                    filteredClasses.length > 0 ? (
-                        <>
-                            <div className='hidden md:block'>
-                                <Table
-                                    // onRowDoubleclick={}
-                                    isClass={true}
-                                    headers={["Subject", "Course", "Days", "Time", "Finish Time", "Action"]}
-                                    teacherData={singleTeacherData}
-                                    bodyRows={filteredClasses.map((cls: any) => [
-                                        cls.class_name,
-                                        cls.course_name,
-                                        `${cls.start_day} - ${cls.finish_day}`,
-                                        `${cls?.started_time}-${cls?.finish_time}`,
-                                        cls.finish_time,
-                                        <>
-                                            <div className="flex gap-x-4 items-center justify-center">
-                                                <div className='cursor-pointer' onClick={() => deleteClass(cls?._id)}>
-                                                    <DeleteIcon />
-                                                </div>
-                                                <div className='cursor-pointer' onClick={() => editClass(cls?._id)}>
-                                                    <EditIcon />
-                                                </div>
+                    <>
+                        <div className='hidden md:block mb-7'>
+                            <SearchInput
+                                placeholder="Search Class Name..."
+                                searchValue={searchValue}
+                                searchHandler={handleSearch}
+                                setSearchValue={setSearchValue}
+                            />
+                        </div>
+
+                        {searchValue && searchedClass.length === 0 && isSearched && (
+                            <span className='flex items-center justify-center text-red-500 mb-5'>
+                                No class found with the name "{searchValue}"
+                            </span>
+                        )}
+
+                        {classToDisplay.length > 0 && (
+                            <Table
+                                isClass={true}
+                                headers={["Subject", "Course", "Days", "Time", "Action"]}
+                                teacherData={singleTeacherData}
+                                bodyRows={classToDisplay.map((cls: any) => [
+                                    cls.class_name,
+                                    cls.course_name,
+                                    `${cls.start_day} - ${cls.finish_day}`,
+                                    `${cls?.started_time}-${cls?.finish_time}`,
+                                    <>
+                                        <div className="flex gap-x-4 items-center justify-center">
+                                            <div className='cursor-pointer' onClick={() => deleteClass(cls?._id)}>
+                                                <DeleteIcon />
                                             </div>
-                                        </>
-                                    ])}
-                                />
-                            </div>
-                            <div className='block md:hidden my-5'>
-                                {filteredClasses?.map((cls: any) => {
-                                    return (
-                                        <TableForMobileScreen key={cls._id} data={cls} isStudent={false} updatedClass={updatedClass} handleShowPopUp={editClass} />
-                                    )
-                                })}
-                            </div>
-                        </>
-                    ) : (
-                        <span className='flex items-center justify-center'>No Class Found</span>
-                    )
+                                            <div className='cursor-pointer' onClick={() => editClass(cls?._id)}>
+                                                <EditIcon />
+                                            </div>
+                                        </div>
+                                    </>
+                                ])}
+                            />
+                        )}
+                    </>
                 )}
-                <Buttons type="button" secondary={true} clickHandler={handleFullModal} style='px-5 mt-10'>
+                <Buttons type="button" secondary={true} clickHandler={handleFullModal} style='px-5 mt-10 ml-10'>
                     <span className='text-xl mr-2'>+</span> {"  "} Add Class
                 </Buttons>
             </div>
         </div>
     );
+
+
 };
 
 export default AllClassesTab;
