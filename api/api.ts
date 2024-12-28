@@ -1,6 +1,6 @@
-import axios from 'axios';
+import axios from "axios";
 
-const baseUrl = 'http://localhost:5000';
+const baseUrl = process.env.NEXT_PUBLIC_BACKEND_URL;
 
 // Interface for AddClass payload
 // export interface AddClassPayload {
@@ -16,58 +16,69 @@ const baseUrl = 'http://localhost:5000';
 
 // Add Class API request
 export const createaCourse = async (payload: any) => {
-    try {
-        const response = await axios.post(`${baseUrl}/api/courses/course`, payload);
-        // api/courses/course
-        return response.data;
-    } catch (error) {
-        throw error;
-    }
+  try {
+    const response = await axios.post(`${baseUrl}/api/courses/course`, payload);
+    // api/courses/course
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
 };
 export const createTeacher = async (payload: any) => {
-    try {
-        const response = await axios.post(`${baseUrl}/api/teachers/teacher`, payload);
-        // api/courses/course
-        return response.data;
-    } catch (error) {
-        throw error;
-    }
+  try {
+    const response = await axios.post(
+      `${baseUrl}/api/teachers/teacher`,
+      payload
+    );
+    // api/courses/course
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
 };
 export const addClass = async (payload: any) => {
-    try {
-        const response = await axios.post(`${baseUrl}/api/classes/class`, payload, { withCredentials: true });
-        return response.data;
-    } catch (error) {
-        throw error;
-    }
+  try {
+    const response = await axios.post(`${baseUrl}/api/classes/class`, payload, {
+      withCredentials: true,
+    });
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
 };
 export const loginAsTeacher = async (payload: any) => {
-    try {
-        const response = await axios.post(`${baseUrl}/api/auth/login`, payload, { withCredentials: true });
-        return response.data;
-    } catch (error) {
-        throw error;
-    }
+  try {
+    const response = await axios.post(`${baseUrl}/api/auth/login`, payload, {
+      withCredentials: true,
+    });
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
 };
 export const loginAsManager = async (payload: any) => {
-    try {
-        const response = await axios.post(`${baseUrl}/api/auth/login`, payload, { withCredentials: true });
-        return response.data;
-    } catch (error) {
-        throw error;
-    }
+  try {
+    const response = await axios.post(`${baseUrl}/api/auth/login`, payload, {
+      withCredentials: true,
+    });
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
 };
 export const getSingleTeacherData = async (handle: any) => {
-    try {
-        const response = await axios.get(`${baseUrl}/api/teachers/handle-teacher/${handle}`, { withCredentials: true });
-        return response.data;
-    } catch (error) {
-        throw error;
-    }
+  try {
+    const response = await axios.get(
+      `${baseUrl}/api/teachers/handle-teacher/${handle}`,
+      { withCredentials: true }
+    );
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
 };
 
 // export const getSingleTeacherData = axios.post(`${baseUrl}/api/teachers/teacher/:handle`,handle)
-
 
 // Example of another API request (e.g., fetch classes)
 // export const fetchClasses = async () => {

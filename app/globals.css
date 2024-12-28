@@ -14,7 +14,7 @@
 .animated-text {
   position: relative;
   display: inline-block;
-  background :#1e1e1ede;
+  background: #1e1e1ede;
 }
 @keyframes slideDown {
   0% {
@@ -24,7 +24,6 @@
     transform: translateY(10px);
   }
 }
-
 
 @keyframes slideUp {
   0% {
@@ -60,10 +59,10 @@
 /* styles.css */
 @keyframes countdown {
   from {
-      stroke-dasharray: 283;
+    stroke-dasharray: 283;
   }
   to {
-      stroke-dasharray: 0;
+    stroke-dasharray: 0;
   }
 }
 

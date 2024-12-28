@@ -6,32 +6,30 @@ import { useDispatch, useSelector } from "react-redux";
 import { setWhoIsLoggedIn } from "../../redux/slices/authSlice";
 
 export default function ClientWrapper({ children }: { children: any }) {
-    const dispatch = useDispatch()
-    const whoIsLoggedIn = useSelector((state: any) => state.authSlice.whoLoggedIn)
+  const baseUrl = process.env.NEXT_PUBLIC_BACKEND_URL;
+  const dispatch = useDispatch();
+  const whoIsLoggedIn = useSelector(
+    (state: any) => state.authSlice.whoLoggedIn
+  );
 
-    useEffect(() => {
-        const sendRequest = async () => {
+  useEffect(() => {
+    const sendRequest = async () => {
+      try {
+        const response = await axios.get(`${baseUrl}/api/get-session`, {
+          withCredentials: true,
+        });
+        if (Object.keys(response?.data?.data)[0] === "manager_access") {
+          dispatch(setWhoIsLoggedIn("manager"));
+        } else {
+          dispatch(setWhoIsLoggedIn("teacher"));
+        }
+      } catch (error) {
+        console.error("Error making request:", error);
+      }
+    };
 
-            try {
-                const response = await axios.get("http://localhost:5000/api/get-session", { withCredentials: true })
-                if (Object.keys(response?.data?.data)[0] === "manager_access") {
-                    dispatch(setWhoIsLoggedIn("manager"))
+    sendRequest();
+  });
 
-                }
-                else {
-
-                    dispatch(setWhoIsLoggedIn("teacher"))
-                }
-
-            } catch (error) {
-                console.error('Error making request:', error);
-            }
-        };
-
-        sendRequest();
-    });
-
-    return (<>
-        {children}
-    </>);
+  return <>{children}</>;
 }
