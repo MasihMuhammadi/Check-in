@@ -13,8 +13,13 @@ import CourseClases from "../../../components/courseClasses";
 import CourseTeacher from "../../../components/courseTeachers";
 import AdminAccount from "../../../components/adminAccount";
 import AdminDetails from "../../../components/adminDetails";
+const CourseAdmin = ({ params }: { params: { handle: string } }) => {
+  const handle = params?.handle;
 
-const CourseAdmin = ({ params }: { params: any }) => {
+  console.log("Params:", params);
+  console.log("Handle:", handle);
+  console.log("Course handle:", handle);
+  console.log(params, "........ppppppp");
   const [currentCourse, setCurrentCourse] = useState<any>();
   const [relatedData, setRelatedData] = useState({
     classes: null,
@@ -35,50 +40,30 @@ const CourseAdmin = ({ params }: { params: any }) => {
   const baseUrl = process.env.NEXT_PUBLIC_BACKEND_URL;
 
   useEffect(() => {
-    const getAllClasses = async () => {
-      const response = await axios.get(
-        `${baseUrl}/api/courses/h-course/${params.handle}`,
-        {
-          withCredentials: true,
-        }
-      );
+    if (!handle || !baseUrl) return;
 
-      setCurrentCourse(response?.data);
+    const getAllClasses = async () => {
       try {
-        if (response?.statusText === "OK") {
-          try {
-            const getTeachers = await axios.get(
-              `${baseUrl}/api/teachers/teacher/${response?.data?.courseName}`,
-              { withCredentials: true }
-            );
-            const getClasses = await axios.get(`${baseUrl}/api/classes/class`, {
-              withCredentials: true,
-            });
-            // const students = await axios.get(`${baseUrl}/api/students/course-student/${response?.data?.courseName}`, { withCredentials: true });
-            const students = await axios.get(
-              `${baseUrl}/api/students/student`,
-              { withCredentials: true }
-            );
-            const classes = getClasses?.data?.data?.filter(
-              (cls: any) => cls?.course_name === response?.data?.courseName
-            );
-            setRelatedData({
-              classes: classes,
-              students: students?.data,
-              teachers: getTeachers?.data,
-            });
-            setIsLoading(false);
-          } catch (err) {
-            console.log(err);
-            setIsLoading(false);
-          }
-        }
-      } catch (err: any) {
-        console.log(err?.message);
+        setIsLoading(true);
+
+        const response = await axios.get(
+          `${baseUrl}/api/courses/h-course/${encodeURIComponent(handle)}`,
+          { withCredentials: true },
+        );
+
+        setCurrentCourse(response.data);
+
+        // Continue with your existing teachers,
+        // classes, and students API requests.
+      } catch (error) {
+        console.error("Error fetching course:", error);
+      } finally {
+        setIsLoading(false);
       }
     };
+
     getAllClasses();
-  }, [params.handle]);
+  }, [handle, baseUrl]);
 
   const renderContent = () => {
     switch (tab) {

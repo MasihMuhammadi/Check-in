@@ -1,6 +1,11 @@
 "use client";
+
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import axios from "axios";
+import { useRouter } from "next/navigation";
+
 import ToggleButton from "./toggleButtons";
 import Navbar from "./navbar";
 import BurgerLines from "./animatedMenu/burgerLines";
@@ -8,76 +13,107 @@ import NavMenu from "./animatedMenu/navMenu";
 import EduEchoLogo from "../../public/smallIcons/eduEcho";
 import ProfileIcon from "../../public/smallIcons/profileIcon";
 import LogoutIcon from "../../public/smallIcons/logoutIcon";
-import { useDispatch, useSelector } from "react-redux";
-import axios from "axios";
-import { setIsLoggedIn, setWhoIsLoggedIn } from "../../redux/slices/authSlice";
-import { useRouter } from "next/navigation";
-import Buttons from "./buttons";
-import { setShowConfirmationPrompt } from "../../redux/slices/headerSlice";
 import HomeIcon from "../../public/smallIcons/homeIcon";
+import Buttons from "./buttons";
+
+import {
+  logout,
+  setIsLoggedIn,
+  setWhoIsLoggedIn,
+} from "../../redux/slices/authSlice";
+
+import { setShowConfirmationPrompt } from "../../redux/slices/headerSlice";
 
 const Header = () => {
   const [crossBurger, setCrossBurger] = useState(false);
+  const [showDropDown, setShowDropDown] = useState(false);
+  const [showPrompt, setShowPrompt] = useState(false);
+
   const baseUrl = process.env.NEXT_PUBLIC_BACKEND_URL;
   const dispatch = useDispatch();
-
-  const courseData = useSelector(
-    (state: any) => state.courseSlice.teacherSignUpData
-  );
-  const managerData = useSelector((state: any) => state.authSlice.managerData);
-  const teacherData = useSelector(
-    (state: any) => state.authSlice.loggedTeacher
-  );
-  const isLoggedIn = useSelector((state: any) => state.authSlice.isLoggedIn);
-  const whoIsLoggedIn = useSelector(
-    (state: any) => state.authSlice.whoLoggedIn
-  );
-  const confirmationPrompt = useSelector(
-    (state: any) => state.headerSlice.showPrompt
-  );
-  const [showDropDown, setShowDropDown] = useState(false);
-
-  const [showPrompt, setShowPrompt] = useState(false);
   const router = useRouter();
+
+  const auth = useSelector((state: any) => state.authSlice);
+
+  const managerData = auth?.managerData?.data;
+  const teacherData = auth?.loggedTeacher;
+
+  const isLoggedIn = auth?.isLoggedIn;
+  const whoIsLoggedIn = auth?.whoLoggedIn;
+
+  // Adjust these paths if your API response has a different structure.
+  const managerHandle = managerData?.data?.handle ?? managerData?.handle;
+
+  const teacherHandle =
+    teacherData?.data?.teacherData?.handle ??
+    teacherData?.teacherData?.handle ??
+    teacherData?.data?.handle ??
+    teacherData?.handle;
+
+  const courseWithTeacherHandle =
+    teacherData?.data?.courseData?.data?.handle ??
+    teacherData?.courseData?.data?.handle ??
+    teacherData?.courseData?.handle;
+
+  const profileHref =
+    whoIsLoggedIn === "manager"
+      ? managerHandle
+        ? `/courses/admin/${managerHandle}`
+        : null
+      : whoIsLoggedIn === "teacher"
+        ? teacherHandle && courseWithTeacherHandle
+          ? `/courses/${courseWithTeacherHandle}/teacher/${teacherHandle}`
+          : null
+        : null;
+
   const showConfirmation = () => {
     setShowPrompt(true);
     dispatch(setShowConfirmationPrompt(true));
   };
 
+  const handleCancel = () => {
+    setShowPrompt(false);
+    dispatch(setShowConfirmationPrompt(false));
+  };
+
   const logoutUser = async () => {
     try {
-      await axios.post(`${baseUrl}/api/logout`, "", { withCredentials: true });
-      router.push("/login");
+      if (!baseUrl) {
+        throw new Error("NEXT_PUBLIC_BACKEND_URL is not configured");
+      }
+
+      await axios.post(`${baseUrl}/api/logout`, {}, { withCredentials: true });
+
+      dispatch(logout());
       dispatch(setIsLoggedIn(false));
       dispatch(setWhoIsLoggedIn(""));
+
       setShowPrompt(false);
-    } catch (err) {
-      console.log(err);
+      setShowDropDown(false);
+
+      router.push("/login");
+    } catch (error) {
+      console.error("Logout failed:", error);
     }
   };
 
-  const handleCancel = () => {
-    setShowPrompt(false);
-  };
-
-  const managerHandle = managerData?.data?.data?.handle;
-  const teacherHandle = teacherData?.teacherData?.handle;
-  const courseWithTeacherHandle = teacherData?.courseData?.data?.handle;
-
   return (
-    <div className="">
+    <div>
       {showPrompt && (
-        <div className="h-screen w-screen fixed top-0 left-0 z-50">
-          <div className="absolute top-0 left-0 w-full h-full bg-gray-800 opacity-50 z-40"></div>
-          <div className="flex flex-col justify-center items-center z-50 absolute inset-0">
-            <div className="bg-white border border-black h-[200px] w-[500px] rounded-md p-4">
-              <p className="border-b border-black mb-6 text-xl pb-2">
+        <div className="fixed left-0 top-0 z-50 h-screen w-screen">
+          <div className="absolute left-0 top-0 z-40 h-full w-full bg-gray-800 opacity-50" />
+
+          <div className="absolute inset-0 z-50 flex items-center justify-center">
+            <div className="h-[200px] w-[min(500px,95vw)] rounded-md border border-black bg-white p-4">
+              <p className="mb-6 border-b border-black pb-2 text-xl">
                 Are you sure you want to logout?
               </p>
-              <div className="flex gap-x-4 justify-end mt-20">
+
+              <div className="mt-12 flex justify-end gap-x-4">
                 <Buttons primary={true} style="px-8" clickHandler={logoutUser}>
                   Ok
                 </Buttons>
+
                 <Buttons
                   secondary={true}
                   style="px-4"
@@ -90,60 +126,72 @@ const Header = () => {
           </div>
         </div>
       )}
-      <div className="flex flex-row justify-between items-center z-10 relative">
-        <div className="hidden sm:hidden md:flex lg:flex">
+
+      <div className="relative z-10 flex flex-row items-center justify-between">
+        <div className="hidden md:flex">
           <Navbar />
         </div>
-        <div className="py-2 ">
-          <Link href={"/"}>
+
+        <div className="py-2">
+          <Link href="/">
             <EduEchoLogo />
           </Link>
         </div>
-        <div className="hidden sm:hidden md:block lg:block relative">
-          {whoIsLoggedIn == "manager" || whoIsLoggedIn == "teacher" ? (
+
+        <div className="relative hidden md:block">
+          {isLoggedIn &&
+          (whoIsLoggedIn === "manager" || whoIsLoggedIn === "teacher") ? (
             <>
-              <div
-                onClick={() => setShowDropDown(!showDropDown)}
-                className="pr-5 cursor-pointer"
+              <button
+                type="button"
+                aria-label="Open profile menu"
+                onClick={() => setShowDropDown((previous) => !previous)}
+                className="cursor-pointer pr-5"
               >
                 <ProfileIcon width={28} height={28} />
-              </div>
-              <div className="absolute right-4">
-                {showDropDown && (
-                  <div className="bg-gray-100 shadow-lg  flex flex-col border px-5 py-4 rounded">
+              </button>
+
+              {showDropDown && (
+                <div className="absolute right-4 flex flex-col rounded border bg-gray-100 px-5 py-4 shadow-lg">
+                  {profileHref ? (
                     <Link
-                      className="border-b flex gap-x-2 border-b-black pb-2"
-                      href={
-                        whoIsLoggedIn == "manager"
-                          ? `/courses/admin/${managerHandle}`
-                          : `courses/${courseWithTeacherHandle}/teacher/${teacherHandle}`
-                      }
+                      className="flex gap-x-2 border-b border-b-black pb-2"
+                      href={profileHref}
+                      onClick={() => setShowDropDown(false)}
                     >
                       <HomeIcon />
                       Profile
                     </Link>
-                    <div
-                      className="cursor-pointer flex gap-x-2 mt-2"
-                      onClick={showConfirmation}
-                    >
-                      <LogoutIcon width={20} height={20} />
-                      Logout
-                    </div>
-                  </div>
-                )}
-              </div>
+                  ) : (
+                    <p className="border-b border-b-black pb-2 text-sm text-red-600">
+                      Profile information is unavailable.
+                    </p>
+                  )}
+
+                  <button
+                    type="button"
+                    className="mt-2 flex cursor-pointer gap-x-2 text-left"
+                    onClick={showConfirmation}
+                  >
+                    <LogoutIcon width={20} height={20} />
+                    Logout
+                  </button>
+                </div>
+              )}
             </>
           ) : (
             <ToggleButton />
           )}
         </div>
-        <div className="flex sm:flex relative md:hidden lg:hidden w-8 h-8 z-10">
+
+        <div className="relative z-10 flex h-8 w-8 md:hidden">
           <div className="absolute top-0">
             <BurgerLines
               crossBurger={crossBurger}
               setCrossBurger={setCrossBurger}
             />
           </div>
+
           <div className="mt-4">
             <div
               className={`transition-all duration-300 ${

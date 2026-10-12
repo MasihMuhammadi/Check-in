@@ -59,7 +59,7 @@ const TeacherLoginForm = ({ role, setRole }: { role: any; setRole: any }) => {
     password: "",
     role: role,
   };
-  let baseUrl = "${baseUrl}";
+  let baseUrl = "http://localhost:4300";
 
   const onSubmit = async (values: any) => {
     const payload = {
